@@ -1,0 +1,101 @@
+import { useState } from 'react';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import { FilterPanel } from '@/components/dashboard/FilterPanel';
+import { StartScreen } from '@/components/dashboard/screens/StartScreen';
+import { CompletenessScreen } from '@/components/dashboard/screens/CompletenessScreen';
+import { CoverageScreen } from '@/components/dashboard/screens/CoverageScreen';
+import { PlaceholderScreen } from '@/components/dashboard/screens/PlaceholderScreen';
+import type { CerifEntity, PublicationType, Source } from '@/data/types';
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarGroupContent,
+} from '@/components/ui/sidebar';
+import { BarChart3, CheckCircle2, Database, Home, Layers, Target } from 'lucide-react';
+
+export default function DashboardLayout() {
+  const [organisation, setOrganisation] = useState('all');
+  const [source, setSource] = useState<Source | 'All'>('All');
+  const [cerifEntity, setCerifEntity] = useState<CerifEntity>('Publication');
+  const [publicationType, setPublicationType] = useState<PublicationType | 'All'>('All');
+  const [activeTab, setActiveTab] = useState('start');
+
+  return (
+    <SidebarProvider>
+      <div className="min-h-screen flex w-full">
+        <Sidebar>
+          <SidebarHeader className="p-4 border-b border-sidebar-border">
+            <div className="flex items-center gap-2">
+              <BarChart3 className="h-6 w-6 text-sidebar-primary" />
+              <div>
+                <h2 className="text-sm font-bold text-sidebar-foreground leading-tight">ORI Dashboard</h2>
+                <p className="text-xs text-sidebar-foreground/60">Data Quality Monitor</p>
+              </div>
+            </div>
+          </SidebarHeader>
+          <SidebarContent className="p-4">
+            <SidebarGroup>
+              <SidebarGroupLabel className="text-sidebar-foreground/50 text-xs uppercase tracking-widest mb-2">Filters</SidebarGroupLabel>
+              <SidebarGroupContent>
+                <FilterPanel
+                  organisation={organisation}
+                  source={source}
+                  cerifEntity={cerifEntity}
+                  publicationType={publicationType}
+                  onOrganisationChange={setOrganisation}
+                  onSourceChange={setSource}
+                  onCerifEntityChange={setCerifEntity}
+                  onPublicationTypeChange={setPublicationType}
+                  showSource={activeTab !== 'coverage'}
+                  showType={activeTab !== 'start'}
+                />
+              </SidebarGroupContent>
+            </SidebarGroup>
+          </SidebarContent>
+        </Sidebar>
+
+        <div className="flex-1 flex flex-col min-w-0">
+          <header className="sticky top-0 z-10 h-14 flex items-center gap-4 border-b bg-background/95 backdrop-blur px-4">
+            <SidebarTrigger />
+            <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
+              <TabsList className="bg-muted">
+                <TabsTrigger value="start" className="gap-1.5">
+                  <Home className="h-3.5 w-3.5" />
+                  <span className="hidden sm:inline">Start</span>
+                </TabsTrigger>
+                <TabsTrigger value="completeness" className="gap-1.5">
+                  <CheckCircle2 className="h-3.5 w-3.5" />
+                  <span className="hidden sm:inline">Completeness</span>
+                </TabsTrigger>
+                <TabsTrigger value="coverage" className="gap-1.5">
+                  <Layers className="h-3.5 w-3.5" />
+                  <span className="hidden sm:inline">Coverage</span>
+                </TabsTrigger>
+                <TabsTrigger value="accuracy" className="gap-1.5">
+                  <Target className="h-3.5 w-3.5" />
+                  <span className="hidden sm:inline">Accuracy</span>
+                </TabsTrigger>
+                <TabsTrigger value="enrichment" className="gap-1.5">
+                  <Database className="h-3.5 w-3.5" />
+                  <span className="hidden sm:inline">Enrichment</span>
+                </TabsTrigger>
+              </TabsList>
+            </Tabs>
+          </header>
+
+          <main className="flex-1 p-6 overflow-y-auto">
+            {activeTab === 'start' && <StartScreen />}
+            {activeTab === 'completeness' && <CompletenessScreen />}
+            {activeTab === 'coverage' && <CoverageScreen />}
+            {activeTab === 'accuracy' && <PlaceholderScreen type="accuracy" />}
+            {activeTab === 'enrichment' && <PlaceholderScreen type="enrichment" />}
+          </main>
+        </div>
+      </div>
+    </SidebarProvider>
+  );
+}
