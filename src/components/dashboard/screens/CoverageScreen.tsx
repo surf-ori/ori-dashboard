@@ -3,21 +3,27 @@ import { CoverageBarChart } from '@/components/dashboard/CoverageBarChart';
 import { TimelineChart } from '@/components/dashboard/TimelineChart';
 import { DataTable } from '@/components/dashboard/DataTable';
 import { InterventionPanel } from '@/components/dashboard/InterventionPanel';
+import { FilterSummary } from '@/components/dashboard/FilterSummary';
+import { MatchingMethodSelector } from '@/components/dashboard/MatchingMethodSelector';
 import { coverageComparisons, completenessTimeline, detailRecords, interventions } from '@/data/mockData';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import type { CoverageComparison } from '@/data/types';
+import type { CoverageComparison, DashboardFilters, MatchingMethod } from '@/data/types';
 
-export function CoverageScreen() {
-  const [primarySource, setPrimarySource] = useState('OpenAlex');
-  const [comparisonMode, setComparisonMode] = useState<'ror' | 'doi'>('doi');
+interface Props {
+  filters: DashboardFilters;
+  onMatchingMethodChange: (m: MatchingMethod) => void;
+}
+
+export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
+  const primarySource = filters.source;
   const [selectedComparison, setSelectedComparison] = useState<{ comparison: CoverageComparison; segment: string } | null>(null);
 
   const handleBarClick = (comparison: CoverageComparison, segment: string) => {
     setSelectedComparison({ comparison, segment });
   };
+
+  const totalRecords = coverageComparisons.reduce((s, c) => s + c.onlyInPrimary + c.inBoth, 0);
 
   const segmentLabel = selectedComparison
     ? selectedComparison.segment === 'onlyInPrimary'
@@ -36,35 +42,9 @@ export function CoverageScreen() {
         </p>
       </div>
 
-      <div className="flex flex-wrap items-end gap-4">
-        <div>
-          <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5 block">Primary Source</Label>
-          <Select value={primarySource} onValueChange={setPrimarySource}>
-            <SelectTrigger className="w-[180px]"><SelectValue /></SelectTrigger>
-            <SelectContent>
-              <SelectItem value="OpenAlex">OpenAlex</SelectItem>
-              <SelectItem value="Crossref">Crossref</SelectItem>
-              <SelectItem value="CRIS">CRIS</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+      <FilterSummary filters={filters} recordCount={totalRecords} />
 
-        <div>
-          <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5 block">Matching Method</Label>
-          <div className="flex gap-1">
-            <Button
-              variant={comparisonMode === 'doi' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setComparisonMode('doi')}
-            >DOI-based</Button>
-            <Button
-              variant={comparisonMode === 'ror' ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setComparisonMode('ror')}
-            >ROR-based</Button>
-          </div>
-        </div>
-      </div>
+      <MatchingMethodSelector value={filters.matchingMethod} onChange={onMatchingMethodChange} />
 
       <CoverageBarChart
         data={coverageComparisons}
@@ -84,7 +64,7 @@ export function CoverageScreen() {
           <TimelineChart
             data={completenessTimeline}
             title={`Coverage Over Time: ${primarySource} ↔ ${selectedComparison.comparison.compareSource}`}
-            color="hsl(174, 52%, 38%)"
+            color="hsl(var(--accent))"
           />
 
           <DataTable

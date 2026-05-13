@@ -1,18 +1,21 @@
 import { useState } from 'react';
-import { KPICard } from '@/components/dashboard/KPICard';
 import { TimelineChart } from '@/components/dashboard/TimelineChart';
 import { DataTable } from '@/components/dashboard/DataTable';
 import { InterventionPanel } from '@/components/dashboard/InterventionPanel';
+import { FilterSummary } from '@/components/dashboard/FilterSummary';
 import { completenessMetrics, completenessTimeline, detailRecords, interventions } from '@/data/mockData';
 import { cn } from '@/lib/utils';
+import type { DashboardFilters } from '@/data/types';
 
-export function CompletenessScreen() {
+interface Props { filters: DashboardFilters; }
+
+export function CompletenessScreen({ filters }: Props) {
   const [selectedField, setSelectedField] = useState('doi');
   const selectedMetric = completenessMetrics.find(m => m.field === selectedField);
-
   const filteredRecords = detailRecords.filter(r => r.missingFields.includes(selectedField));
+  const totalRecords = completenessMetrics[0]?.total ?? 0;
 
-  const mockQuery = `SELECT * FROM publications\nWHERE organisation_ror = '008xxew50'\n  AND ${selectedField} IS NULL\nORDER BY year DESC\nLIMIT 100;`;
+  const mockQuery = `SELECT * FROM publications\nWHERE organisation = '${filters.organisation}'\n  AND ${selectedField} IS NULL\nORDER BY year DESC\nLIMIT 100;`;
 
   return (
     <div className="space-y-6">
@@ -22,6 +25,8 @@ export function CompletenessScreen() {
           How complete is the metadata across your records? Click a metric card to drill down.
         </p>
       </div>
+
+      <FilterSummary filters={filters} recordCount={totalRecords} />
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
         {completenessMetrics.map(m => (
@@ -53,13 +58,11 @@ export function CompletenessScreen() {
             data={completenessTimeline}
             title={`${selectedMetric.label} — Completeness Over Time`}
           />
-
           <DataTable
             records={filteredRecords}
             title={`Records Missing: ${selectedMetric.label}`}
             sqlQuery={mockQuery}
           />
-
           <InterventionPanel interventions={interventions.slice(0, 3)} />
         </>
       )}

@@ -5,10 +5,19 @@ import { ArrowRight, Sparkles } from 'lucide-react';
 import { enrichmentEntities, detailRecords, interventions } from '@/data/mockData';
 import { DataTable } from '@/components/dashboard/DataTable';
 import { InterventionPanel } from '@/components/dashboard/InterventionPanel';
+import { FilterSummary } from '@/components/dashboard/FilterSummary';
+import { MatchingMethodSelector } from '@/components/dashboard/MatchingMethodSelector';
 import { cn } from '@/lib/utils';
+import type { DashboardFilters, MatchingMethod } from '@/data/types';
 
-export function EnrichmentScreen() {
+interface Props {
+  filters: DashboardFilters;
+  onMatchingMethodChange: (m: MatchingMethod) => void;
+}
+
+export function EnrichmentScreen({ filters, onMatchingMethodChange }: Props) {
   const [selected, setSelected] = useState<{ entity: string; source: string } | null>(null);
+  const totalRecords = enrichmentEntities.reduce((s, e) => s + e.totalRecords, 0);
 
   return (
     <div className="space-y-6">
@@ -20,6 +29,10 @@ export function EnrichmentScreen() {
           from a comparing source.
         </p>
       </div>
+
+      <FilterSummary filters={filters} recordCount={totalRecords} />
+
+      <MatchingMethodSelector value={filters.matchingMethod} onChange={onMatchingMethodChange} />
 
       <div className="space-y-5">
         {enrichmentEntities.map(e => (
@@ -84,7 +97,7 @@ export function EnrichmentScreen() {
           <DataTable
             records={detailRecords.slice(0, 6)}
             title={`Records missing ${selected.entity.toUpperCase()} that can be enriched from ${selected.source}`}
-            sqlQuery={`SELECT p.id, p.title, c.${selected.entity} AS proposed_value\nFROM primary_source p\nJOIN ${selected.source.toLowerCase()} c ON p.doi = c.doi\nWHERE p.${selected.entity} IS NULL\n  AND c.${selected.entity} IS NOT NULL;`}
+            sqlQuery={`SELECT p.id, p.title, c.${selected.entity} AS proposed_value\nFROM primary_source p\nJOIN ${selected.source.toLowerCase()} c ON p.${filters.matchingMethod} = c.${filters.matchingMethod}\nWHERE p.${selected.entity} IS NULL\n  AND c.${selected.entity} IS NOT NULL;`}
           />
           <InterventionPanel interventions={interventions.slice(0, 3)} />
         </div>
