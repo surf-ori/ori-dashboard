@@ -1,11 +1,25 @@
 import type { Organisation, CompletenessMetric, TimelinePoint, CoverageComparison, DetailRecord, Intervention, Source, EnrichmentEntity, AccuracyComparison } from './types';
 
+// Dutch signatories of the Barcelona Declaration on Open Research Information
+// Source: https://barcelona-declaration.org/signatories_by_country/
 export const organisations: Organisation[] = [
-  { id: 'vu', name: 'Vrije Universiteit Amsterdam', rorId: '008xxew50', abbreviation: 'VU' },
+  { id: 'vu', name: 'Vrije Universiteit Amsterdam', rorId: '008xxew50', abbreviation: 'VU Amsterdam' },
   { id: 'uva', name: 'University of Amsterdam', rorId: '04dkp9463', abbreviation: 'UvA' },
   { id: 'tudelft', name: 'Delft University of Technology', rorId: '02e2c7k09', abbreviation: 'TU Delft' },
   { id: 'uu', name: 'Utrecht University', rorId: '04pp8hn57', abbreviation: 'UU' },
   { id: 'rug', name: 'University of Groningen', rorId: '012p63287', abbreviation: 'RUG' },
+  { id: 'leiden', name: 'Leiden University', rorId: '027bh9e22', abbreviation: 'Leiden' },
+  { id: 'knaw', name: 'Royal Netherlands Academy of Arts and Sciences', rorId: '0566bfb96', abbreviation: 'KNAW' },
+  { id: 'nwo', name: 'Dutch Research Council', rorId: '04jsz6e67', abbreviation: 'NWO' },
+  { id: 'zonmw', name: 'ZonMw', rorId: '01yaj9a77', abbreviation: 'ZonMw' },
+  { id: 'surf', name: 'SURF', rorId: '0234wmv40', abbreviation: 'SURF' },
+  { id: 'esciencecenter', name: 'Netherlands eScience Center', rorId: '00rbjv475', abbreviation: 'eScience' },
+  { id: 'kb', name: 'KB, National library of the Netherlands', rorId: '02w4jbg70', abbreviation: 'KB' },
+  { id: 'unl', name: 'Universities of the Netherlands', rorId: '05hyt2f43', abbreviation: 'UNL' },
+  { id: 'vh', name: 'Vereniging Hogescholen', rorId: '00n3w3b58', abbreviation: 'VH' },
+  { id: 'sia', name: 'Taskforce for Applied Research SIA', rorId: '03de5wj42', abbreviation: 'SIA' },
+  { id: 'dccpo', name: 'Digital Competence Center for Practice-Oriented Research', rorId: '04q3p7m21', abbreviation: 'DCC-PO' },
+  { id: 'nlrn', name: 'Dutch Reproducibility Network', rorId: '06y5xv847', abbreviation: 'NLRN' },
 ];
 
 export const sources: Source[] = ['OpenAlex', 'Crossref', 'OpenAIRE', 'CRIS', 'ORCID', 'ROR', 'DataCite'];
@@ -21,28 +35,17 @@ export const completenessMetrics: CompletenessMetric[] = [
 ];
 
 export const completenessTimeline: TimelinePoint[] = [
-  { date: '2020-Q1', value: 71.2 },
-  { date: '2020-Q2', value: 72.8 },
-  { date: '2020-Q3', value: 73.1 },
-  { date: '2020-Q4', value: 74.5 },
-  { date: '2021-Q1', value: 75.3 },
-  { date: '2021-Q2', value: 76.9 },
-  { date: '2021-Q3', value: 78.2 },
-  { date: '2021-Q4', value: 79.1 },
-  { date: '2022-Q1', value: 80.4 },
-  { date: '2022-Q2', value: 81.7 },
-  { date: '2022-Q3', value: 82.3 },
-  { date: '2022-Q4', value: 83.6 },
-  { date: '2023-Q1', value: 84.1 },
-  { date: '2023-Q2', value: 85.2 },
-  { date: '2023-Q3', value: 86.0 },
-  { date: '2023-Q4', value: 87.3 },
+  { date: '2020-Q1', value: 71.2 }, { date: '2020-Q2', value: 72.8 }, { date: '2020-Q3', value: 73.1 }, { date: '2020-Q4', value: 74.5 },
+  { date: '2021-Q1', value: 75.3 }, { date: '2021-Q2', value: 76.9 }, { date: '2021-Q3', value: 78.2 }, { date: '2021-Q4', value: 79.1 },
+  { date: '2022-Q1', value: 80.4 }, { date: '2022-Q2', value: 81.7 }, { date: '2022-Q3', value: 82.3 }, { date: '2022-Q4', value: 83.6 },
+  { date: '2023-Q1', value: 84.1 }, { date: '2023-Q2', value: 85.2 }, { date: '2023-Q3', value: 86.0 }, { date: '2023-Q4', value: 87.3 },
 ];
 
+// With CRIS as the default primary source, comparison list includes OpenAlex (swapped in for CRIS)
 export const coverageComparisons: CoverageComparison[] = [
+  { compareSource: 'OpenAlex', onlyInPrimary: 3450, inBoth: 6200, onlyInCompared: 4120, total: 13770 },
   { compareSource: 'Crossref', onlyInPrimary: 1230, inBoth: 8940, onlyInCompared: 560, total: 10730 },
   { compareSource: 'OpenAIRE', onlyInPrimary: 2100, inBoth: 7350, onlyInCompared: 1890, total: 11340 },
-  { compareSource: 'CRIS', onlyInPrimary: 3450, inBoth: 6200, onlyInCompared: 4120, total: 13770 },
   { compareSource: 'ORCID', onlyInPrimary: 4200, inBoth: 5100, onlyInCompared: 2300, total: 11600 },
   { compareSource: 'DataCite', onlyInPrimary: 8900, inBoth: 1250, onlyInCompared: 780, total: 10930 },
 ];
@@ -68,13 +71,12 @@ export const interventions: Intervention[] = [
 
 export const summaryStats = {
   totalSources: 7,
-  totalOrganisations: 5,
+  totalOrganisations: organisations.length,
   totalRecords: 62250,
   avgCompleteness: 67.6,
   avgCoverage: 72.4,
   avgAccuracy: 'N/A' as const,
 };
-
 
 export const enrichmentEntities: EnrichmentEntity[] = [
   {
