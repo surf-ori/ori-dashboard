@@ -5,11 +5,13 @@ export interface Organisation {
   abbreviation: string;
 }
 
-export type CerifEntity = 'Publication' | 'Person' | 'Organisation' | 'Project' | 'Dataset';
+export type CerifEntity = 'Publications' | 'Persons' | 'Organisations' | 'Projects' | 'Datasets';
 
 export type Source = 'OpenAlex' | 'Crossref' | 'OpenAIRE' | 'CRIS' | 'ORCID' | 'ROR' | 'DataCite';
 
 export type PublicationType = 'Journal Article' | 'Conference Paper' | 'Book Chapter' | 'Preprint' | 'Thesis' | 'Report';
+
+export type MatchingMethod = 'doi' | 'ror';
 
 export interface CompletenessMetric {
   field: string;
@@ -54,9 +56,10 @@ export interface Intervention {
 
 export interface DashboardFilters {
   organisation: string;
-  source: Source | 'All';
+  source: Source;
   cerifEntity: CerifEntity;
   publicationType: PublicationType | 'All';
+  matchingMethod: MatchingMethod;
 }
 
 export interface EnrichmentEntity {
