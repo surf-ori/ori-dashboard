@@ -58,3 +58,22 @@ export interface DashboardFilters {
   cerifEntity: CerifEntity;
   publicationType: PublicationType | 'All';
 }
+
+export interface EnrichmentEntity {
+  entity: string;
+  label: string;
+  missingPercentage: number;
+  missingCount: number;
+  totalRecords: number;
+  recoverable: { source: Source; percentage: number; count: number }[];
+}
+
+export interface AccuracyComparison {
+  primarySource: Source;
+  compareSource: Source;
+  recordsInPrimary: number;
+  recordsInBoth: number;
+  recordsInCompare: number;
+  conflicts: { field: string; label: string; count: number; percentage: number }[];
+  agreements: { field: string; label: string; count: number; percentage: number }[];
+}
