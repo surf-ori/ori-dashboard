@@ -75,7 +75,6 @@ export const summaryStats = {
   avgAccuracy: 'N/A' as const,
 };
 
-import type { EnrichmentEntity, AccuracyComparison } from './types';
 
 export const enrichmentEntities: EnrichmentEntity[] = [
   {
