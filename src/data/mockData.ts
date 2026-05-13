@@ -74,3 +74,56 @@ export const summaryStats = {
   avgCoverage: 72.4,
   avgAccuracy: 'N/A' as const,
 };
+
+import type { EnrichmentEntity, AccuracyComparison } from './types';
+
+export const enrichmentEntities: EnrichmentEntity[] = [
+  {
+    entity: 'ror', label: 'ROR', missingPercentage: 74, missingCount: 5403, totalRecords: 7300,
+    recoverable: [
+      { source: 'OpenAlex', percentage: 10, count: 540 },
+      { source: 'OpenAIRE', percentage: 20, count: 1080 },
+    ],
+  },
+  {
+    entity: 'orcid', label: 'ORCID', missingPercentage: 66, missingCount: 4281, totalRecords: 6486,
+    recoverable: [
+      { source: 'OpenAlex', percentage: 10, count: 428 },
+      { source: 'OpenAIRE', percentage: 20, count: 856 },
+    ],
+  },
+  {
+    entity: 'doi', label: 'DOI', missingPercentage: 37, missingCount: 2392, totalRecords: 6464,
+    recoverable: [
+      { source: 'OpenAlex', percentage: 10, count: 239 },
+      { source: 'Crossref', percentage: 20, count: 478 },
+    ],
+  },
+  {
+    entity: 'grantDoi', label: 'Grant DOI', missingPercentage: 81, missingCount: 5912, totalRecords: 7300,
+    recoverable: [
+      { source: 'OpenAIRE', percentage: 18, count: 1064 },
+      { source: 'Crossref', percentage: 7, count: 414 },
+    ],
+  },
+];
+
+export const accuracyComparison: AccuracyComparison = {
+  primarySource: 'CRIS',
+  compareSource: 'OpenAlex',
+  recordsInPrimary: 128000,
+  recordsInBoth: 84000,
+  recordsInCompare: 152000,
+  conflicts: [
+    { field: 'ror', label: 'different ROR affiliation id', count: 53000, percentage: 80 },
+    { field: 'orcid', label: 'different ORCiD', count: 53000, percentage: 80 },
+    { field: 'authors', label: 'different author list', count: 12600, percentage: 15 },
+    { field: 'year', label: 'different publication year', count: 4200, percentage: 5 },
+  ],
+  agreements: [
+    { field: 'ror', label: 'same ROR affiliation id', count: 21000, percentage: 20 },
+    { field: 'orcid', label: 'same ORCID', count: 21000, percentage: 20 },
+    { field: 'authors', label: 'matching author list', count: 71400, percentage: 85 },
+    { field: 'year', label: 'matching publication year', count: 79800, percentage: 95 },
+  ],
+};
