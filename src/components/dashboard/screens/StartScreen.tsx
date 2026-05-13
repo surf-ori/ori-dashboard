@@ -1,20 +1,21 @@
 import { KPICard } from '@/components/dashboard/KPICard';
 import { summaryStats, organisations } from '@/data/mockData';
-import { BookOpen, Building2, Database, CheckCircle2, Layers, Target } from 'lucide-react';
+import { Sparkles, CheckCircle2, Layers, Target } from 'lucide-react';
 
 export function StartScreen() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight mb-2">Open Research Information Dashboard</h1>
+        <h1 className="text-3xl font-bold tracking-tight mb-2">ORI Quality Dashboard</h1>
         <p className="text-muted-foreground max-w-3xl">
-          Monitor and improve the quality of open research information for Dutch research performing organisations.
-          This dashboard supports the goals of the{' '}
+          Built for metadata specialists at the Dutch signatories of the{' '}
           <a href="https://barcelona-declaration.org/" target="_blank" rel="noopener noreferrer" className="text-primary underline underline-offset-2 hover:text-primary/80">
             Barcelona Declaration on Open Research Information
           </a>
-          {' '}by measuring <strong>completeness</strong>, <strong>coverage</strong>, and <strong>accuracy</strong> of
-          research metadata across multiple open sources.
+          . This dashboard shows where the metadata of your institution can be improved across the open sources
+          containing Open Research Information about your organisation — measuring{' '}
+          <strong>coverage</strong>, <strong>completeness</strong>, <strong>enrichment</strong> potential and{' '}
+          <strong>accuracy</strong>.
         </p>
       </div>
 
@@ -26,7 +27,7 @@ export function StartScreen() {
           <KPICard label="Total Records" value={summaryStats.totalRecords.toLocaleString()} subtitle="Across all sources and organisations" />
           <KPICard label="Avg. Completeness" value={`${summaryStats.avgCompleteness}%`} subtitle="Metadata field coverage" variant="accent" />
           <KPICard label="Avg. Coverage" value={`${summaryStats.avgCoverage}%`} subtitle="Cross-source record overlap" variant="accent" />
-          <KPICard label="Avg. Accuracy" value="Coming soon" subtitle="Data correctness assessment" />
+          <KPICard label="Avg. Accuracy" value="80%" subtitle="Conflict-free shared records" />
         </div>
       </div>
 
@@ -55,31 +56,31 @@ export function StartScreen() {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
           <div className="flex gap-3">
-            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
-            <div>
-              <p className="font-medium">Completeness</p>
-              <p className="text-muted-foreground">Check which metadata fields are present across your records</p>
-            </div>
-          </div>
-          <div className="flex gap-3">
             <Layers className="h-5 w-5 text-accent shrink-0 mt-0.5" />
             <div>
               <p className="font-medium">Coverage</p>
-              <p className="text-muted-foreground">Compare which records appear in different open sources</p>
+              <p className="text-muted-foreground">Are the records of your institution represented across the selected sources?</p>
+            </div>
+          </div>
+          <div className="flex gap-3">
+            <CheckCircle2 className="h-5 w-5 text-accent shrink-0 mt-0.5" />
+            <div>
+              <p className="font-medium">Completeness</p>
+              <p className="text-muted-foreground">Are records in the selected sources filled with valid values for the required fields (DOI, ROR, ORCID)?</p>
+            </div>
+          </div>
+          <div className="flex gap-3">
+            <Sparkles className="h-5 w-5 text-primary shrink-0 mt-0.5" />
+            <div>
+              <p className="font-medium">Enrichment</p>
+              <p className="text-muted-foreground">Which missing values can be recovered from comparing sources to enrich your primary source?</p>
             </div>
           </div>
           <div className="flex gap-3">
             <Target className="h-5 w-5 text-primary shrink-0 mt-0.5" />
             <div>
               <p className="font-medium">Accuracy</p>
-              <p className="text-muted-foreground">Assess the correctness of metadata values (coming soon)</p>
-            </div>
-          </div>
-          <div className="flex gap-3">
-            <Database className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-            <div>
-              <p className="font-medium">Enrichment</p>
-              <p className="text-muted-foreground">View side-by-side metadata from different sources (coming soon)</p>
+              <p className="text-muted-foreground">Where do values disagree between sources, and how can the conflicts be resolved?</p>
             </div>
           </div>
         </div>
