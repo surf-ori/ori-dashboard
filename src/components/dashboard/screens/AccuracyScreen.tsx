@@ -8,17 +8,27 @@ import { accuracyComparison, detailRecords, interventions } from '@/data/mockDat
 import { DataTable } from '@/components/dashboard/DataTable';
 import { TimelineChart } from '@/components/dashboard/TimelineChart';
 import { InterventionPanel } from '@/components/dashboard/InterventionPanel';
+import { FilterSummary } from '@/components/dashboard/FilterSummary';
+import { MatchingMethodSelector } from '@/components/dashboard/MatchingMethodSelector';
 import { completenessTimeline } from '@/data/mockData';
 import { cn } from '@/lib/utils';
+import type { DashboardFilters, MatchingMethod, Source } from '@/data/types';
 
-export function AccuracyScreen() {
+interface Props {
+  filters: DashboardFilters;
+  onMatchingMethodChange: (m: MatchingMethod) => void;
+}
+
+export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
   const a = accuracyComparison;
-  const [primary, setPrimary] = useState(a.primarySource);
-  const [compare, setCompare] = useState(a.compareSource);
-  const [matchBy, setMatchBy] = useState<'doi' | 'ror'>('doi');
+  const primary = filters.source;
+  const [compare, setCompare] = useState<Source>(a.compareSource);
   const [selected, setSelected] = useState<{ kind: 'conflict' | 'agreement'; field: string } | null>({
     kind: 'conflict', field: a.conflicts[0].field,
   });
+
+  const matchBy = filters.matchingMethod;
+  const totalRecords = a.recordsInPrimary + a.recordsInCompare - a.recordsInBoth;
 
   const selectedItem = selected
     ? (selected.kind === 'conflict' ? a.conflicts : a.agreements).find(c => c.field === selected.field)
@@ -34,21 +44,12 @@ export function AccuracyScreen() {
         </p>
       </div>
 
+      <FilterSummary filters={filters} recordCount={totalRecords} />
+
       <div className="flex flex-wrap items-end gap-4">
         <div>
-          <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5 block">Primary Source</Label>
-          <Select value={primary} onValueChange={(v) => setPrimary(v as typeof primary)}>
-            <SelectTrigger className="w-[180px]"><SelectValue /></SelectTrigger>
-            <SelectContent>
-              <SelectItem value="CRIS">CRIS</SelectItem>
-              <SelectItem value="OpenAlex">OpenAlex</SelectItem>
-              <SelectItem value="Crossref">Crossref</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-        <div>
           <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5 block">Compare Source</Label>
-          <Select value={compare} onValueChange={(v) => setCompare(v as typeof compare)}>
+          <Select value={compare} onValueChange={(v) => setCompare(v as Source)}>
             <SelectTrigger className="w-[180px]"><SelectValue /></SelectTrigger>
             <SelectContent>
               <SelectItem value="OpenAlex">OpenAlex</SelectItem>
@@ -57,19 +58,9 @@ export function AccuracyScreen() {
             </SelectContent>
           </Select>
         </div>
-        <div>
-          <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5 block">Match by</Label>
-          <Select value={matchBy} onValueChange={(v) => setMatchBy(v as 'doi' | 'ror')}>
-            <SelectTrigger className="w-[140px]"><SelectValue /></SelectTrigger>
-            <SelectContent>
-              <SelectItem value="doi">DOI</SelectItem>
-              <SelectItem value="ror">ROR</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+        <MatchingMethodSelector value={matchBy} onChange={onMatchingMethodChange} />
       </div>
 
-      {/* Big numbers diagram */}
       <Card>
         <CardContent className="pt-6">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-4">
@@ -92,7 +83,6 @@ export function AccuracyScreen() {
         </CardContent>
       </Card>
 
-      {/* Conflicts vs Agreements */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <Card>
           <CardHeader className="pb-3">
