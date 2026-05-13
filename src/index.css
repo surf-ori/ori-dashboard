@@ -2,108 +2,132 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Serif+4:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700;900&display=swap');
 
+/* =========================================================================
+   SURF brand tokens — translated to HSL for shadcn/Tailwind
+   Source: SURF Merkportaal (https://merkportaal.surf.nl)
+   ========================================================================= */
 @layer base {
   :root {
-    --background: 210 20% 98%;
-    --foreground: 215 25% 15%;
+    /* Surfaces */
+    --background: 0 0% 100%;          /* surf-bg #FFFFFF */
+    --foreground: 0 0% 4%;            /* surf-black */
 
     --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
+    --card-foreground: 0 0% 4%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
+    --popover-foreground: 0 0% 4%;
 
-    --primary: 213 56% 33%;
+    /* Primary = SURF orange #E67300 */
+    --primary: 30 100% 45%;
     --primary-foreground: 0 0% 100%;
+    --primary-700: 30 100% 36%;       /* hover */
+    --primary-050: 30 100% 95%;       /* tint */
 
-    --secondary: 210 30% 93%;
-    --secondary-foreground: 215 25% 15%;
+    --secondary: 0 0% 96%;            /* bg-soft */
+    --secondary-foreground: 0 0% 4%;
 
-    --muted: 210 20% 95%;
-    --muted-foreground: 215 15% 50%;
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 32%;     /* fg-2 */
 
-    --accent: 174 52% 38%;
+    /* Accent = SURF blue #0077C0 (cool support colour for charts/links) */
+    --accent: 203 100% 38%;
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 65% 51%;
+    /* Destructive = SURF red #DF3226 */
+    --destructive: 4 73% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 214 20% 88%;
-    --input: 214 20% 88%;
-    --ring: 213 56% 33%;
+    --border: 0 0% 85%;               /* surf-border */
+    --input: 0 0% 85%;
+    --ring: 30 100% 45%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;                /* SURF radii are softer */
 
-    --sidebar-background: 215 25% 15%;
-    --sidebar-foreground: 210 20% 90%;
-    --sidebar-primary: 174 52% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 215 20% 22%;
-    --sidebar-accent-foreground: 210 20% 90%;
-    --sidebar-border: 215 15% 25%;
-    --sidebar-ring: 174 52% 48%;
+    /* Sidebar = SURF basiskader black with orange accent */
+    --sidebar-background: 0 0% 4%;
+    --sidebar-foreground: 0 0% 92%;
+    --sidebar-primary: 30 100% 50%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 92%;
+    --sidebar-border: 0 0% 18%;
+    --sidebar-ring: 30 100% 50%;
 
-    --success: 152 55% 42%;
+    /* Status — SURF support palette */
+    --success: 146 100% 27%;          /* green-dark #008942 */
     --success-foreground: 0 0% 100%;
-    --warning: 38 92% 50%;
+    --warning: 30 100% 45%;           /* re-use orange for warning */
     --warning-foreground: 0 0% 100%;
-    --info: 213 56% 50%;
+    --info: 203 100% 38%;             /* blue */
     --info-foreground: 0 0% 100%;
+
+    /* Brand support colours (chart palette) */
+    --surf-purple: 291 57% 33%;
+    --surf-green-light: 146 47% 81%;
+    --surf-yellow: 52 100% 50%;
   }
 
   .dark {
-    --background: 215 25% 10%;
-    --foreground: 210 20% 90%;
-
-    --card: 215 25% 13%;
-    --card-foreground: 210 20% 90%;
-
-    --popover: 215 25% 13%;
-    --popover-foreground: 210 20% 90%;
-
-    --primary: 174 52% 48%;
-    --primary-foreground: 215 25% 10%;
-
-    --secondary: 215 20% 22%;
-    --secondary-foreground: 210 20% 90%;
-
-    --muted: 215 20% 18%;
-    --muted-foreground: 215 15% 55%;
-
-    --accent: 174 52% 38%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 62% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 215 15% 25%;
-    --input: 215 15% 25%;
-    --ring: 174 52% 48%;
-
-    --sidebar-background: 215 30% 8%;
-    --sidebar-foreground: 210 20% 85%;
-    --sidebar-primary: 174 52% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 215 20% 15%;
-    --sidebar-accent-foreground: 210 20% 85%;
-    --sidebar-border: 215 15% 18%;
-    --sidebar-ring: 174 52% 48%;
+    --background: 0 0% 6%;
+    --foreground: 0 0% 95%;
+    --card: 0 0% 9%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 30 100% 50%;
+    --primary-foreground: 0 0% 4%;
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 203 100% 50%;
+    --accent-foreground: 0 0% 4%;
+    --destructive: 4 73% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 30 100% 50%;
   }
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
+  * { @apply border-border; }
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Source Sans 3', system-ui, sans-serif;
+    font-family: 'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif;
+    font-size: 17px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
   }
 
-  h1, h2, h3, h4 {
-    font-family: 'Source Serif 4', Georgia, serif;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Nunito', system-ui, sans-serif;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    line-height: 1.15;
+  }
+
+  /* SURF sentence-case discipline — never auto-capitalise headings */
+}
+
+@layer components {
+  /* SURF eyebrow — small orange uppercase label above headings */
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.08em] text-primary;
+  }
+
+  /* SURF basiskader — the signature thick black rounded frame */
+  .basiskader {
+    border: 4px solid hsl(var(--foreground));
+    border-radius: 32px;
+  }
+
+  /* Underlined inline link, SURF style */
+  .link {
+    @apply text-primary underline underline-offset-2 hover:opacity-80;
   }
 }
