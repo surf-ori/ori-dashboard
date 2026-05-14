@@ -7,6 +7,8 @@ import { CompletenessScreen } from '@/components/dashboard/screens/CompletenessS
 import { CoverageScreen } from '@/components/dashboard/screens/CoverageScreen';
 import { EnrichmentScreen } from '@/components/dashboard/screens/EnrichmentScreen';
 import { AccuracyScreen } from '@/components/dashboard/screens/AccuracyScreen';
+import { MockDataScreen } from '@/components/dashboard/screens/MockDataScreen';
+import { DashboardDataProvider } from '@/data/DataContext';
 import type { CerifEntity, DashboardFilters, MatchingMethod, PublicationType, Source } from '@/data/types';
 import {
   Sidebar,
@@ -16,7 +18,7 @@ import {
   SidebarHeader,
   SidebarGroupContent,
 } from '@/components/ui/sidebar';
-import { CheckCircle2, Home, Layers, Sparkles, Target } from 'lucide-react';
+import { CheckCircle2, Database, Home, Layers, Sparkles, Target } from 'lucide-react';
 import surfLogo from '@/assets/surf-logo-white.svg';
 
 export default function DashboardLayout() {
@@ -30,6 +32,7 @@ export default function DashboardLayout() {
   const filters: DashboardFilters = { organisation, source, cerifEntity, publicationType, matchingMethod };
 
   return (
+    <DashboardDataProvider>
     <SidebarProvider>
       <div className="min-h-screen flex w-full">
         <Sidebar>
@@ -71,6 +74,7 @@ export default function DashboardLayout() {
                 <TabsTrigger value="completeness" className="gap-1.5"><CheckCircle2 className="h-3.5 w-3.5" /><span className="hidden sm:inline">Completeness</span></TabsTrigger>
                 <TabsTrigger value="enrichment" className="gap-1.5"><Sparkles className="h-3.5 w-3.5" /><span className="hidden sm:inline">Enrichment</span></TabsTrigger>
                 <TabsTrigger value="accuracy" className="gap-1.5"><Target className="h-3.5 w-3.5" /><span className="hidden sm:inline">Accuracy</span></TabsTrigger>
+                <TabsTrigger value="data" className="gap-1.5"><Database className="h-3.5 w-3.5" /><span className="hidden sm:inline">Data</span></TabsTrigger>
               </TabsList>
             </Tabs>
           </header>
@@ -81,9 +85,11 @@ export default function DashboardLayout() {
             {activeTab === 'completeness' && <CompletenessScreen filters={filters} />}
             {activeTab === 'enrichment' && <EnrichmentScreen filters={filters} onMatchingMethodChange={setMatchingMethod} />}
             {activeTab === 'accuracy' && <AccuracyScreen filters={filters} onMatchingMethodChange={setMatchingMethod} />}
+            {activeTab === 'data' && <MockDataScreen />}
           </main>
         </div>
       </div>
     </SidebarProvider>
+    </DashboardDataProvider>
   );
 }
