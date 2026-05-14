@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight, Sparkles } from 'lucide-react';
-import { enrichmentEntities, detailRecords, interventions } from '@/data/mockData';
+import { useDashboardData } from '@/data/DataContext';
 import { DataTable } from '@/components/dashboard/DataTable';
 import { InterventionPanel } from '@/components/dashboard/InterventionPanel';
 import { FilterSummary } from '@/components/dashboard/FilterSummary';
@@ -16,6 +16,7 @@ interface Props {
 }
 
 export function EnrichmentScreen({ filters, onMatchingMethodChange }: Props) {
+  const { enrichmentEntities, detailRecords, interventions } = useDashboardData();
   const [selected, setSelected] = useState<{ entity: string; source: string } | null>(null);
   const totalRecords = enrichmentEntities.reduce((s, e) => s + e.totalRecords, 0);
 
