@@ -82,20 +82,21 @@ export const enrichmentEntities: EnrichmentEntity[] = [
   {
     entity: 'ror', label: 'ROR', missingPercentage: 74, missingCount: 5403, totalRecords: 7300,
     recoverable: [
-      { source: 'OpenAlex', percentage: 10, count: 1495 },
       { source: 'OpenAIRE', percentage: 20, count: 2990 },
+      { source: 'OpenAlex', percentage: 10, count: 1495 },
     ],
   },
   {
     entity: 'orcid', label: 'ORCID', missingPercentage: 66, missingCount: 4281, totalRecords: 6486,
     recoverable: [
-      { source: 'OpenAlex', percentage: 10, count: 428 },
       { source: 'OpenAIRE', percentage: 20, count: 856 },
+      { source: 'OpenAlex', percentage: 10, count: 428 },
     ],
   },
   {
     entity: 'doi', label: 'DOI', missingPercentage: 37, missingCount: 2392, totalRecords: 6464,
     recoverable: [
+      { source: 'OpenAIRE', percentage: 15, count: 358 },
       { source: 'OpenAlex', percentage: 10, count: 239 },
       { source: 'Crossref', percentage: 20, count: 478 },
     ],
