@@ -4,13 +4,12 @@ import { Badge } from '@/components/ui/badge';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ArrowRight, ArrowLeft, AlertTriangle, CheckCircle2 } from 'lucide-react';
-import { accuracyComparison, detailRecords, interventions } from '@/data/mockData';
+import { useDashboardData } from '@/data/DataContext';
 import { DataTable } from '@/components/dashboard/DataTable';
 import { TimelineChart } from '@/components/dashboard/TimelineChart';
 import { InterventionPanel } from '@/components/dashboard/InterventionPanel';
 import { FilterSummary } from '@/components/dashboard/FilterSummary';
 import { MatchingMethodSelector } from '@/components/dashboard/MatchingMethodSelector';
-import { completenessTimeline } from '@/data/mockData';
 import { cn } from '@/lib/utils';
 import type { DashboardFilters, MatchingMethod, Source } from '@/data/types';
 
@@ -20,6 +19,7 @@ interface Props {
 }
 
 export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
+  const { accuracyComparison, detailRecords, interventions, completenessTimeline } = useDashboardData();
   const a = accuracyComparison;
   const primary = filters.source;
   const [compare, setCompare] = useState<Source>(a.compareSource);

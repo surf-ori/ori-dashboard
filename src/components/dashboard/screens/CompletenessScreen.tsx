@@ -3,13 +3,14 @@ import { TimelineChart } from '@/components/dashboard/TimelineChart';
 import { DataTable } from '@/components/dashboard/DataTable';
 import { InterventionPanel } from '@/components/dashboard/InterventionPanel';
 import { FilterSummary } from '@/components/dashboard/FilterSummary';
-import { completenessMetrics, completenessTimeline, detailRecords, interventions } from '@/data/mockData';
+import { useDashboardData } from '@/data/DataContext';
 import { cn } from '@/lib/utils';
 import type { DashboardFilters } from '@/data/types';
 
 interface Props { filters: DashboardFilters; }
 
 export function CompletenessScreen({ filters }: Props) {
+  const { completenessMetrics, completenessTimeline, detailRecords, interventions } = useDashboardData();
   const [selectedField, setSelectedField] = useState('doi');
   const selectedMetric = completenessMetrics.find(m => m.field === selectedField);
   const filteredRecords = detailRecords.filter(r => r.missingFields.includes(selectedField));
