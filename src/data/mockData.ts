@@ -82,7 +82,7 @@ export const enrichmentEntities: EnrichmentEntity[] = [
   {
     entity: 'ror', label: 'ROR', missingPercentage: 74, missingCount: 5403, totalRecords: 7300,
     recoverable: [
-      { source: 'OpenAIRE', percentage: 20, count: 2990 },
+      { source: 'OpenAIRE', percentage: 10, count: 729 },
       { source: 'OpenAlex', percentage: 10, count: 1495 },
     ],
   },

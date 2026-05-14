@@ -72,7 +72,7 @@ export function EnrichmentScreen({ filters, onMatchingMethodChange }: Props) {
                           <Badge variant="secondary" className="text-xs">{r.source}</Badge>
                           <Sparkles className="h-3.5 w-3.5 text-accent opacity-0 group-hover:opacity-100 transition-opacity" />
                         </div>
-                        <p className="text-2xl font-bold text-accent">{r.percentage}%</p>
+                        <p className="text-2xl font-bold text-accent">+{r.percentage}%</p>
                         <p className="text-xs font-mono text-muted-foreground">({r.count.toLocaleString()})</p>
                         <p className="text-xs text-muted-foreground mt-1.5 leading-snug">
                           can be recovered from<br />&nbsp;{r.source}
