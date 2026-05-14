@@ -74,7 +74,7 @@ export function EnrichmentScreen({ filters, onMatchingMethodChange }: Props) {
                         <p className="text-2xl font-bold text-accent">{r.percentage}%</p>
                         <p className="text-xs font-mono text-muted-foreground">({r.count.toLocaleString()})</p>
                         <p className="text-xs text-muted-foreground mt-1.5 leading-snug">
-                          of those can be recovered from <strong className="text-foreground">{r.source}</strong>
+                          can be recovered from<br />&nbsp;{r.source}
                         </p>
                         <p className="text-[10px] text-accent mt-1.5 uppercase tracking-wider font-medium">Click to view records</p>
                       </button>
