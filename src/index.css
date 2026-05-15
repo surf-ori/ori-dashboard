@@ -2,17 +2,19 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Source+Sans+3:wght@300;400;500;600;700;900&display=swap');
+/* SURF Design System Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
 
 /* =========================================================================
-   SURF brand tokens — translated to HSL for shadcn/Tailwind
-   Source: SURF Merkportaal (https://merkportaal.surf.nl)
+   SURF Design System Tokens
+   Based on: https://github.com/surf-ori/surf-design-system
    ========================================================================= */
 @layer base {
   :root {
-    /* Surfaces */
-    --background: 0 0% 100%;          /* surf-bg #FFFFFF */
-    --foreground: 0 0% 4%;            /* surf-black */
+    /* Surfaces - White backgrounds */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 4%;
 
     --card: 0 0% 100%;
     --card-foreground: 0 0% 4%;
@@ -20,33 +22,37 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 4%;
 
-    /* Primary = SURF orange #E67300 */
+    /* Primary - SURF Orange #E67300 */
     --primary: 30 100% 45%;
     --primary-foreground: 0 0% 100%;
-    --primary-700: 30 100% 36%;       /* hover */
-    --primary-050: 30 100% 95%;       /* tint */
+    --primary-700: 30 100% 36%;
+    --primary-050: 30 100% 95%;
 
-    --secondary: 0 0% 96%;            /* bg-soft */
+    /* Secondary */
+    --secondary: 0 0% 96%;
     --secondary-foreground: 0 0% 4%;
 
+    /* Muted */
     --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 32%;     /* fg-2 */
+    --muted-foreground: 0 0% 32%;
 
-    /* Accent = SURF blue #0077C0 (cool support colour for charts/links) */
+    /* Accent - SURF Blue #0077C0 */
     --accent: 203 100% 38%;
     --accent-foreground: 0 0% 100%;
 
-    /* Destructive = SURF red #DF3226 */
+    /* Destructive - SURF Red #DF3226 */
     --destructive: 4 73% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 85%;               /* surf-border */
+    /* Borders */
+    --border: 0 0% 85%;
     --input: 0 0% 85%;
     --ring: 30 100% 45%;
 
-    --radius: 0.75rem;                /* SURF radii are softer */
+    /* Border radius */
+    --radius: 0.75rem;
 
-    /* Sidebar = SURF basiskader black with orange accent */
+    /* Sidebar - Dark basiskader */
     --sidebar-background: 0 0% 4%;
     --sidebar-foreground: 0 0% 92%;
     --sidebar-primary: 30 100% 50%;
@@ -56,18 +62,23 @@
     --sidebar-border: 0 0% 18%;
     --sidebar-ring: 30 100% 50%;
 
-    /* Status — SURF support palette */
-    --success: 146 100% 27%;          /* green-dark #008942 */
+    /* Status colors - SURF Support palette */
+    --success: 146 100% 27%;
     --success-foreground: 0 0% 100%;
-    --warning: 30 100% 45%;           /* re-use orange for warning */
+    --warning: 30 100% 45%;
     --warning-foreground: 0 0% 100%;
-    --info: 203 100% 38%;             /* blue */
+    --info: 203 100% 38%;
     --info-foreground: 0 0% 100%;
 
-    /* Brand support colours (chart palette) */
+    /* Chart palette - SURF brand colors */
     --surf-purple: 291 57% 33%;
     --surf-green-light: 146 47% 81%;
     --surf-yellow: 52 100% 50%;
+
+    /* SURF specific */
+    --surf-border: 0 0% 85%;
+    --surf-black: 0 0% 4%;
+    --surf-white: 0 0% 100%;
   }
 
   .dark {
@@ -94,7 +105,9 @@
 }
 
 @layer base {
-  * { @apply border-border; }
+  * {
+    @apply border-border;
+  }
 
   body {
     @apply bg-background text-foreground;
@@ -102,6 +115,7 @@
     font-size: 17px;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -111,23 +125,91 @@
     line-height: 1.15;
   }
 
-  /* SURF sentence-case discipline — never auto-capitalise headings */
+  /* SURF sentence-case discipline */
+  h1, h2, h3, h4, h5, h6 {
+    text-transform: none;
+  }
 }
 
 @layer components {
-  /* SURF eyebrow — small orange uppercase label above headings */
+  /* SURF Eyebrow - Small orange uppercase label */
   .eyebrow {
     @apply text-xs font-semibold uppercase tracking-[0.08em] text-primary;
   }
 
-  /* SURF basiskader — the signature thick black rounded frame */
+  /* SURF Basiskader - Signature thick black rounded frame */
   .basiskader {
     border: 4px solid hsl(var(--foreground));
     border-radius: 32px;
   }
 
-  /* Underlined inline link, SURF style */
+  /* Underlined inline link - SURF style */
   .link {
     @apply text-primary underline underline-offset-2 hover:opacity-80;
+  }
+
+  /* SURF Button variants */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold
+           hover:bg-primary-700 transition-colors focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground px-6 py-3 rounded-lg font-semibold
+           hover:bg-muted transition-colors focus:ring-2 focus:ring-secondary focus:ring-offset-2;
+  }
+
+  /* SURF Card styling */
+  .surf-card {
+    @apply bg-card border border-border rounded-xl shadow-sm;
+  }
+
+  /* SURF Focus ring */
+  .surf-focus {
+    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+  }
+
+  /* SURF Text utilities */
+  .text-eyebrow {
+    @apply text-xs font-semibold uppercase tracking-widest text-muted-foreground;
+  }
+
+  .text-heading-xl {
+    @apply text-4xl font-extrabold tracking-tight;
+  }
+
+  .text-heading-lg {
+    @apply text-3xl font-extrabold tracking-tight;
+  }
+
+  .text-heading-md {
+    @apply text-2xl font-bold tracking-tight;
+  }
+
+  .text-heading-sm {
+    @apply text-xl font-bold tracking-tight;
+  }
+}
+
+@layer utilities {
+  /* SURF spacing scale */
+  .space-surf-xs { @apply space-y-2; }
+  .space-surf-sm { @apply space-y-4; }
+  .space-surf-md { @apply space-y-6; }
+  .space-surf-lg { @apply space-y-8; }
+  .space-surf-xl { @apply space-y-12; }
+
+  /* SURF gradient backgrounds */
+  .bg-gradient-primary {
+    background: linear-gradient(135deg, hsl(var(--primary) / 0.1) 0%, hsl(var(--accent) / 0.1) 100%);
+  }
+
+  /* SURF typography */
+  .font-display {
+    font-family: 'Nunito', system-ui, sans-serif;
+  }
+
+  .font-sans {
+    font-family: 'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif;
   }
 }
