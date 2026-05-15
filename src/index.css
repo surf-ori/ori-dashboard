@@ -2,105 +2,168 @@
 @tailwind components;
 @tailwind utilities;
 
-/* SURF Design System Fonts */
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap');
-
 /* =========================================================================
    SURF Design System Tokens
-   Based on: https://github.com/surf-ori/surf-design-system
+   Based on: surf-design-system/colors_and_type.css
    ========================================================================= */
+
+/* --- Webfonts (local) --- */
+@font-face {
+  font-family: "Nunito";
+  src: url("/fonts/Nunito-VariableFont_wght.ttf") format("truetype-variations"),
+       url("/fonts/Nunito-Regular.ttf") format("truetype");
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("/fonts/SourceSansPro-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("/fonts/SourceSansPro-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("/fonts/SourceSansPro-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
-    /* Surfaces - White backgrounds */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 4%;
+    /* --- Base colors --- */
+    --surf-orange: 30 100% 45%;          /* #E67300 */
+    --surf-black: 0 0% 4%;               /* #000000 */
+    --surf-grey: 0 0% 80%;               /* #CCCCCC */
 
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 4%;
+    /* Lighter oranges */
+    --surf-orange-700: 30 100% 36%;      /* #B85B00 */
+    --surf-orange-500: 30 100% 45%;      /* #E67300 */
+    --surf-orange-300: 30 90% 63%;       /* #F4A95A */
+    --surf-orange-200: 30 90% 78%;       /* #F9C892 */
+    --surf-orange-100: 30 90% 87%;       /* #FCE4C8 */
+    --surf-orange-050: 30 90% 95%;       /* #FFF3E3 */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 4%;
+    /* Support palette */
+    --surf-red: 4 73% 51%;               /* #DF3226 */
+    --surf-yellow: 52 100% 50%;          /* #FEDB00 */
+    --surf-blue: 203 100% 38%;           /* #0077C0 */
+    --surf-green-dark: 146 100% 27%;     /* #008942 */
+    --surf-green-light: 146 47% 81%;     /* #B8E3C9 */
+    --surf-purple: 291 57% 33%;          /* #772583 */
 
-    /* Primary - SURF Orange #E67300 */
-    --primary: 30 100% 45%;
-    --primary-foreground: 0 0% 100%;
-    --primary-700: 30 100% 36%;
-    --primary-050: 30 100% 95%;
-
-    /* Secondary */
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 4%;
-
-    /* Muted */
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 32%;
-
-    /* Accent - SURF Blue #0077C0 */
-    --accent: 203 100% 38%;
-    --accent-foreground: 0 0% 100%;
-
-    /* Destructive - SURF Red #DF3226 */
-    --destructive: 4 73% 51%;
-    --destructive-foreground: 0 0% 100%;
-
-    /* Borders */
-    --border: 0 0% 85%;
-    --input: 0 0% 85%;
-    --ring: 30 100% 45%;
-
-    /* Border radius */
-    --radius: 0.75rem;
-
-    /* Sidebar - Dark basiskader */
-    --sidebar-background: 0 0% 4%;
-    --sidebar-foreground: 0 0% 92%;
-    --sidebar-primary: 30 100% 50%;
-    --sidebar-primary-foreground: 0 0% 0%;
-    --sidebar-accent: 0 0% 12%;
-    --sidebar-accent-foreground: 0 0% 92%;
-    --sidebar-border: 0 0% 18%;
-    --sidebar-ring: 30 100% 50%;
-
-    /* Status colors - SURF Support palette */
-    --success: 146 100% 27%;
-    --success-foreground: 0 0% 100%;
-    --warning: 30 100% 45%;
-    --warning-foreground: 0 0% 100%;
-    --info: 203 100% 38%;
-    --info-foreground: 0 0% 100%;
-
-    /* Chart palette - SURF brand colors */
-    --surf-purple: 291 57% 33%;
-    --surf-green-light: 146 47% 81%;
-    --surf-yellow: 52 100% 50%;
-
-    /* SURF specific */
+    /* Neutrals */
+    --surf-bg: 0 0% 100%;
+    --surf-bg-soft: 0 0% 96%;
+    --surf-bg-muted: 0 0% 93%;
     --surf-border: 0 0% 85%;
-    --surf-black: 0 0% 4%;
-    --surf-white: 0 0% 100%;
-  }
+    --surf-border-soft: 0 0% 93%;
 
-  .dark {
-    --background: 0 0% 6%;
-    --foreground: 0 0% 95%;
-    --card: 0 0% 9%;
-    --card-foreground: 0 0% 95%;
-    --popover: 0 0% 9%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 30 100% 50%;
-    --primary-foreground: 0 0% 4%;
-    --secondary: 0 0% 14%;
-    --secondary-foreground: 0 0% 95%;
-    --muted: 0 0% 14%;
-    --muted-foreground: 0 0% 65%;
-    --accent: 203 100% 50%;
-    --accent-foreground: 0 0% 4%;
-    --destructive: 4 73% 51%;
-    --destructive-foreground: 0 0% 100%;
-    --border: 0 0% 18%;
-    --input: 0 0% 18%;
-    --ring: 30 100% 50%;
+    /* Semantic foreground / background */
+    --fg-1: hsl(0 0% 4%);
+    --fg-2: hsl(0 0% 23%);
+    --fg-3: hsl(0 0% 42%);
+    --fg-inverse: hsl(0 0% 100%);
+    --fg-accent: hsl(var(--surf-orange));
+
+    --bg-1: hsl(var(--surf-bg));
+    --bg-2: hsl(var(--surf-bg-soft));
+    --bg-3: hsl(var(--surf-bg-muted));
+    --bg-accent: hsl(var(--surf-orange));
+    --bg-accent-soft: hsl(var(--surf-orange-050));
+    --bg-inverse: hsl(0 0% 4%);
+
+    --border-1: hsl(var(--surf-border));
+    --border-2: hsl(var(--surf-border-soft));
+
+    /* Status / feedback */
+    --status-success: hsl(var(--surf-green-dark));
+    --status-info: hsl(var(--surf-blue));
+    --status-warning: hsl(var(--surf-yellow));
+    --status-error: hsl(var(--surf-red));
+
+    /* Typography */
+    --font-display: "Nunito", "Nunito Sans", system-ui, sans-serif;
+    --font-body: "Source Sans Pro", "Source Sans 3", system-ui, sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+    /* Weights */
+    --weight-regular: 400;
+    --weight-medium: 500;
+    --weight-semibold: 600;
+    --weight-bold: 700;
+    --weight-xbold: 800;
+
+    /* Type scale */
+    --fs-display: clamp(48px, 6vw, 80px);
+    --fs-h1: clamp(36px, 4vw, 56px);
+    --fs-h2: clamp(28px, 3vw, 40px);
+    --fs-h3: 24px;
+    --fs-h4: 20px;
+    --fs-h5: 18px;
+    --fs-h6: 16px;
+    --fs-body-lg: 19px;
+    --fs-body: 17px;
+    --fs-body-sm: 15px;
+    --fs-caption: 13px;
+    --fs-mono: 14px;
+
+    --lh-tight: 1.1;
+    --lh-snug: 1.25;
+    --lh-normal: 1.5;
+    --lh-loose: 1.7;
+
+    --tracking-tight: -0.01em;
+    --tracking-normal: 0;
+    --tracking-wide: 0.04em;
+
+    /* Spacing scale */
+    --space-0: 0;
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+    --space-8: 64px;
+    --space-9: 96px;
+    --space-10: 128px;
+
+    /* Radii / shadows / borders */
+    --radius-xs: 4px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 32px;
+    --radius-pill: 999px;
+
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 14px rgba(0,0,0,0.08);
+    --shadow-lg: 0 12px 32px rgba(0,0,0,0.12);
+
+    --border-thin: 1px;
+    --border-base: 2px;
+    --border-thick: 4px;
+
+    /* Motion */
+    --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+    --ease-in-out: cubic-bezier(0.6, 0, 0.4, 1);
+    --dur-fast: 120ms;
+    --dur-base: 220ms;
+    --dur-slow: 380ms;
   }
 }
 
@@ -111,62 +174,98 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif;
-    font-size: 17px;
-    line-height: 1.5;
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    line-height: var(--lh-normal);
+    color: var(--fg-1);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Nunito', system-ui, sans-serif;
-    font-weight: 800;
-    letter-spacing: -0.01em;
-    line-height: 1.15;
+  h1, h2, h3, h4, h5, h6,
+  .h-display, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: var(--font-display);
+    font-weight: var(--weight-xbold);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--tracking-tight);
+    color: var(--fg-1);
+    margin: 0;
   }
 
-  /* SURF sentence-case discipline */
-  h1, h2, h3, h4, h5, h6 {
-    text-transform: none;
+  .h-display { font-size: var(--fs-display); font-weight: 900; }
+  h1, .h1 { font-size: var(--fs-h1); }
+  h2, .h2 { font-size: var(--fs-h2); }
+  h3, .h3 { font-size: var(--fs-h3); }
+  h4, .h4 { font-size: var(--fs-h4); font-weight: var(--weight-bold); }
+  h5, .h5 { font-size: var(--fs-h5); font-weight: var(--weight-bold); }
+  h6, .h6 { font-size: var(--fs-h6); font-weight: var(--weight-bold); text-transform: none; }
+
+  p, .p { font-size: var(--fs-body); line-height: var(--lh-normal); margin: 0; }
+  .p-lg { font-size: var(--fs-body-lg); line-height: var(--lh-normal); }
+  .p-sm { font-size: var(--fs-body-sm); line-height: var(--lh-normal); }
+  .caption { font-size: var(--fs-caption); color: var(--fg-3); line-height: var(--lh-snug); }
+  
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: var(--fs-caption);
+    font-weight: var(--weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: var(--tracking-wide);
+    color: var(--fg-accent);
+  }
+
+  a { 
+    color: hsl(var(--surf-orange)); 
+    text-decoration: underline; 
+    text-underline-offset: 2px; 
+  }
+  a:hover { color: hsl(var(--surf-orange-700)); }
+
+  code, kbd, pre, .mono {
+    font-family: var(--font-mono);
+    font-size: var(--fs-mono);
   }
 }
 
 @layer components {
-  /* SURF Eyebrow - Small orange uppercase label */
-  .eyebrow {
-    @apply text-xs font-semibold uppercase tracking-[0.08em] text-primary;
-  }
-
   /* SURF Basiskader - Signature thick black rounded frame */
   .basiskader {
-    border: 4px solid hsl(var(--foreground));
-    border-radius: 32px;
-  }
-
-  /* Underlined inline link - SURF style */
-  .link {
-    @apply text-primary underline underline-offset-2 hover:opacity-80;
-  }
-
-  /* SURF Button variants */
-  .btn-primary {
-    @apply bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold
-           hover:bg-primary-700 transition-colors focus:ring-2 focus:ring-primary focus:ring-offset-2;
-  }
-
-  .btn-secondary {
-    @apply bg-secondary text-secondary-foreground px-6 py-3 rounded-lg font-semibold
-           hover:bg-muted transition-colors focus:ring-2 focus:ring-secondary focus:ring-offset-2;
+    border: 4px solid hsl(var(--surf-black));
+    border-radius: var(--radius-xl);
   }
 
   /* SURF Card styling */
   .surf-card {
-    @apply bg-card border border-border rounded-xl shadow-sm;
+    background: hsl(var(--bg-1));
+    border: 1px solid hsl(var(--border-2));
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
   }
 
   /* SURF Focus ring */
   .surf-focus {
-    @apply focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2;
+    @apply focus:outline-none focus:ring-2 focus:ring-[hsl(var(--surf-orange))] focus:ring-offset-2;
+  }
+
+  /* SURF Button variants */
+  .btn-primary {
+    @apply bg-[hsl(var(--surf-orange))] text-white px-6 py-3 rounded-lg font-semibold
+           hover:bg-[hsl(var(--surf-orange-700))] transition-colors duration-[var(--dur-base)] ease-[var(--ease-out)];
+  }
+
+  .btn-secondary {
+    @apply bg-[hsl(var(--surf-black))] text-white px-6 py-3 rounded-lg font-semibold
+           hover:bg-[hsl(0 0% 20%)] transition-colors duration-[var(--dur-base)] ease-[var(--ease-out)];
+  }
+
+  .btn-outline {
+    @apply bg-white text-black border-2 border-black px-6 py-3 rounded-lg font-semibold
+           hover:bg-black hover:text-white transition-colors duration-[var(--dur-base)] ease-[var(--ease-out)];
+  }
+
+  .btn-text {
+    @apply text-[hsl(var(--surf-orange))] font-semibold px-4 py-2 
+           hover:text-[hsl(var(--surf-orange-700))] transition-colors;
   }
 
   /* SURF Text utilities */
@@ -189,6 +288,15 @@
   .text-heading-sm {
     @apply text-xl font-bold tracking-tight;
   }
+
+  /* SURF Typography */
+  .font-display {
+    font-family: var(--font-display);
+  }
+
+  .font-sans {
+    font-family: var(--font-body);
+  }
 }
 
 @layer utilities {
@@ -199,17 +307,16 @@
   .space-surf-lg { @apply space-y-8; }
   .space-surf-xl { @apply space-y-12; }
 
-  /* SURF gradient backgrounds */
-  .bg-gradient-primary {
-    background: linear-gradient(135deg, hsl(var(--primary) / 0.1) 0%, hsl(var(--accent) / 0.1) 100%);
+  /* SURF transition utilities */
+  .transition-surf {
+    @apply transition-all duration-[var(--dur-base)] ease-[var(--ease-out)];
   }
 
-  /* SURF typography */
-  .font-display {
-    font-family: 'Nunito', system-ui, sans-serif;
+  .transition-surf-fast {
+    @apply transition-all duration-[var(--dur-fast)] ease-[var(--ease-out)];
   }
 
-  .font-sans {
-    font-family: 'Source Sans 3', 'Source Sans Pro', system-ui, sans-serif;
+  .transition-surf-slow {
+    @apply transition-all duration-[var(--dur-slow)] ease-[var(--ease-in-out)];
   }
 }

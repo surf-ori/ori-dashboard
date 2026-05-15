@@ -19,7 +19,7 @@ import {
   SidebarGroupContent,
 } from '@/components/ui/sidebar';
 import { CheckCircle2, Database, Home, Layers, Sparkles, Target } from 'lucide-react';
-import surfLogo from '@/assets/surf-logo-white.svg';
+import { SurfLogo } from '@/components/ui/SurfLogo';
 
 export default function DashboardLayout() {
   const [organisation, setOrganisation] = useState('vu');
@@ -37,13 +37,7 @@ export default function DashboardLayout() {
       <div className="min-h-screen flex w-full">
         <Sidebar>
           <SidebarHeader className="p-5 border-b border-sidebar-border">
-            <div className="flex items-center gap-3">
-              <img src={surfLogo} alt="SURF" className="h-8 w-auto" />
-              <div className="border-l border-sidebar-border pl-3">
-                <p className="text-[10px] uppercase tracking-[0.14em] text-sidebar-foreground/60 font-semibold">ORI</p>
-                <h2 className="font-display font-extrabold text-sm text-sidebar-foreground leading-tight">Quality Dashboard</h2>
-              </div>
-            </div>
+            <SurfLogo variant="dark" showText={true} />
           </SidebarHeader>
           <SidebarContent className="p-4">
             <SidebarGroup>

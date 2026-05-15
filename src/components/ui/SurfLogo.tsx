@@ -1,8 +1,7 @@
 "use client";
 
 import React from 'react';
-import surfLogoSvg from '@/assets/surf-logo.svg';
-import surfLogoWhiteSvg from '@/assets/surf-logo-white.svg';
+import { cn } from '@/lib/utils';
 
 interface SurfLogoProps {
   variant?: 'light' | 'dark';
@@ -11,14 +10,20 @@ interface SurfLogoProps {
 }
 
 export function SurfLogo({ variant = 'light', className = '', showText = true }: SurfLogoProps) {
-  const logoSrc = variant === 'dark' ? surfLogoWhiteSvg : surfLogoSvg;
+  const logoSrc = variant === 'dark' 
+    ? '/assets/logo/SURF_diap.svg' 
+    : '/assets/logo/SURF_fc.svg';
 
   return (
-    <div className={`flex items-center gap-3 ${className}`}>
+    <div className={cn('flex items-center gap-3', className)}>
       <img 
         src={logoSrc} 
         alt="SURF" 
         className="h-8 w-auto"
+        onError={(e) => {
+          // Fallback to text if logo fails to load
+          (e.target as HTMLImageElement).style.display = 'none';
+        }}
       />
       {showText && (
         <div className="border-l border-sidebar-border pl-3">
