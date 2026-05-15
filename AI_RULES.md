@@ -75,6 +75,22 @@ Make the data editable for demo purosous.
 --font-body:    "Source Sans Pro", system-ui;  /* body — 400 / 600 */
 ```
 
+## Signature elements
+
+- **Basiskader** — thick black rounded-rectangle frame (4–5px border, 24–32px radius) wrapping hero compositions and photography. The single most recognisable structural element of the brand.
+- **Orange as accent only** — primary buttons, links, eyebrows, focus rings. Never as a body text colour.
+- **Sentence-case Dutch headlines** in Nunito 800/900 — verbs and infinitives, no Title Case.
+- **Photography over illustration** — warm daylight portraits of students and researchers, framed inside the basiskader.
+
+## Common gotchas
+
+- Don't use emoji. Don't use gradient backgrounds. Don't use bouncy animations.
+- Don't write copy in `u`-form Dutch unless writing to boards/executives.
+- Don't title-case English headings — sentence case throughout.
+- Use the `--surf-orange-700` darker shade for hover; don't lighten on hover.
+- Icons are line-only, 2px stroke, rounded ends — never filled, never coloured (except SURF orange).
+
+
 
 ## Tech Stack Overview
 
