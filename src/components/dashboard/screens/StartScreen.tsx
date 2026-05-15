@@ -5,7 +5,6 @@ import { Sparkles, CheckCircle2, Layers, Target } from 'lucide-react';
 
 export function StartScreen() {
   const { organisations } = useDashboardData();
-  
   return (
     <div className="space-y-8">
       <div>
