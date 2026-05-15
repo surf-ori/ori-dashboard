@@ -1,0 +1,273 @@
+/* =========================================================================
+   SURF — Colors & Type tokens
+   Source: SURF Merkportaal (https://merkportaal.surf.nl)
+   ========================================================================= */
+
+/* --- Webfonts ------------------------------------------------------------ */
+/* SURF uses Nunito (headings) + Source Sans Pro (body).
+   Both shipped locally in /fonts (official files). */
+
+/* Nunito — local (variable + static, full weight family) */
+@font-face {
+  font-family: "Nunito";
+  src: url("fonts/Nunito-VariableFont_wght.ttf") format("truetype-variations"),
+       url("fonts/Nunito-Regular.ttf") format("truetype");
+  font-weight: 200 900; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Nunito";
+  src: url("fonts/Nunito-Italic-VariableFont_wght.ttf") format("truetype-variations"),
+       url("fonts/Nunito-Italic.ttf") format("truetype");
+  font-weight: 200 900; font-style: italic; font-display: swap;
+}
+
+/* Source Sans Pro — local */
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("fonts/SourceSansPro-ExtraLight.ttf") format("truetype");
+  font-weight: 200; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("fonts/SourceSansPro-ExtraLightItalic.ttf") format("truetype");
+  font-weight: 200; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("fonts/SourceSansPro-Light.ttf") format("truetype");
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("fonts/SourceSansPro-LightItalic.ttf") format("truetype");
+  font-weight: 300; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("fonts/SourceSansPro-Regular.ttf") format("truetype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("fonts/SourceSansPro-Italic.ttf") format("truetype");
+  font-weight: 400; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("fonts/SourceSansPro-SemiBold.ttf") format("truetype");
+  font-weight: 600; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("fonts/SourceSansPro-SemiBoldItalic.ttf") format("truetype");
+  font-weight: 600; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("fonts/SourceSansPro-Bold.ttf") format("truetype");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("fonts/SourceSansPro-BoldItalic.ttf") format("truetype");
+  font-weight: 700; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("fonts/SourceSansPro-Black.ttf") format("truetype");
+  font-weight: 900; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("fonts/SourceSansPro-BlackItalic.ttf") format("truetype");
+  font-weight: 900; font-style: italic; font-display: swap;
+}
+
+:root {
+  /* ---------- Base colors --------------------------------------------- */
+  /* Basiskleuren — primary brand */
+  --surf-orange: #E67300;          /* CMYK 0/64/89/0  RGB 238/118/40 */
+  --surf-black:  #000000;          /* CMYK 87/75/61/92 RGB 7/8/9 */
+  --surf-grey:   #CCCCCC;          /* CMYK 23/18/18/1  RGB 204/203/203 */
+
+  /* Lighter oranges (derived tints used across SURF comms) */
+  --surf-orange-700: #B85B00;
+  --surf-orange-500: #E67300;      /* canonical */
+  --surf-orange-300: #F4A95A;
+  --surf-orange-200: #F9C892;
+  --surf-orange-100: #FCE4C8;
+  --surf-orange-050: #FFF3E3;
+
+  /* Steunkleuren — support palette */
+  --surf-red:        #DF3226;
+  --surf-yellow:     #FEDB00;
+  --surf-blue:       #0077C0;
+  --surf-green-dark: #008942;
+  --surf-green-light:#B8E3C9;
+  --surf-purple:     #772583;
+
+  /* 80% alpha versions (per brand portal "transparante" set) */
+  --surf-orange-a80:    rgba(230, 115,   0, 0.8);
+  --surf-red-a80:       rgba(223,  50,  38, 0.8);
+  --surf-yellow-a80:    rgba(254, 219,   0, 0.8);
+  --surf-blue-a80:      rgba(  0, 119, 192, 0.8);
+  --surf-green-dk-a80:  rgba(  0, 137,  66, 0.8);
+  --surf-green-lt-a80:  rgba(184, 227, 201, 0.8);
+  --surf-purple-a80:    rgba(119,  37, 131, 0.8);
+
+  /* ---------- Neutrals (derived) -------------------------------------- */
+  --surf-bg:           #FFFFFF;
+  --surf-bg-soft:      #F5F5F5;
+  --surf-bg-muted:     #ECECEC;
+  --surf-border:       #D9D9D9;
+  --surf-border-soft:  #ECECEC;
+
+  /* ---------- Semantic foreground / background ------------------------ */
+  --fg-1: var(--surf-black);       /* primary text */
+  --fg-2: #3A3A3A;                 /* secondary text */
+  --fg-3: #6B6B6B;                 /* muted / meta */
+  --fg-inverse: #FFFFFF;
+  --fg-accent:  var(--surf-orange);
+
+  --bg-1: var(--surf-bg);
+  --bg-2: var(--surf-bg-soft);
+  --bg-3: var(--surf-bg-muted);
+  --bg-accent: var(--surf-orange);
+  --bg-accent-soft: var(--surf-orange-050);
+  --bg-inverse: var(--surf-black);
+
+  --border-1: var(--surf-border);
+  --border-2: var(--surf-border-soft);
+
+  /* Status / feedback */
+  --status-success: var(--surf-green-dark);
+  --status-info:    var(--surf-blue);
+  --status-warning: var(--surf-yellow);
+  --status-error:   var(--surf-red);
+
+  /* ---------- Type families ------------------------------------------- */
+  --font-display: "Nunito", "Nunito Sans", system-ui, sans-serif;
+  --font-body:    "Source Sans Pro", "Source Sans 3", system-ui, sans-serif;
+  --font-mono:    ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* Weights */
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semibold:600;
+  --weight-bold:    700;     /* Nunito Bold (default for koppen) */
+  --weight-xbold:   800;     /* Nunito Extra Bold (for emphasis) */
+
+  /* ---------- Type scale ---------------------------------------------- */
+  /* Headings use Nunito Bold/Extra Bold, tight tracking. */
+  --fs-display: clamp(48px, 6vw, 80px);
+  --fs-h1: clamp(36px, 4vw, 56px);
+  --fs-h2: clamp(28px, 3vw, 40px);
+  --fs-h3: 24px;
+  --fs-h4: 20px;
+  --fs-h5: 18px;
+  --fs-h6: 16px;
+  --fs-body-lg: 19px;
+  --fs-body:    17px;
+  --fs-body-sm: 15px;
+  --fs-caption: 13px;
+  --fs-mono:    14px;
+
+  --lh-tight:  1.1;
+  --lh-snug:   1.25;
+  --lh-normal: 1.5;
+  --lh-loose:  1.7;
+
+  --tracking-tight: -0.01em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.04em;
+
+  /* ---------- Spacing scale ------------------------------------------- */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10:128px;
+
+  /* ---------- Radii / shadows / borders ------------------------------- */
+  /* SURF's "basiskader" is a black rounded rectangle frame used in
+     compositions — radii are soft but not pillowy. */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.06);
+  --shadow-md: 0 4px 14px rgba(0,0,0,0.08);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.12);
+
+  --border-thin:   1px;
+  --border-base:   2px;
+  --border-thick:  4px;          /* used for the SURF basiskader frame */
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.6, 0, 0.4, 1);
+  --dur-fast: 120ms;
+  --dur-base: 220ms;
+  --dur-slow: 380ms;
+}
+
+/* =========================================================================
+   Semantic element styles — apply by adding the matching class or
+   matching the element directly.
+   ========================================================================= */
+html { color: var(--fg-1); background: var(--bg-1); }
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  color: var(--fg-1);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h-display, .h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: var(--font-display);
+  font-weight: var(--weight-xbold);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tracking-tight);
+  color: var(--fg-1);
+  margin: 0;
+}
+
+.h-display { font-size: var(--fs-display); font-weight: 900; }
+h1, .h1 { font-size: var(--fs-h1); }
+h2, .h2 { font-size: var(--fs-h2); }
+h3, .h3 { font-size: var(--fs-h3); }
+h4, .h4 { font-size: var(--fs-h4); font-weight: var(--weight-bold); }
+h5, .h5 { font-size: var(--fs-h5); font-weight: var(--weight-bold); }
+h6, .h6 { font-size: var(--fs-h6); font-weight: var(--weight-bold); text-transform: none; }
+
+p, .p { font-size: var(--fs-body); line-height: var(--lh-normal); margin: 0; }
+.p-lg   { font-size: var(--fs-body-lg); line-height: var(--lh-normal); }
+.p-sm   { font-size: var(--fs-body-sm); line-height: var(--lh-normal); }
+.caption{ font-size: var(--fs-caption); color: var(--fg-3); line-height: var(--lh-snug); }
+.eyebrow{
+  font-family: var(--font-body);
+  font-size: var(--fs-caption);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-wide);
+  color: var(--fg-accent);
+}
+
+a { color: var(--surf-orange); text-decoration: underline; text-underline-offset: 2px; }
+a:hover { color: var(--surf-orange-700); }
+
+code, kbd, pre, .mono {
+  font-family: var(--font-mono);
+  font-size: var(--fs-mono);
+}
