@@ -13,14 +13,15 @@ interface KPICardProps {
 export function KPICard({ label, value, subtitle, className, variant = 'default' }: KPICardProps) {
   return (
     <Card className={cn(
-      'transition-shadow hover:shadow-md',
-      variant === 'accent' && 'border-l-4 border-l-accent',
+      'transition-all hover:shadow-sm border-2',
+      variant === 'accent' && 'border-primary/40 bg-primary/5',
+      variant === 'muted' && 'border-muted bg-muted/30',
       className
     )}>
-      <CardContent className="p-5">
-        <p className="text-sm font-medium text-muted-foreground mb-1">{label}</p>
-        <p className="text-2xl font-bold tracking-tight">{value}</p>
-        {subtitle && <p className="text-xs text-muted-foreground mt-1">{subtitle}</p>}
+      <CardContent className="p-6">
+        <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2">{label}</p>
+        <p className="text-3xl font-bold tracking-tight font-display">{value}</p>
+        {subtitle && <p className="text-xs text-muted-foreground mt-2 leading-relaxed">{subtitle}</p>}
       </CardContent>
     </Card>
   );

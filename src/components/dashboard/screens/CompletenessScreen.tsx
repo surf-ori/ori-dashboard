@@ -19,11 +19,11 @@ export function CompletenessScreen({ filters }: Props) {
   const mockQuery = `SELECT * FROM publications\nWHERE organisation = '${filters.organisation}'\n  AND ${selectedField} IS NULL\nORDER BY year DESC\nLIMIT 100;`;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-6xl">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight mb-1">Completeness</h1>
-        <p className="text-sm text-muted-foreground">
-          How complete is the metadata across your records? Click a metric card to drill down.
+        <h1 className="text-2xl font-bold tracking-tight mb-2">Completeness</h1>
+        <p className="text-sm text-muted-foreground max-w-3xl">
+          Hoe compleet is de metadata across jouw records? Klik op een metric card om te drill down.
         </p>
       </div>
 
@@ -35,18 +35,18 @@ export function CompletenessScreen({ filters }: Props) {
             key={m.field}
             onClick={() => setSelectedField(m.field)}
             className={cn(
-              'text-left rounded-lg border bg-card p-4 transition-all hover:shadow-md',
+              'text-left rounded-lg border-2 bg-card p-4 transition-all hover:shadow-sm',
               selectedField === m.field && 'ring-2 ring-primary border-primary'
             )}
           >
-            <p className="text-xs font-medium text-muted-foreground">{m.label}</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{m.label}</p>
             <p className={cn(
-              'text-2xl font-bold mt-1',
+              'text-2xl font-bold mt-2 font-display',
               m.percentage >= 80 ? 'text-success' : m.percentage >= 50 ? 'text-warning' : 'text-destructive'
             )}>
               {m.percentage}%
             </p>
-            <p className="text-xs text-muted-foreground mt-1">
+            <p className="text-xs text-muted-foreground mt-1 font-mono">
               {m.filled.toLocaleString()} / {m.total.toLocaleString()}
             </p>
           </button>
@@ -57,11 +57,11 @@ export function CompletenessScreen({ filters }: Props) {
         <>
           <TimelineChart
             data={completenessTimeline}
-            title={`${selectedMetric.label} — Completeness Over Time`}
+            title={`${selectedMetric.label} — Completeness over tijd`}
           />
           <DataTable
             records={filteredRecords}
-            title={`Records Missing: ${selectedMetric.label}`}
+            title={`Records missing: ${selectedMetric.label}`}
             sqlQuery={mockQuery}
           />
           <InterventionPanel interventions={interventions.slice(0, 3)} />

@@ -24,8 +24,6 @@ export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
     setSelectedComparison({ comparison, segment });
   };
 
-  
-
   const segmentLabel = selectedComparison
     ? selectedComparison.segment === 'onlyInPrimary'
       ? `Only in ${primarySource}`
@@ -35,11 +33,11 @@ export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
     : '';
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-6xl">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight mb-1">Coverage</h1>
-        <p className="text-sm text-muted-foreground">
-          Compare which records are present across different open sources. Click on a bar segment for details.
+        <h1 className="text-2xl font-bold tracking-tight mb-2">Coverage</h1>
+        <p className="text-sm text-muted-foreground max-w-3xl">
+          Vergelijk welke records aanwezig zijn across verschillende open sources. Klik op een bar segment voor details.
         </p>
       </div>
 
@@ -55,16 +53,16 @@ export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
 
       {selectedComparison && (
         <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <h2 className="text-lg font-semibold">Detail View</h2>
+          <div className="flex items-center gap-2 flex-wrap">
+            <h2 className="text-lg font-semibold">Detail view</h2>
             <Badge>{segmentLabel}</Badge>
             <Badge variant="outline">{selectedComparison.comparison.compareSource}</Badge>
-            <Button variant="ghost" size="sm" onClick={() => setSelectedComparison(null)}>✕ Close</Button>
+            <Button variant="ghost" size="sm" onClick={() => setSelectedComparison(null)}>Close</Button>
           </div>
 
           <TimelineChart
             data={completenessTimeline}
-            title={`Coverage Over Time: ${primarySource} ↔ ${selectedComparison.comparison.compareSource}`}
+            title={`Coverage over tijd: ${primarySource} ↔ ${selectedComparison.comparison.compareSource}`}
             color="hsl(var(--accent))"
           />
 

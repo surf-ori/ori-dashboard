@@ -29,7 +29,6 @@ export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
 
   const matchBy = filters.matchingMethod;
 
-  // Derive record counts from the Coverage comparisons mock table for the selected compare source.
   const cov = coverageComparisons.find(c => c.compareSource === compare);
   const recordsInPrimary = cov ? cov.onlyInPrimary + cov.inBoth : a.recordsInPrimary;
   const recordsInBoth = cov ? cov.inBoth : a.recordsInBoth;
@@ -41,9 +40,9 @@ export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
     : null;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-6xl">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight mb-1">Accuracy</h1>
+        <h1 className="text-2xl font-bold tracking-tight mb-2">Accuracy</h1>
         <p className="text-sm text-muted-foreground max-w-3xl">
           Actionable data on records with conflicting information between sources. See where values disagree and
           how to resolve them, so the institutional record stays consistent across the open research ecosystem.
@@ -71,18 +70,18 @@ export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
         <CardContent className="pt-6">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-4">
             <div className="rounded-xl border-2 border-border bg-card p-6 text-center">
-              <p className="text-4xl font-bold tracking-tight">{(recordsInPrimary / 1000).toFixed(0)}k</p>
+              <p className="text-4xl font-bold tracking-tight font-display">{(recordsInPrimary / 1000).toFixed(0)}k</p>
               <p className="text-xs text-muted-foreground mt-1">records in <strong className="text-foreground">{primary}</strong> (primary)</p>
             </div>
             <ArrowRight className="hidden md:block h-6 w-6 mx-auto text-muted-foreground" />
             <div className="rounded-xl border-2 border-primary/40 bg-primary/5 p-6 text-center">
-              <p className="text-4xl font-bold tracking-tight text-primary">{(recordsInBoth / 1000).toFixed(0)}k</p>
+              <p className="text-4xl font-bold tracking-tight text-primary font-display">{(recordsInBoth / 1000).toFixed(0)}k</p>
               <p className="text-xs text-muted-foreground mt-1">records in <strong className="text-foreground">both sources</strong></p>
               <p className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1">matched on {matchBy.toUpperCase()}</p>
             </div>
             <ArrowLeft className="hidden md:block h-6 w-6 mx-auto text-muted-foreground" />
             <div className="rounded-xl border-2 border-border bg-card p-6 text-center">
-              <p className="text-4xl font-bold tracking-tight">{(recordsInCompare / 1000).toFixed(0)}k</p>
+              <p className="text-4xl font-bold tracking-tight font-display">{(recordsInCompare / 1000).toFixed(0)}k</p>
               <p className="text-xs text-muted-foreground mt-1">records in <strong className="text-foreground">{compare}</strong> (compare)</p>
             </div>
           </div>
@@ -105,7 +104,7 @@ export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
                   key={c.field}
                   onClick={() => setSelected({ kind: 'conflict', field: c.field })}
                   className={cn(
-                    'w-full text-left rounded-md border p-3 transition-all hover:bg-muted/50 flex items-start gap-3',
+                    'w-full text-left rounded-md border-2 p-3 transition-all hover:bg-muted/50 flex items-start gap-3',
                     active && 'border-destructive bg-destructive/5 ring-1 ring-destructive/30'
                   )}
                 >
@@ -139,7 +138,7 @@ export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
                   key={c.field}
                   onClick={() => setSelected({ kind: 'agreement', field: c.field })}
                   className={cn(
-                    'w-full text-left rounded-md border p-3 transition-all hover:bg-muted/50 flex items-start gap-3',
+                    'w-full text-left rounded-md border-2 p-3 transition-all hover:bg-muted/50 flex items-start gap-3',
                     active && 'border-success bg-success/5 ring-1 ring-success/30'
                   )}
                 >
@@ -170,7 +169,7 @@ export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
 
           <TimelineChart
             data={completenessTimeline}
-            title={`${selected!.kind === 'conflict' ? 'Conflict' : 'Agreement'} rate over time — ${selectedItem.label}`}
+            title={`${selected!.kind === 'conflict' ? 'Conflict' : 'Agreement'} rate over tijd — ${selectedItem.label}`}
             color={selected!.kind === 'conflict' ? 'hsl(var(--destructive))' : 'hsl(var(--success))'}
           />
 

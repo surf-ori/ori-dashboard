@@ -21,13 +21,15 @@ export function FilterPanel({
   organisation, source, cerifEntity, publicationType,
   onOrganisationChange, onSourceChange, onCerifEntityChange, onPublicationTypeChange,
 }: FilterPanelProps) {
-  const labelCls = "text-xs font-semibold uppercase tracking-wider text-sidebar-foreground/60 mb-1.5 block";
+  const labelCls = "text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2 block";
   return (
-    <div className="space-y-4">
+    <div className="space-y-5">
       <div>
         <Label className={labelCls}>Organisation</Label>
         <Select value={organisation} onValueChange={onOrganisationChange}>
-          <SelectTrigger className="w-full"><SelectValue /></SelectTrigger>
+          <SelectTrigger className="w-full text-sm">
+            <SelectValue />
+          </SelectTrigger>
           <SelectContent>
             {organisations.map(o => (
               <SelectItem key={o.id} value={o.id}>{o.abbreviation} — {o.name}</SelectItem>
@@ -39,7 +41,9 @@ export function FilterPanel({
       <div>
         <Label className={labelCls}>Primary Source</Label>
         <Select value={source} onValueChange={v => onSourceChange(v as Source)}>
-          <SelectTrigger className="w-full"><SelectValue /></SelectTrigger>
+          <SelectTrigger className="w-full text-sm">
+            <SelectValue />
+          </SelectTrigger>
           <SelectContent>
             {sources.map(s => <SelectItem key={s} value={s}>{s}</SelectItem>)}
           </SelectContent>
@@ -49,7 +53,9 @@ export function FilterPanel({
       <div>
         <Label className={labelCls}>Entity Table</Label>
         <Select value={cerifEntity} onValueChange={v => onCerifEntityChange(v as CerifEntity)}>
-          <SelectTrigger className="w-full"><SelectValue /></SelectTrigger>
+          <SelectTrigger className="w-full text-sm">
+            <SelectValue />
+          </SelectTrigger>
           <SelectContent>
             {cerifEntities.map(e => <SelectItem key={e} value={e}>{e}</SelectItem>)}
           </SelectContent>
@@ -59,7 +65,9 @@ export function FilterPanel({
       <div>
         <Label className={labelCls}>Publication Type</Label>
         <Select value={publicationType} onValueChange={v => onPublicationTypeChange(v as PublicationType | 'All')}>
-          <SelectTrigger className="w-full"><SelectValue /></SelectTrigger>
+          <SelectTrigger className="w-full text-sm">
+            <SelectValue />
+          </SelectTrigger>
           <SelectContent>
             <SelectItem value="All">All Types</SelectItem>
             {publicationTypes.map(t => <SelectItem key={t} value={t}>{t}</SelectItem>)}

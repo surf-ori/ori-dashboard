@@ -11,22 +11,22 @@ interface MatchingMethodSelectorProps {
 export function MatchingMethodSelector({ value, onChange, className }: MatchingMethodSelectorProps) {
   return (
     <div className={className}>
-      <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5 block">
+      <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-2 block">
         Matching Method
       </Label>
-      <div className="inline-flex rounded-md border bg-muted p-0.5">
+      <div className="inline-flex rounded-md border-2 bg-muted p-0.5">
         <Button
           type="button"
           variant={value === 'doi' ? 'default' : 'ghost'}
           size="sm"
-          className="h-8"
+          className="h-9 text-sm"
           onClick={() => onChange('doi')}
         >DOI-based</Button>
         <Button
           type="button"
           variant={value === 'ror' ? 'default' : 'ghost'}
           size="sm"
-          className="h-8"
+          className="h-9 text-sm"
           onClick={() => onChange('ror')}
         >ROR-based</Button>
       </div>
