@@ -50,6 +50,6 @@ A data quality dashboard for Dutch research institutions to assess the quality o
 
 ### Design
 - Clean white background, subtle gray borders
-- Professional color palette suitable for academic/government context
+- Professional color palette suitable for academic/government context using the SURF design system (for more see https://merkportaal.surf.nl)
 - Responsive layout (desktop-first but usable on tablet)
 
