@@ -43,11 +43,11 @@ export const completenessTimeline: TimelinePoint[] = [
 
 // With CRIS as the default primary source, comparison list includes OpenAlex (swapped in for CRIS)
 export const coverageComparisons: CoverageComparison[] = [
-  { compareSource: 'OpenAlex', onlyInPrimary: 3450, inBoth: 6200, onlyInCompared: 4120, total: 13770 },
-  { compareSource: 'Crossref', onlyInPrimary: 1230, inBoth: 8940, onlyInCompared: 560, total: 10730 },
-  { compareSource: 'OpenAIRE', onlyInPrimary: 2100, inBoth: 7350, onlyInCompared: 1890, total: 11340 },
-  { compareSource: 'ORCID', onlyInPrimary: 4200, inBoth: 5100, onlyInCompared: 2300, total: 11600 },
-  { compareSource: 'DataCite', onlyInPrimary: 8900, inBoth: 1250, onlyInCompared: 780, total: 10930 },
+  { compareSource: 'OpenAlex', onlyInPrimary: 77386, inBoth: 139023, onlyInCompared: 4120, total: 220529 },
+  { compareSource: 'Crossref', onlyInPrimary: 26164, inBoth: 190245, onlyInCompared: 560, total: 216969 },
+  { compareSource: 'OpenAIRE', onlyInPrimary: 48091, inBoth: 168318, onlyInCompared: 1890, total: 218299 },
+  { compareSource: 'ORCID', onlyInPrimary: 97728, inBoth: 118681, onlyInCompared: 2300, total: 218709 },
+  { compareSource: 'DataCite', onlyInPrimary: 189764, inBoth: 26645, onlyInCompared: 780, total: 217189 },
 ];
 
 export const detailRecords: DetailRecord[] = [
