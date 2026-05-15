@@ -78,7 +78,7 @@ src/
 ├── hooks/               # Custom React hooks
 ├── lib/                 # Utility functions
 ├── pages/               # Route pages
-└── assets/              # Static assets
+└── assets/              # Static assets; fonts, logos, favico
 ```
 
 ### Naming Conventions
