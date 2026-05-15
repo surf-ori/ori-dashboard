@@ -19,7 +19,7 @@ interface Props {
 }
 
 export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
-  const { accuracyComparison, detailRecords, interventions, completenessTimeline } = useDashboardData();
+  const { accuracyComparison, coverageComparisons, detailRecords, interventions, completenessTimeline } = useDashboardData();
   const a = accuracyComparison;
   const primary = filters.source;
   const [compare, setCompare] = useState<Source>(a.compareSource);
@@ -28,7 +28,13 @@ export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
   });
 
   const matchBy = filters.matchingMethod;
-  const totalRecords = a.recordsInPrimary + a.recordsInCompare - a.recordsInBoth;
+
+  // Derive record counts from the Coverage comparisons mock table for the selected compare source.
+  const cov = coverageComparisons.find(c => c.compareSource === compare);
+  const recordsInPrimary = cov ? cov.onlyInPrimary + cov.inBoth : a.recordsInPrimary;
+  const recordsInBoth = cov ? cov.inBoth : a.recordsInBoth;
+  const recordsInCompare = cov ? cov.inBoth + cov.onlyInCompared : a.recordsInCompare;
+  const totalRecords = recordsInPrimary + recordsInCompare - recordsInBoth;
 
   const selectedItem = selected
     ? (selected.kind === 'conflict' ? a.conflicts : a.agreements).find(c => c.field === selected.field)
@@ -65,18 +71,18 @@ export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
         <CardContent className="pt-6">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-4">
             <div className="rounded-xl border-2 border-border bg-card p-6 text-center">
-              <p className="text-4xl font-bold tracking-tight">{(a.recordsInPrimary / 1000).toFixed(0)}k</p>
+              <p className="text-4xl font-bold tracking-tight">{(recordsInPrimary / 1000).toFixed(0)}k</p>
               <p className="text-xs text-muted-foreground mt-1">records in <strong className="text-foreground">{primary}</strong> (primary)</p>
             </div>
             <ArrowRight className="hidden md:block h-6 w-6 mx-auto text-muted-foreground" />
             <div className="rounded-xl border-2 border-primary/40 bg-primary/5 p-6 text-center">
-              <p className="text-4xl font-bold tracking-tight text-primary">{(a.recordsInBoth / 1000).toFixed(0)}k</p>
+              <p className="text-4xl font-bold tracking-tight text-primary">{(recordsInBoth / 1000).toFixed(0)}k</p>
               <p className="text-xs text-muted-foreground mt-1">records in <strong className="text-foreground">both sources</strong></p>
               <p className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1">matched on {matchBy.toUpperCase()}</p>
             </div>
             <ArrowLeft className="hidden md:block h-6 w-6 mx-auto text-muted-foreground" />
             <div className="rounded-xl border-2 border-border bg-card p-6 text-center">
-              <p className="text-4xl font-bold tracking-tight">{(a.recordsInCompare / 1000).toFixed(0)}k</p>
+              <p className="text-4xl font-bold tracking-tight">{(recordsInCompare / 1000).toFixed(0)}k</p>
               <p className="text-xs text-muted-foreground mt-1">records in <strong className="text-foreground">{compare}</strong> (compare)</p>
             </div>
           </div>
