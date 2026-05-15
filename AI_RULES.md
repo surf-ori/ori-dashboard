@@ -39,10 +39,11 @@ A data quality dashboard for Dutch research institutions to assess the quality o
 - Each row shows how many of your records are missing a valid value, and how many of those can be filled in from a comparing source.
 
 #### 5. Accuracy Screen (Placeholder)
-- Tab accessible, shows "Coming soon" state with brief description of planned functionality
+- Actionable data on records with conflicting information between sources. 
+- See where values disagree and how to resolve them, so the institutional record stays consistent across the open research ecosystem.
 
 #### 6. Mock data
-Make the data editable for demo purusous.
+Make the data editable for demo purosous.
 
 ### Components to Build
 - `DashboardLayout` — sidebar + content area with tab navigation
