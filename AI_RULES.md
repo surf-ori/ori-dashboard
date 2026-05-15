@@ -60,6 +60,21 @@ Make the data editable for demo purosous.
 - Professional color palette suitable for academic/government context using the SURF design system (for more see https://merkportaal.surf.nl)
 - Responsive layout (desktop-first but usable on tablet)
 
+## Core tokens (from `colors_and_type.css`)
+
+```css
+--surf-orange: #E67300;   /* primary interaction color */
+--surf-black:  #000000;   /* primary structural color */
+--surf-grey:   #CCCCCC;
+
+/* Support palette */
+--surf-red: #DF3226;  --surf-yellow: #FEDB00;  --surf-blue: #0077C0;
+--surf-green-dark: #008942;  --surf-green-light: #B8E3C9;  --surf-purple: #772583;
+
+--font-display: "Nunito", system-ui;      /* headings — 700 / 800 */
+--font-body:    "Source Sans Pro", system-ui;  /* body — 400 / 600 */
+```
+
 
 ## Tech Stack Overview
 
