@@ -23,6 +23,24 @@ export function MockDataScreen() {
       </div>
 
       <Card>
+        <CardHeader>
+          <CardTitle className="text-base">Total records</CardTitle>
+          <p className="text-xs text-muted-foreground">
+            Shown in the filter bar on every screen and used to scale the Coverage chart so
+            "Only in {`{primary}`}" + "In Both" sums to this value.
+          </p>
+        </CardHeader>
+        <CardContent>
+          <input
+            type="number"
+            value={d.totalRecords}
+            onChange={e => d.setTotalRecords(Number(e.target.value) || 0)}
+            className="w-48 rounded-md border bg-background px-3 py-2 text-sm font-mono"
+          />
+        </CardContent>
+      </Card>
+
+      <Card>
         <CardHeader><CardTitle className="text-base">Organisations</CardTitle></CardHeader>
         <CardContent>
           <EditableTable rows={d.organisations} onChange={d.setOrganisations} />

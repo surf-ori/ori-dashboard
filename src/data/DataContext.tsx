@@ -37,8 +37,12 @@ interface DataContextValue {
   setEnrichmentEntities: (v: EnrichmentEntity[]) => void;
   accuracyComparison: AccuracyComparison;
   setAccuracyComparison: (v: AccuracyComparison) => void;
+  totalRecords: number;
+  setTotalRecords: (v: number) => void;
   resetAll: () => void;
 }
+
+const DEFAULT_TOTAL_RECORDS = 216409;
 
 const DataContext = createContext<DataContextValue | null>(null);
 
@@ -51,6 +55,7 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
   const [interventions, setInterventions] = useState<Intervention[]>(defaultInterventions);
   const [enrichmentEntities, setEnrichmentEntities] = useState<EnrichmentEntity[]>(defaultEnrichmentEntities);
   const [accuracyComparison, setAccuracyComparison] = useState<AccuracyComparison>(defaultAccuracyComparison);
+  const [totalRecords, setTotalRecords] = useState<number>(DEFAULT_TOTAL_RECORDS);
 
   const resetAll = () => {
     setOrganisations(defaultOrganisations);
@@ -61,6 +66,7 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
     setInterventions(defaultInterventions);
     setEnrichmentEntities(defaultEnrichmentEntities);
     setAccuracyComparison(defaultAccuracyComparison);
+    setTotalRecords(DEFAULT_TOTAL_RECORDS);
   };
 
   return (
@@ -74,6 +80,7 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
         interventions, setInterventions,
         enrichmentEntities, setEnrichmentEntities,
         accuracyComparison, setAccuracyComparison,
+        totalRecords, setTotalRecords,
         resetAll,
       }}
     >

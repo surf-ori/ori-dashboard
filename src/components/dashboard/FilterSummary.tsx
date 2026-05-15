@@ -1,14 +1,17 @@
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { organisations } from '@/data/mockData';
+import { useDashboardData } from '@/data/DataContext';
 import type { DashboardFilters } from '@/data/types';
 
 interface FilterSummaryProps {
   filters: DashboardFilters;
-  recordCount: number;
+  recordCount?: number;
 }
 
-export function FilterSummary({ filters, recordCount }: FilterSummaryProps) {
+export function FilterSummary({ filters }: FilterSummaryProps) {
+  const { totalRecords } = useDashboardData();
+  const count = totalRecords;
   const org = organisations.find(o => o.id === filters.organisation);
   const orgLabel = org ? org.abbreviation : filters.organisation;
 
@@ -21,7 +24,7 @@ export function FilterSummary({ filters, recordCount }: FilterSummaryProps) {
         <Badge variant="outline">Entity: <span className="font-semibold ml-1">{filters.cerifEntity}</span></Badge>
         <Badge variant="outline">Type: <span className="font-semibold ml-1">{filters.publicationType}</span></Badge>
         <span className="ml-auto text-muted-foreground">
-          → <span className="font-semibold text-foreground">{recordCount.toLocaleString()}</span> records
+          → <span className="font-semibold text-foreground">{count.toLocaleString()}</span> records
         </span>
       </CardContent>
     </Card>

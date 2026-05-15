@@ -16,15 +16,25 @@ interface Props {
 }
 
 export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
-  const { coverageComparisons, completenessTimeline, detailRecords, interventions } = useDashboardData();
+  const { coverageComparisons, completenessTimeline, detailRecords, interventions, totalRecords } = useDashboardData();
   const primarySource = filters.source;
   const [selectedComparison, setSelectedComparison] = useState<{ comparison: CoverageComparison; segment: string } | null>(null);
+
+  // Normalize each comparison so onlyInPrimary + inBoth always sums to totalRecords,
+  // preserving the original ratio between the two segments.
+  const normalizedComparisons: CoverageComparison[] = coverageComparisons.map(c => {
+    const primarySum = c.onlyInPrimary + c.inBoth;
+    if (primarySum === 0) return { ...c, onlyInPrimary: 0, inBoth: totalRecords, total: totalRecords + c.onlyInCompared };
+    const inBoth = Math.round((c.inBoth / primarySum) * totalRecords);
+    const onlyInPrimary = totalRecords - inBoth;
+    return { ...c, onlyInPrimary, inBoth, total: totalRecords + c.onlyInCompared };
+  });
 
   const handleBarClick = (comparison: CoverageComparison, segment: string) => {
     setSelectedComparison({ comparison, segment });
   };
 
-  const totalRecords = coverageComparisons.reduce((s, c) => s + c.onlyInPrimary + c.inBoth, 0);
+  
 
   const segmentLabel = selectedComparison
     ? selectedComparison.segment === 'onlyInPrimary'
@@ -43,12 +53,12 @@ export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
         </p>
       </div>
 
-      <FilterSummary filters={filters} recordCount={totalRecords} />
+      <FilterSummary filters={filters} />
 
       <MatchingMethodSelector value={filters.matchingMethod} onChange={onMatchingMethodChange} />
 
       <CoverageBarChart
-        data={coverageComparisons}
+        data={normalizedComparisons}
         primarySource={primarySource}
         onBarClick={handleBarClick}
       />
