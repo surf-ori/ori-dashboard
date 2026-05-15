@@ -35,7 +35,8 @@ A data quality dashboard for Dutch research institutions to assess the quality o
 - **Interventions section** (collapsible)
 
 #### 4. Enrichment Screen (Placeholder)
-- Tab accessible, shows "Coming soon" state explaining it will show record-level metadata from different sources
+- See which metadata values you can recover from other sources to enrich the records in your primary source. 
+- Each row shows how many of your records are missing a valid value, and how many of those can be filled in from a comparing source.
 
 #### 5. Accuracy Screen (Placeholder)
 - Tab accessible, shows "Coming soon" state with brief description of planned functionality
