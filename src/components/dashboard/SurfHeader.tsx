@@ -1,9 +1,8 @@
 "use client";
 
 import React from 'react';
-import { SurfLogo } from '@/components/ui/SurfLogo';
-import { Bell, User, Settings } from '@/lib/surf-icons';
 import { cn } from '@/lib/utils';
+import { Bell, User, Settings } from 'lucide-react';
 
 interface SurfHeaderProps {
   className?: string;
@@ -29,7 +28,7 @@ export function SurfHeader({ className, showSidebarTrigger = true, onSidebarTrig
       )}
       
       <div className="flex-1 flex items-center justify-between">
-        <SurfLogo variant="light" showText={false} className="h-8" />
+        <div className="font-display font-extrabold text-lg">ORI Dashboard</div>
         
         <div className="flex items-center gap-2">
           <button className="p-2 hover:bg-muted rounded-lg transition-colors" aria-label="Notifications">
