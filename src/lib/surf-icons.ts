@@ -57,7 +57,6 @@ import {
   Music,
   Play,
   Pause,
-  Stop,
   Volume2,
   VolumeX,
   Mic,
@@ -96,7 +95,6 @@ import {
   Forward,
   MessageSquare,
   MessageCircle,
-  Comment,
   ThumbsUp,
   ThumbsDown,
   Heart,
@@ -116,7 +114,6 @@ import {
   Map,
   Pin,
   Crosshair,
-  Compass as CompassIcon,
   Anchor,
   Flag,
   Trophy,
@@ -127,7 +124,6 @@ import {
   ShieldAlert,
   AlertCircle,
   HelpCircle,
-  Info as InfoIcon,
   Loader2,
   Loader,
   Circle,
@@ -138,7 +134,6 @@ import {
   Diamond,
   CircleDot,
   SquareDot,
-  TriangleDot,
 } from 'lucide-react';
 
 export const SurfIcons = {
@@ -200,7 +195,6 @@ export const SurfIcons = {
   Music,
   Play,
   Pause,
-  Stop,
   Volume2,
   VolumeX,
   Mic,
@@ -239,7 +233,6 @@ export const SurfIcons = {
   Forward,
   MessageSquare,
   MessageCircle,
-  Comment,
   ThumbsUp,
   ThumbsDown,
   Heart,
@@ -259,7 +252,6 @@ export const SurfIcons = {
   Map,
   Pin,
   Crosshair,
-  CompassIcon,
   Anchor,
   Flag,
   Trophy,
@@ -270,7 +262,6 @@ export const SurfIcons = {
   ShieldAlert,
   AlertCircle,
   HelpCircle,
-  Info as InfoIcon,
   Loader2,
   Loader,
   Circle,
@@ -281,7 +272,6 @@ export const SurfIcons = {
   Diamond,
   CircleDot,
   SquareDot,
-  TriangleDot,
 };
 
 export default SurfIcons;
