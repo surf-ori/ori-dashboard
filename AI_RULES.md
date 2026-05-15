@@ -79,6 +79,7 @@ src/
 ├── lib/                 # Utility functions
 ├── pages/               # Route pages
 └── assets/              # Static assets; fonts, logos, favico
+└── fonts/               # Fonts
 ```
 
 ### Naming Conventions
