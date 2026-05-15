@@ -53,12 +53,12 @@ export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
         </p>
       </div>
 
-      <FilterSummary filters={filters} recordCount={totalRecords} />
+      <FilterSummary filters={filters} />
 
       <MatchingMethodSelector value={filters.matchingMethod} onChange={onMatchingMethodChange} />
 
       <CoverageBarChart
-        data={coverageComparisons}
+        data={normalizedComparisons}
         primarySource={primarySource}
         onBarClick={handleBarClick}
       />
