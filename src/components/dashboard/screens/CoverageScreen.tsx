@@ -34,7 +34,7 @@ export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
     setSelectedComparison({ comparison, segment });
   };
 
-  const totalRecords = coverageComparisons.reduce((s, c) => s + c.onlyInPrimary + c.inBoth, 0);
+  
 
   const segmentLabel = selectedComparison
     ? selectedComparison.segment === 'onlyInPrimary'
