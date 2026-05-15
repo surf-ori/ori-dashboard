@@ -9,9 +9,9 @@ interface FilterSummaryProps {
   recordCount?: number;
 }
 
-export function FilterSummary({ filters, recordCount }: FilterSummaryProps) {
+export function FilterSummary({ filters }: FilterSummaryProps) {
   const { totalRecords } = useDashboardData();
-  const count = recordCount ?? totalRecords;
+  const count = totalRecords;
   const org = organisations.find(o => o.id === filters.organisation);
   const orgLabel = org ? org.abbreviation : filters.organisation;
 
