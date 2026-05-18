@@ -40,9 +40,11 @@ export default function DashboardLayout() {
             <div className="flex items-center gap-3">
               <img src={surfLogo} alt="SURF" className="h-9 w-auto" />
               <div className="border-l border-sidebar-border pl-3">
-                <p className="text-[10px] uppercase tracking-[0.14em] text-sidebar-primary font-bold">ORI</p>
+                <p className="text-[10px] uppercase tracking-[0.14em] text-sidebar-primary font-bold">
+                  Open Research Information
+                </p>
                 <h2 className="font-display font-extrabold text-sm text-sidebar-foreground leading-tight">
-                  Quality dashboard
+                  Data quality dashboard
                 </h2>
               </div>
             </div>
