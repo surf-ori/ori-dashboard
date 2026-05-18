@@ -8,6 +8,7 @@ import {
   interventions as defaultInterventions,
   enrichmentEntities as defaultEnrichmentEntities,
   accuracyComparison as defaultAccuracyComparison,
+  overviewCards as defaultOverviewCards,
 } from './mockData';
 import type {
   Organisation,
@@ -18,6 +19,7 @@ import type {
   Intervention,
   EnrichmentEntity,
   AccuracyComparison,
+  OverviewCard,
 } from './types';
 
 interface DataContextValue {
@@ -37,6 +39,8 @@ interface DataContextValue {
   setEnrichmentEntities: (v: EnrichmentEntity[]) => void;
   accuracyComparison: AccuracyComparison;
   setAccuracyComparison: (v: AccuracyComparison) => void;
+  overviewCards: OverviewCard[];
+  setOverviewCards: (v: OverviewCard[]) => void;
   totalRecords: number;
   setTotalRecords: (v: number) => void;
   resetAll: () => void;
@@ -55,6 +59,7 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
   const [interventions, setInterventions] = useState<Intervention[]>(defaultInterventions);
   const [enrichmentEntities, setEnrichmentEntities] = useState<EnrichmentEntity[]>(defaultEnrichmentEntities);
   const [accuracyComparison, setAccuracyComparison] = useState<AccuracyComparison>(defaultAccuracyComparison);
+  const [overviewCards, setOverviewCards] = useState<OverviewCard[]>(defaultOverviewCards);
   const [totalRecords, setTotalRecords] = useState<number>(DEFAULT_TOTAL_RECORDS);
 
   const resetAll = () => {
@@ -66,6 +71,7 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
     setInterventions(defaultInterventions);
     setEnrichmentEntities(defaultEnrichmentEntities);
     setAccuracyComparison(defaultAccuracyComparison);
+    setOverviewCards(defaultOverviewCards);
     setTotalRecords(DEFAULT_TOTAL_RECORDS);
   };
 
@@ -80,6 +86,7 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
         interventions, setInterventions,
         enrichmentEntities, setEnrichmentEntities,
         accuracyComparison, setAccuracyComparison,
+        overviewCards, setOverviewCards,
         totalRecords, setTotalRecords,
         resetAll,
       }}

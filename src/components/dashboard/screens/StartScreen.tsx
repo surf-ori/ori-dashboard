@@ -1,10 +1,9 @@
 import { KPICard } from '@/components/dashboard/KPICard';
-import { summaryStats } from '@/data/mockData';
 import { useDashboardData } from '@/data/DataContext';
 import { Sparkles, CheckCircle2, Layers, Target } from 'lucide-react';
 
 export function StartScreen() {
-  const { organisations } = useDashboardData();
+  const { organisations, overviewCards } = useDashboardData();
   return (
     <div className="space-y-8">
       <div>
@@ -24,12 +23,15 @@ export function StartScreen() {
       <div>
         <h2 className="text-lg font-semibold mb-4">Overview</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <KPICard label="Sources Monitored" value={summaryStats.totalSources} subtitle="OpenAlex, Crossref, OpenAIRE, CRIS, ORCID, ROR, DataCite" variant="accent" />
-          <KPICard label="Organisations" value={summaryStats.totalOrganisations} subtitle="Dutch Research Performing Organisations" />
-          <KPICard label="Total Records" value={summaryStats.totalRecords.toLocaleString()} subtitle="Across all sources and organisations" />
-          <KPICard label="Avg. Completeness" value={`${summaryStats.avgCompleteness}%`} subtitle="Metadata field coverage" variant="accent" />
-          <KPICard label="Avg. Coverage" value={`${summaryStats.avgCoverage}%`} subtitle="Cross-source record overlap" variant="accent" />
-          <KPICard label="Avg. Accuracy" value="80%" subtitle="Conflict-free shared records" />
+          {overviewCards.map((c, i) => (
+            <KPICard
+              key={c.title}
+              label={c.title}
+              value={c.value}
+              subtitle={c.details}
+              variant={i % 2 === 0 ? 'accent' : undefined}
+            />
+          ))}
         </div>
       </div>
 
