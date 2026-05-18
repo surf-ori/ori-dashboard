@@ -68,13 +68,22 @@ export const interventions: Intervention[] = [
 ];
 
 export const summaryStats = {
-  totalSources: 7,
+  totalSources: 5,
   totalOrganisations: organisations.length,
-  totalRecords: 62250,
+  totalRecords: 216409,
   avgCompleteness: 67.6,
   avgCoverage: 72.4,
   avgAccuracy: 'N/A' as const,
 };
+
+export const overviewCards: OverviewCard[] = [
+  { title: 'Sources Monitored', value: '5', details: 'OpenAlex, Crossref, OpenAIRE, CRIS, ROR' },
+  { title: 'Organisations', value: String(organisations.length), details: 'Dutch Research Performing Organisations' },
+  { title: 'Total Records', value: '216,409', details: 'Across all sources and organisations' },
+  { title: 'Avg. Completeness', value: '67.6%', details: 'Metadata field coverage' },
+  { title: 'Avg. Coverage', value: '72.4%', details: 'Cross-source record overlap' },
+  { title: 'Avg. Accuracy', value: '80%', details: 'Conflict-free shared records' },
+];
 
 export const enrichmentEntities: EnrichmentEntity[] = [
   {
