@@ -77,12 +77,14 @@ export const summaryStats = {
 };
 
 export const overviewCards: OverviewCard[] = [
-  { title: 'Sources Monitored', value: '5', details: 'OpenAlex, Crossref, OpenAIRE, CRIS, ROR' },
-  { title: 'Organisations', value: String(organisations.length), details: 'Dutch Research Performing Organisations' },
-  { title: 'Total Records', value: '216,409', details: 'Across all sources and organisations' },
-  { title: 'Avg. Completeness', value: '67.6%', details: 'Metadata field coverage' },
+  { title: 'Sources Monitored', value: '4', details: 'OpenAlex, Crossref, OpenAIRE, CRIS' },
+  { title: 'Organisations', value: '17', details: 'Dutch Research Performing Organisations' },
+  { title: 'Total Records', value: '6,963,012', details: 'Across all sources and organisations' },
+  { title: 'Filtered Records', value: '216,409', details: 'Publications, for VU Amsterdam, in CRIS' },
   { title: 'Avg. Coverage', value: '72.4%', details: 'Cross-source record overlap' },
-  { title: 'Avg. Accuracy', value: '80%', details: 'Conflict-free shared records' },
+  { title: 'Avg. Completeness', value: '67.6%', details: 'Metadata field coverage per source' },
+  { title: 'Avg. Enrichment', value: '90.2%', details: 'Records that can be enriched' },
+  { title: 'Avg. Accuracy', value: '80.4%', details: 'Conflict-free shared records' },
 ];
 
 export const enrichmentEntities: EnrichmentEntity[] = [
