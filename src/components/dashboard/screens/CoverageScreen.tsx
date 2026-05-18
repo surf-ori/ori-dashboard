@@ -37,8 +37,9 @@ export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight mb-1">Coverage</h1>
-        <p className="text-sm text-muted-foreground">
+        <div className="eyebrow mb-2">Data quality</div>
+        <h1 className="font-display text-3xl font-extrabold tracking-tight mb-1">Coverage</h1>
+        <p className="text-sm" style={{ color: 'hsl(var(--foreground-2))' }}>
           Compare which records are present across different open sources. Click on a bar segment for details.
         </p>
       </div>
