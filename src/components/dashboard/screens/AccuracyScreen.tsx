@@ -49,9 +49,9 @@ export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
       <div>
         <div className="eyebrow mb-2">Data quality</div>
         <h1 className="font-display text-3xl font-extrabold tracking-tight mb-1">Accuracy</h1>
-        <p className="text-sm max-w-3xl" style={{ color: 'hsl(var(--foreground-2))' }}>
-          Actionable data on records with conflicting information between sources. See where values disagree and
-          how to resolve them, so the institutional record stays consistent across the open research ecosystem.
+        <p className="max-w-3xl text-[17px] leading-relaxed" style={{ color: 'hsl(var(--foreground-2))' }}>
+          Find records where sources disagree, and see where the values line up. A clear view of conflicts
+          helps you keep the institutional record consistent across the open research ecosystem.
         </p>
       </div>
 
