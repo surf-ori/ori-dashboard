@@ -39,6 +39,8 @@ interface DataContextValue {
   setEnrichmentEntities: (v: EnrichmentEntity[]) => void;
   accuracyComparison: AccuracyComparison;
   setAccuracyComparison: (v: AccuracyComparison) => void;
+  overviewCards: OverviewCard[];
+  setOverviewCards: (v: OverviewCard[]) => void;
   totalRecords: number;
   setTotalRecords: (v: number) => void;
   resetAll: () => void;
