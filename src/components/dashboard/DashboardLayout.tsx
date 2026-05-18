@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { cn } from '@/lib/utils';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { FilterPanel } from '@/components/dashboard/FilterPanel';
@@ -86,7 +87,10 @@ export default function DashboardLayout() {
                   <TabsTrigger
                     key={value}
                     value={value}
-                    className="relative h-16 rounded-none bg-transparent px-0 py-0 text-sm font-semibold text-muted-foreground shadow-none data-[state=active]:bg-transparent data-[state=active]:text-foreground data-[state=active]:shadow-none hover:text-foreground transition-colors after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-px after:h-[3px] after:rounded-t-sm after:bg-primary after:scale-x-0 data-[state=active]:after:scale-x-100 after:transition-transform after:origin-left"
+                    className={cn(
+                      "relative h-16 rounded-none bg-transparent px-0 py-0 text-sm font-semibold text-muted-foreground shadow-none data-[state=active]:bg-transparent data-[state=active]:text-foreground data-[state=active]:shadow-none hover:text-foreground transition-colors after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-px after:h-[3px] after:rounded-t-sm after:bg-primary after:scale-x-0 data-[state=active]:after:scale-x-100 after:transition-transform after:origin-left",
+                      value === 'data' && 'ml-auto',
+                    )}
                   >
                     <Icon className="h-4 w-4 mr-1.5" />
                     <span className="hidden sm:inline">{label}</span>
