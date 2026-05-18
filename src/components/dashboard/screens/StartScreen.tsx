@@ -1,10 +1,9 @@
 import { KPICard } from '@/components/dashboard/KPICard';
-import { summaryStats } from '@/data/mockData';
 import { useDashboardData } from '@/data/DataContext';
 import { Sparkles, CheckCircle2, Layers, Target } from 'lucide-react';
 
 export function StartScreen() {
-  const { organisations } = useDashboardData();
+  const { organisations, overviewCards } = useDashboardData();
   return (
     <div className="space-y-8">
       <div>
