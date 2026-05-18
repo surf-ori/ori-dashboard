@@ -87,32 +87,32 @@ export const overviewCards: OverviewCard[] = [
 
 export const enrichmentEntities: EnrichmentEntity[] = [
   {
-    entity: 'ror', label: 'ROR', missingPercentage: 74, missingCount: 5403, totalRecords: 7300,
+    entity: 'ror', label: 'ROR', missingPercentage: 74, missingCount: 160143, totalRecords: 216409,
     recoverable: [
-      { source: 'OpenAIRE', percentage: 10, count: 729 },
-      { source: 'OpenAlex', percentage: 10, count: 1495 },
+      { source: 'OpenAIRE', percentage: 10, count: 16014 },
+      { source: 'OpenAlex', percentage: 10, count: 16014 },
     ],
   },
   {
-    entity: 'orcid', label: 'ORCID', missingPercentage: 66, missingCount: 4281, totalRecords: 6486,
+    entity: 'orcid', label: 'ORCID', missingPercentage: 66, missingCount: 142830, totalRecords: 216409,
     recoverable: [
-      { source: 'OpenAIRE', percentage: 20, count: 856 },
-      { source: 'OpenAlex', percentage: 10, count: 428 },
+      { source: 'OpenAIRE', percentage: 20, count: 28566 },
+      { source: 'OpenAlex', percentage: 10, count: 14283 },
     ],
   },
   {
-    entity: 'doi', label: 'DOI', missingPercentage: 37, missingCount: 2392, totalRecords: 6464,
+    entity: 'doi', label: 'DOI', missingPercentage: 37, missingCount: 80071, totalRecords: 216409,
     recoverable: [
-      { source: 'OpenAIRE', percentage: 15, count: 358 },
-      { source: 'OpenAlex', percentage: 10, count: 239 },
-      { source: 'Crossref', percentage: 20, count: 478 },
+      { source: 'OpenAIRE', percentage: 15, count: 12011 },
+      { source: 'OpenAlex', percentage: 10, count: 8007 },
+      { source: 'Crossref', percentage: 20, count: 16014 },
     ],
   },
   {
-    entity: 'grantDoi', label: 'Grant DOI', missingPercentage: 81, missingCount: 5912, totalRecords: 7300,
+    entity: 'grantDoi', label: 'Grant DOI', missingPercentage: 81, missingCount: 175291, totalRecords: 216409,
     recoverable: [
-      { source: 'OpenAIRE', percentage: 18, count: 1064 },
-      { source: 'Crossref', percentage: 7, count: 414 },
+      { source: 'OpenAIRE', percentage: 18, count: 31552 },
+      { source: 'Crossref', percentage: 7, count: 12270 },
     ],
   },
 ];
