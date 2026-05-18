@@ -73,6 +73,20 @@
   font-display: swap;
   src: url('./fonts/SourceSansPro-BoldItalic.ttf') format('truetype');
 }
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('./fonts/SourceSansPro-Black.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url('./fonts/SourceSansPro-BlackItalic.ttf') format('truetype');
+}
 
 /* Nunito — self-hosted variable fonts (preferred, full 200–1000 range) */
 @font-face {
