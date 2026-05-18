@@ -41,6 +41,16 @@ export function MockDataScreen() {
       </Card>
 
       <Card>
+        <CardHeader>
+          <CardTitle className="text-base">Overview cards</CardTitle>
+          <p className="text-xs text-muted-foreground">Shown in the Overview grid on the Start tab.</p>
+        </CardHeader>
+        <CardContent>
+          <EditableTable rows={d.overviewCards} onChange={d.setOverviewCards} />
+        </CardContent>
+      </Card>
+
+      <Card>
         <CardHeader><CardTitle className="text-base">Organisations</CardTitle></CardHeader>
         <CardContent>
           <EditableTable rows={d.organisations} onChange={d.setOrganisations} />
