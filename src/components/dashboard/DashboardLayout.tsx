@@ -38,16 +38,20 @@ export default function DashboardLayout() {
         <Sidebar>
           <SidebarHeader className="p-5 border-b border-sidebar-border">
             <div className="flex items-center gap-3">
-              <img src={surfLogo} alt="SURF" className="h-8 w-auto" />
+              <img src={surfLogo} alt="SURF" className="h-9 w-auto" />
               <div className="border-l border-sidebar-border pl-3">
-                <p className="text-[10px] uppercase tracking-[0.14em] text-sidebar-foreground/60 font-semibold">ORI</p>
-                <h2 className="font-display font-extrabold text-sm text-sidebar-foreground leading-tight">Quality Dashboard</h2>
+                <p className="text-[10px] uppercase tracking-[0.14em] text-sidebar-primary font-bold">ORI</p>
+                <h2 className="font-display font-extrabold text-sm text-sidebar-foreground leading-tight">
+                  Quality dashboard
+                </h2>
               </div>
             </div>
           </SidebarHeader>
           <SidebarContent className="p-4">
             <SidebarGroup>
-              <SidebarGroupLabel className="text-sidebar-foreground/50 text-xs uppercase tracking-widest mb-2">Filters</SidebarGroupLabel>
+              <SidebarGroupLabel className="text-sidebar-primary text-[11px] font-semibold uppercase tracking-[0.08em] mb-2">
+                Filters
+              </SidebarGroupLabel>
               <SidebarGroupContent>
                 <FilterPanel
                   organisation={organisation}
@@ -65,21 +69,32 @@ export default function DashboardLayout() {
         </Sidebar>
 
         <div className="flex-1 flex flex-col min-w-0">
-          <header className="sticky top-0 z-10 h-14 flex items-center gap-4 border-b bg-background/95 backdrop-blur px-4">
-            <SidebarTrigger />
+          <header className="sticky top-0 z-10 flex items-center gap-6 border-b border-border-soft bg-background px-6 h-16">
+            <SidebarTrigger className="text-foreground" />
             <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
-              <TabsList className="bg-muted">
-                <TabsTrigger value="start" className="gap-1.5"><Home className="h-3.5 w-3.5" /><span className="hidden sm:inline">About</span></TabsTrigger>
-                <TabsTrigger value="coverage" className="gap-1.5"><Layers className="h-3.5 w-3.5" /><span className="hidden sm:inline">Coverage</span></TabsTrigger>
-                <TabsTrigger value="completeness" className="gap-1.5"><CheckCircle2 className="h-3.5 w-3.5" /><span className="hidden sm:inline">Completeness</span></TabsTrigger>
-                <TabsTrigger value="enrichment" className="gap-1.5"><Sparkles className="h-3.5 w-3.5" /><span className="hidden sm:inline">Enrichment</span></TabsTrigger>
-                <TabsTrigger value="accuracy" className="gap-1.5"><Target className="h-3.5 w-3.5" /><span className="hidden sm:inline">Accuracy</span></TabsTrigger>
-                <TabsTrigger value="data" className="gap-1.5"><Database className="h-3.5 w-3.5" /><span className="hidden sm:inline">Data</span></TabsTrigger>
+              <TabsList className="h-16 bg-transparent p-0 gap-7 rounded-none justify-start">
+                {[
+                  { value: 'start', label: 'About', Icon: Home },
+                  { value: 'coverage', label: 'Coverage', Icon: Layers },
+                  { value: 'completeness', label: 'Completeness', Icon: CheckCircle2 },
+                  { value: 'enrichment', label: 'Enrichment', Icon: Sparkles },
+                  { value: 'accuracy', label: 'Accuracy', Icon: Target },
+                  { value: 'data', label: 'Data', Icon: Database },
+                ].map(({ value, label, Icon }) => (
+                  <TabsTrigger
+                    key={value}
+                    value={value}
+                    className="relative h-16 rounded-none bg-transparent px-0 py-0 text-sm font-semibold text-muted-foreground shadow-none data-[state=active]:bg-transparent data-[state=active]:text-foreground data-[state=active]:shadow-none hover:text-foreground transition-colors after:content-[''] after:absolute after:left-0 after:right-0 after:-bottom-px after:h-[3px] after:rounded-t-sm after:bg-primary after:scale-x-0 data-[state=active]:after:scale-x-100 after:transition-transform after:origin-left"
+                  >
+                    <Icon className="h-4 w-4 mr-1.5" />
+                    <span className="hidden sm:inline">{label}</span>
+                  </TabsTrigger>
+                ))}
               </TabsList>
             </Tabs>
           </header>
 
-          <main className="flex-1 p-6 overflow-y-auto">
+          <main className="flex-1 px-8 py-8 overflow-y-auto bg-background">
             {activeTab === 'start' && <StartScreen />}
             {activeTab === 'coverage' && <CoverageScreen filters={filters} onMatchingMethodChange={setMatchingMethod} />}
             {activeTab === 'completeness' && <CompletenessScreen filters={filters} />}
