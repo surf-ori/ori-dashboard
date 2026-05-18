@@ -19,7 +19,7 @@ interface Props {
 }
 
 export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
-  const { accuracyComparison, coverageComparisons, detailRecords, interventions, completenessTimeline } = useDashboardData();
+  const { accuracyComparison, coverageComparisons, detailRecords, interventions, completenessTimeline, totalRecords: ctxTotal } = useDashboardData();
   const a = accuracyComparison;
   const primary = filters.source;
   const [compare, setCompare] = useState<Source>(a.compareSource);
@@ -29,15 +29,19 @@ export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
 
   const matchBy = filters.matchingMethod;
 
-  // Derive record counts from the Coverage comparisons mock table for the selected compare source.
+  // Derive record counts: primary = total records (mock data), both/compare from Coverage comparisons.
   const cov = coverageComparisons.find(c => c.compareSource === compare);
-  const recordsInPrimary = cov ? cov.onlyInPrimary + cov.inBoth : a.recordsInPrimary;
+  const recordsInPrimary = ctxTotal;
   const recordsInBoth = cov ? cov.inBoth : a.recordsInBoth;
   const recordsInCompare = cov ? cov.inBoth + cov.onlyInCompared : a.recordsInCompare;
   const totalRecords = recordsInPrimary + recordsInCompare - recordsInBoth;
 
+  // Derive absolute conflict/agreement counts from percentage of records in both sources.
+  const conflicts = a.conflicts.map(c => ({ ...c, count: Math.round((c.percentage / 100) * recordsInBoth) }));
+  const agreements = a.agreements.map(c => ({ ...c, count: Math.round((c.percentage / 100) * recordsInBoth) }));
+
   const selectedItem = selected
-    ? (selected.kind === 'conflict' ? a.conflicts : a.agreements).find(c => c.field === selected.field)
+    ? (selected.kind === 'conflict' ? conflicts : agreements).find(c => c.field === selected.field)
     : null;
 
   return (
@@ -98,7 +102,7 @@ export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
-            {a.conflicts.map(c => {
+            {conflicts.map(c => {
               const active = selected?.kind === 'conflict' && selected.field === c.field;
               return (
                 <button
@@ -132,7 +136,7 @@ export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-2">
-            {a.agreements.map(c => {
+            {agreements.map(c => {
               const active = selected?.kind === 'agreement' && selected.field === c.field;
               return (
                 <button
