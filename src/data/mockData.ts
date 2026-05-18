@@ -68,7 +68,7 @@ export const interventions: Intervention[] = [
 ];
 
 export const summaryStats = {
-  totalSources: 7,
+  totalSources: 6502250,
   totalOrganisations: organisations.length,
   totalRecords: 62250,
   avgCompleteness: 67.6,
