@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { cn } from '@/lib/utils';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
 import { FilterPanel } from '@/components/dashboard/FilterPanel';
