@@ -21,8 +21,9 @@ export function CompletenessScreen({ filters }: Props) {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight mb-1">Completeness</h1>
-        <p className="text-sm text-muted-foreground">
+        <div className="eyebrow mb-2">Data quality</div>
+        <h1 className="font-display text-3xl font-extrabold tracking-tight mb-1">Completeness</h1>
+        <p className="text-sm" style={{ color: 'hsl(var(--foreground-2))' }}>
           How complete is the metadata across your records? Click a metric card to drill down.
         </p>
       </div>
@@ -35,18 +36,18 @@ export function CompletenessScreen({ filters }: Props) {
             key={m.field}
             onClick={() => setSelectedField(m.field)}
             className={cn(
-              'text-left rounded-lg border bg-card p-4 transition-all hover:shadow-md',
-              selectedField === m.field && 'ring-2 ring-primary border-primary'
+              'text-left rounded-2xl border border-border-soft bg-card p-4 transition-all hover:shadow-surf',
+              selectedField === m.field && 'border-primary bg-[hsl(var(--primary-050))]'
             )}
           >
-            <p className="text-xs font-medium text-muted-foreground">{m.label}</p>
+            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-primary">{m.label}</p>
             <p className={cn(
-              'text-2xl font-bold mt-1',
-              m.percentage >= 80 ? 'text-success' : m.percentage >= 50 ? 'text-warning' : 'text-destructive'
+              'font-display text-2xl font-extrabold mt-1.5',
+              m.percentage >= 80 ? 'text-success' : m.percentage >= 50 ? 'text-surf-orange-700' : 'text-destructive'
             )}>
               {m.percentage}%
             </p>
-            <p className="text-xs text-muted-foreground mt-1">
+            <p className="text-xs mt-1" style={{ color: 'hsl(var(--muted-foreground))' }}>
               {m.filled.toLocaleString()} / {m.total.toLocaleString()}
             </p>
           </button>
