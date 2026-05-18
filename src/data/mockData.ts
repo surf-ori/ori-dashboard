@@ -22,16 +22,16 @@ export const organisations: Organisation[] = [
   { id: 'nlrn', name: 'Dutch Reproducibility Network', rorId: '06y5xv847', abbreviation: 'NLRN' },
 ];
 
-export const sources: Source[] = ['OpenAlex', 'Crossref', 'OpenAIRE', 'CRIS', 'ORCID', 'ROR', 'DataCite'];
+export const sources: Source[] = ['OpenAlex', 'Crossref', 'OpenAIRE', 'CRIS', 'ROR'];
 
 export const completenessMetrics: CompletenessMetric[] = [
-  { field: 'doi', label: 'Has DOI', percentage: 87.3, total: 12450, filled: 10869 },
-  { field: 'orcid', label: 'Has ORCID', percentage: 62.1, total: 12450, filled: 7731 },
-  { field: 'ror', label: 'Has ROR', percentage: 78.5, total: 12450, filled: 9773 },
-  { field: 'grantDoi', label: 'Has Grant DOI', percentage: 23.4, total: 12450, filled: 2913 },
-  { field: 'issn', label: 'Has ISSN', percentage: 91.2, total: 12450, filled: 11354 },
-  { field: 'oaStatus', label: 'Has OA Status', percentage: 84.7, total: 12450, filled: 10545 },
-  { field: 'correspondingAuthor', label: 'Corresponding Author', percentage: 45.8, total: 12450, filled: 5702 },
+  { field: 'doi', label: 'Has DOI', percentage: 87.3, total: 216409, filled: 188925 },
+  { field: 'orcid', label: 'Has ORCID', percentage: 62.1, total: 216409, filled: 134390 },
+  { field: 'ror', label: 'Has ROR', percentage: 78.5, total: 216409, filled: 169881 },
+  { field: 'grantDoi', label: 'Has Grant DOI', percentage: 23.4, total: 216409, filled: 50640 },
+  { field: 'issn', label: 'Has ISSN', percentage: 91.2, total: 216409, filled: 197365 },
+  { field: 'oaStatus', label: 'Has OA Status', percentage: 84.7, total: 216409, filled: 183298 },
+  { field: 'correspondingAuthor', label: 'Corresponding Author', percentage: 45.8, total: 216409, filled: 99115 },
 ];
 
 export const completenessTimeline: TimelinePoint[] = [
@@ -43,11 +43,9 @@ export const completenessTimeline: TimelinePoint[] = [
 
 // With CRIS as the default primary source, comparison list includes OpenAlex (swapped in for CRIS)
 export const coverageComparisons: CoverageComparison[] = [
-  { compareSource: 'OpenAlex', onlyInPrimary: 77386, inBoth: 139023, onlyInCompared: 4120, total: 220529 },
-  { compareSource: 'Crossref', onlyInPrimary: 26164, inBoth: 190245, onlyInCompared: 560, total: 216969 },
-  { compareSource: 'OpenAIRE', onlyInPrimary: 48091, inBoth: 168318, onlyInCompared: 1890, total: 218299 },
-  { compareSource: 'ORCID', onlyInPrimary: 97728, inBoth: 118681, onlyInCompared: 2300, total: 218709 },
-  { compareSource: 'DataCite', onlyInPrimary: 189764, inBoth: 26645, onlyInCompared: 780, total: 217189 },
+  { compareSource: 'OpenAlex', onlyInPrimary: 77386, inBoth: 139023, onlyInCompared: 41200, total: 257609 },
+  { compareSource: 'Crossref', onlyInPrimary: 26164, inBoth: 190245, onlyInCompared: 5600, total: 222009 },
+  { compareSource: 'OpenAIRE', onlyInPrimary: 48091, inBoth: 168318, onlyInCompared: 18900, total: 235309 },
 ];
 
 export const detailRecords: DetailRecord[] = [
