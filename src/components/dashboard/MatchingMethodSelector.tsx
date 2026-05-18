@@ -1,5 +1,4 @@
-import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 import type { MatchingMethod } from '@/data/types';
 
 interface MatchingMethodSelectorProps {
@@ -8,27 +7,41 @@ interface MatchingMethodSelectorProps {
   className?: string;
 }
 
+const methods: { id: MatchingMethod; label: string }[] = [
+  { id: 'doi', label: 'DOI-based' },
+  { id: 'ror', label: 'ROR-based' },
+];
+
 export function MatchingMethodSelector({ value, onChange, className }: MatchingMethodSelectorProps) {
   return (
     <div className={className}>
-      <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5 block">
-        Matching Method
-      </Label>
-      <div className="inline-flex rounded-md border bg-muted p-0.5">
-        <Button
-          type="button"
-          variant={value === 'doi' ? 'default' : 'ghost'}
-          size="sm"
-          className="h-8"
-          onClick={() => onChange('doi')}
-        >DOI-based</Button>
-        <Button
-          type="button"
-          variant={value === 'ror' ? 'default' : 'ghost'}
-          size="sm"
-          className="h-8"
-          onClick={() => onChange('ror')}
-        >ROR-based</Button>
+      <div className="text-[11px] font-semibold uppercase tracking-[0.08em] text-primary mb-1.5">
+        Matching method
+      </div>
+      <div
+        className="inline-flex rounded-lg border border-border bg-card p-1"
+        role="tablist"
+      >
+        {methods.map((m) => {
+          const active = value === m.id;
+          return (
+            <button
+              key={m.id}
+              type="button"
+              role="tab"
+              aria-selected={active}
+              onClick={() => onChange(m.id)}
+              className={cn(
+                'h-9 px-4 rounded-md text-[13px] font-bold transition-colors',
+                active
+                  ? 'bg-primary text-primary-foreground'
+                  : 'text-[hsl(var(--foreground-2))] hover:text-foreground',
+              )}
+            >
+              {m.label}
+            </button>
+          );
+        })}
       </div>
     </div>
   );
