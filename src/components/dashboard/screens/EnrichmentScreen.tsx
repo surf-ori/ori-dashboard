@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
 import { Badge } from '@/components/ui/badge';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import { useDashboardData } from '@/data/DataContext';
@@ -23,8 +23,9 @@ export function EnrichmentScreen({ filters, onMatchingMethodChange }: Props) {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight mb-1">Enrichment</h1>
-        <p className="text-sm text-muted-foreground max-w-3xl">
+        <div className="eyebrow mb-2">Data quality</div>
+        <h1 className="font-display text-3xl font-extrabold tracking-tight mb-1">Enrichment</h1>
+        <p className="text-sm max-w-3xl" style={{ color: 'hsl(var(--foreground-2))' }}>
           See which metadata values you can recover from other sources to enrich the records in your primary source.
           Each row shows how many of your records are missing a valid value, and how many of those can be filled in
           from a comparing source.
@@ -37,23 +38,23 @@ export function EnrichmentScreen({ filters, onMatchingMethodChange }: Props) {
 
       <div className="space-y-5">
         {enrichmentEntities.map(e => (
-          <Card key={e.entity} className="overflow-hidden">
-            <CardHeader className="pb-3 bg-muted/40 border-b">
-              <CardTitle className="text-sm font-semibold flex items-center gap-2">
+          <div key={e.entity} className="rounded-2xl border border-border-soft bg-card overflow-hidden">
+            <div className="px-5 py-3 border-b border-border-soft bg-secondary/40">
+              <div className="flex items-center gap-2 text-sm">
                 <Badge variant="outline" className="font-mono uppercase tracking-wider">{e.label}</Badge>
-                <span className="text-muted-foreground font-normal">Metadata entity</span>
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="pt-5">
+                <span className="font-normal" style={{ color: 'hsl(var(--foreground-2))' }}>Metadata entity</span>
+              </div>
+            </div>
+            <div className="p-5">
               <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_2fr] gap-4 items-stretch">
-                <div className="rounded-lg border-2 border-destructive/30 bg-destructive/5 p-5 text-center flex flex-col justify-center">
-                  <p className="text-3xl font-bold text-destructive">{e.missingPercentage}%</p>
+                <div className="rounded-2xl bg-[hsl(var(--tint-red))] border border-destructive/20 p-5 text-center flex flex-col justify-center">
+                  <p className="font-display text-3xl font-extrabold text-destructive">{e.missingPercentage}%</p>
                   <p className="text-xs font-mono text-destructive/80 mt-0.5">({e.missingCount.toLocaleString()})</p>
-                  <p className="text-xs text-muted-foreground mt-2 leading-snug">
+                  <p className="text-xs mt-2 leading-snug" style={{ color: 'hsl(var(--foreground-2))' }}>
                     of your records are <strong className="text-foreground">missing</strong> a valid {e.label}<br />in your primary source
                   </p>
                 </div>
-                <div className="hidden md:flex items-center justify-center text-muted-foreground">
+                <div className="hidden md:flex items-center justify-center" style={{ color: 'hsl(var(--muted-foreground))' }}>
                   <ArrowRight className="h-6 w-6" />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -64,27 +65,27 @@ export function EnrichmentScreen({ filters, onMatchingMethodChange }: Props) {
                         key={r.source}
                         onClick={() => setSelected({ entity: e.entity, source: r.source })}
                         className={cn(
-                          'rounded-lg border bg-card p-4 text-left transition-all hover:shadow-md hover:border-accent group',
-                          active && 'ring-2 ring-accent border-accent shadow-md'
+                          'rounded-2xl border border-border-soft bg-card p-4 text-left transition-all hover:shadow-surf hover:border-accent group',
+                          active && 'border-accent bg-[hsl(var(--tint-blue))]'
                         )}
                       >
                         <div className="flex items-center justify-between mb-1">
                           <Badge variant="secondary" className="text-xs">{r.source}</Badge>
                           <Sparkles className="h-3.5 w-3.5 text-accent opacity-0 group-hover:opacity-100 transition-opacity" />
                         </div>
-                        <p className="text-2xl font-bold text-accent">+{r.percentage}%</p>
-                        <p className="text-xs font-mono text-muted-foreground">({r.count.toLocaleString()})</p>
-                        <p className="text-xs text-muted-foreground mt-1.5 leading-snug">
+                        <p className="font-display text-2xl font-extrabold text-accent">+{r.percentage}%</p>
+                        <p className="text-xs font-mono" style={{ color: 'hsl(var(--muted-foreground))' }}>({r.count.toLocaleString()})</p>
+                        <p className="text-xs mt-1.5 leading-snug" style={{ color: 'hsl(var(--foreground-2))' }}>
                           can be recovered from<br />&nbsp;{r.source}
                         </p>
-                        <p className="text-[10px] text-accent mt-1.5 uppercase tracking-wider font-medium">Click to view records</p>
+                        <p className="text-[10px] text-accent mt-1.5 uppercase tracking-[0.08em] font-semibold">Click to view records</p>
                       </button>
                     );
                   })}
                 </div>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         ))}
       </div>
 

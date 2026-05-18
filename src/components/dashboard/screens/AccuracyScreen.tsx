@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
 import { Badge } from '@/components/ui/badge';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -47,8 +47,9 @@ export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight mb-1">Accuracy</h1>
-        <p className="text-sm text-muted-foreground max-w-3xl">
+        <div className="eyebrow mb-2">Data quality</div>
+        <h1 className="font-display text-3xl font-extrabold tracking-tight mb-1">Accuracy</h1>
+        <p className="text-sm max-w-3xl" style={{ color: 'hsl(var(--foreground-2))' }}>
           Actionable data on records with conflicting information between sources. See where values disagree and
           how to resolve them, so the institutional record stays consistent across the open research ecosystem.
         </p>
@@ -58,7 +59,7 @@ export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
 
       <div className="flex flex-wrap items-end gap-4">
         <div>
-          <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5 block">Compare Source</Label>
+          <Label className="text-[11px] font-semibold uppercase tracking-[0.08em] text-primary mb-1.5 block">Compare source</Label>
           <Select value={compare} onValueChange={(v) => setCompare(v as Source)}>
             <SelectTrigger className="w-[180px]"><SelectValue /></SelectTrigger>
             <SelectContent>
@@ -71,37 +72,33 @@ export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
         <MatchingMethodSelector value={matchBy} onChange={onMatchingMethodChange} />
       </div>
 
-      <Card>
-        <CardContent className="pt-6">
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-4">
-            <div className="rounded-xl border-2 border-border bg-card p-6 text-center">
-              <p className="text-4xl font-bold tracking-tight">{(recordsInPrimary / 1000).toFixed(0)}k</p>
-              <p className="text-xs text-muted-foreground mt-1">records in <strong className="text-foreground">{primary}</strong> (primary)</p>
-            </div>
-            <ArrowRight className="hidden md:block h-6 w-6 mx-auto text-muted-foreground" />
-            <div className="rounded-xl border-2 border-primary/40 bg-primary/5 p-6 text-center">
-              <p className="text-4xl font-bold tracking-tight text-primary">{(recordsInBoth / 1000).toFixed(0)}k</p>
-              <p className="text-xs text-muted-foreground mt-1">records in <strong className="text-foreground">both sources</strong></p>
-              <p className="text-[10px] uppercase tracking-wider text-muted-foreground mt-1">matched on {matchBy.toUpperCase()}</p>
-            </div>
-            <ArrowLeft className="hidden md:block h-6 w-6 mx-auto text-muted-foreground" />
-            <div className="rounded-xl border-2 border-border bg-card p-6 text-center">
-              <p className="text-4xl font-bold tracking-tight">{(recordsInCompare / 1000).toFixed(0)}k</p>
-              <p className="text-xs text-muted-foreground mt-1">records in <strong className="text-foreground">{compare}</strong> (compare)</p>
-            </div>
+      <div className="rounded-2xl border border-border-soft bg-card p-6">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr_auto_1fr] items-center gap-4">
+          <div className="rounded-2xl border border-border-soft bg-card p-6 text-center">
+            <p className="font-display text-4xl font-extrabold tracking-tight">{(recordsInPrimary / 1000).toFixed(0)}k</p>
+            <p className="text-xs mt-1" style={{ color: 'hsl(var(--foreground-2))' }}>records in <strong className="text-foreground">{primary}</strong> (primary)</p>
           </div>
-        </CardContent>
-      </Card>
+          <ArrowRight className="hidden md:block h-6 w-6 mx-auto" style={{ color: 'hsl(var(--muted-foreground))' }} />
+          <div className="rounded-2xl bg-[hsl(var(--primary-050))] border border-[hsl(var(--primary-100))] p-6 text-center">
+            <p className="font-display text-4xl font-extrabold tracking-tight text-primary">{(recordsInBoth / 1000).toFixed(0)}k</p>
+            <p className="text-xs mt-1" style={{ color: 'hsl(var(--foreground-2))' }}>records in <strong className="text-foreground">both sources</strong></p>
+            <p className="text-[10px] uppercase tracking-[0.08em] mt-1 font-semibold text-primary">matched on {matchBy.toUpperCase()}</p>
+          </div>
+          <ArrowLeft className="hidden md:block h-6 w-6 mx-auto" style={{ color: 'hsl(var(--muted-foreground))' }} />
+          <div className="rounded-2xl border border-border-soft bg-card p-6 text-center">
+            <p className="font-display text-4xl font-extrabold tracking-tight">{(recordsInCompare / 1000).toFixed(0)}k</p>
+            <p className="text-xs mt-1" style={{ color: 'hsl(var(--foreground-2))' }}>records in <strong className="text-foreground">{compare}</strong> (compare)</p>
+          </div>
+        </div>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-base flex items-center gap-2">
-              <AlertTriangle className="h-4 w-4 text-destructive" />
-              Conflicts
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2">
+        <div className="rounded-2xl border border-border-soft bg-card p-5">
+          <div className="flex items-center gap-2 mb-3">
+            <AlertTriangle className="h-4 w-4 text-destructive" />
+            <h3 className="font-display font-extrabold text-base">Conflicts</h3>
+          </div>
+          <div className="space-y-2">
             {conflicts.map(c => {
               const active = selected?.kind === 'conflict' && selected.field === c.field;
               return (
@@ -109,8 +106,8 @@ export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
                   key={c.field}
                   onClick={() => setSelected({ kind: 'conflict', field: c.field })}
                   className={cn(
-                    'w-full text-left rounded-md border p-3 transition-all hover:bg-muted/50 flex items-start gap-3',
-                    active && 'border-destructive bg-destructive/5 ring-1 ring-destructive/30'
+                    'w-full text-left rounded-lg border border-border-soft p-3 transition-all hover:bg-muted/50 flex items-start gap-3',
+                    active && 'border-destructive bg-[hsl(var(--tint-red))]'
                   )}
                 >
                   <span className={cn(
@@ -118,24 +115,22 @@ export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
                     active ? 'border-destructive bg-destructive' : 'border-muted-foreground/40'
                   )} />
                   <div className="flex-1 text-sm">
-                    <span className="font-semibold">{(c.count / 1000).toFixed(0)}k ({c.percentage}%)</span>
-                    <span className="text-muted-foreground"> records have </span>
-                    <span className="font-medium">{c.label}</span>
+                    <span className="font-bold">{(c.count / 1000).toFixed(0)}k ({c.percentage}%)</span>
+                    <span style={{ color: 'hsl(var(--foreground-2))' }}> records have </span>
+                    <span className="font-semibold">{c.label}</span>
                   </div>
                 </button>
               );
             })}
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card>
-          <CardHeader className="pb-3">
-            <CardTitle className="text-base flex items-center gap-2">
-              <CheckCircle2 className="h-4 w-4 text-success" />
-              Agreement
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-2">
+        <div className="rounded-2xl border border-border-soft bg-card p-5">
+          <div className="flex items-center gap-2 mb-3">
+            <CheckCircle2 className="h-4 w-4 text-success" />
+            <h3 className="font-display font-extrabold text-base">Agreement</h3>
+          </div>
+          <div className="space-y-2">
             {agreements.map(c => {
               const active = selected?.kind === 'agreement' && selected.field === c.field;
               return (
@@ -143,8 +138,8 @@ export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
                   key={c.field}
                   onClick={() => setSelected({ kind: 'agreement', field: c.field })}
                   className={cn(
-                    'w-full text-left rounded-md border p-3 transition-all hover:bg-muted/50 flex items-start gap-3',
-                    active && 'border-success bg-success/5 ring-1 ring-success/30'
+                    'w-full text-left rounded-lg border border-border-soft p-3 transition-all hover:bg-muted/50 flex items-start gap-3',
+                    active && 'border-success bg-[hsl(var(--tint-green))]'
                   )}
                 >
                   <span className={cn(
@@ -152,15 +147,15 @@ export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
                     active ? 'border-success bg-success' : 'border-muted-foreground/40'
                   )} />
                   <div className="flex-1 text-sm">
-                    <span className="font-semibold">{(c.count / 1000).toFixed(0)}k ({c.percentage}%)</span>
-                    <span className="text-muted-foreground"> records have </span>
-                    <span className="font-medium">{c.label}</span>
+                    <span className="font-bold">{(c.count / 1000).toFixed(0)}k ({c.percentage}%)</span>
+                    <span style={{ color: 'hsl(var(--foreground-2))' }}> records have </span>
+                    <span className="font-semibold">{c.label}</span>
                   </div>
                 </button>
               );
             })}
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
 
       {selectedItem && (
