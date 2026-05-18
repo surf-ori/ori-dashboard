@@ -75,7 +75,7 @@ export default function DashboardLayout() {
           <header className="sticky top-0 z-10 flex items-center gap-6 border-b border-border-soft bg-background px-6 h-16">
             <SidebarTrigger className="text-foreground" />
             <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
-              <TabsList className="h-16 bg-transparent p-0 gap-7 rounded-none justify-start">
+              <TabsList className="flex w-full h-16 bg-transparent p-0 gap-7 rounded-none justify-start">
                 {[
                   { value: 'start', label: 'About', Icon: Home },
                   { value: 'coverage', label: 'Coverage', Icon: Layers },
