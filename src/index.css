@@ -4,6 +4,22 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700;900&display=swap');
 
+/* Nunito — self-hosted variable fonts (preferred, full 200–1000 range) */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 200 1000;
+  font-display: swap;
+  src: url('./fonts/Nunito-VariableFont_wght.ttf') format('truetype-variations');
+}
+@font-face {
+  font-family: 'Nunito';
+  font-style: italic;
+  font-weight: 200 1000;
+  font-display: swap;
+  src: url('./fonts/Nunito-Italic-VariableFont_wght.ttf') format('truetype-variations');
+}
+
 /* Nunito — self-hosted from /src/fonts */
 @font-face {
   font-family: 'Nunito';
