@@ -11,10 +11,11 @@ export function MockDataScreen() {
     <div className="space-y-6">
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight mb-1">Mock Data</h1>
-          <p className="text-sm text-muted-foreground max-w-3xl">
-            All datasets backing the dashboard. Edit any value inline — changes propagate live to the
-            visualisations on the other tabs. Use Reset to restore the bundled defaults.
+          <div className="eyebrow mb-2">Data quality</div>
+          <h1 className="font-display text-3xl font-extrabold tracking-tight mb-1">Data</h1>
+          <p className="max-w-3xl text-[17px] leading-relaxed" style={{ color: 'hsl(var(--foreground-2))' }}>
+            All datasets behind the dashboard. Edit any value inline and the changes flow straight through
+            to the visualisations on the other tabs. Use Reset to restore the bundled defaults.
           </p>
         </div>
         <Button variant="outline" size="sm" onClick={d.resetAll} className="gap-1.5">

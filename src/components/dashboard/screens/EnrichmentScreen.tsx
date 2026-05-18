@@ -25,10 +25,10 @@ export function EnrichmentScreen({ filters, onMatchingMethodChange }: Props) {
       <div>
         <div className="eyebrow mb-2">Data quality</div>
         <h1 className="font-display text-3xl font-extrabold tracking-tight mb-1">Enrichment</h1>
-        <p className="text-sm max-w-3xl" style={{ color: 'hsl(var(--foreground-2))' }}>
-          See which metadata values you can recover from other sources to enrich the records in your primary source.
-          Each row shows how many of your records are missing a valid value, and how many of those can be filled in
-          from a comparing source.
+        <p className="max-w-3xl text-[17px] leading-relaxed" style={{ color: 'hsl(var(--foreground-2))' }}>
+          See which metadata values you can recover from other sources to enrich your primary source. Each
+          row shows how many records are missing a valid value, and how many of those can be filled in from
+          a comparing source.
         </p>
       </div>
 
