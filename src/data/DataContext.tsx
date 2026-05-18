@@ -19,6 +19,7 @@ import type {
   Intervention,
   EnrichmentEntity,
   AccuracyComparison,
+  OverviewCard,
 } from './types';
 
 interface DataContextValue {
