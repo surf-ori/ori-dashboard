@@ -24,7 +24,7 @@ export function StartScreen() {
       <div>
         <h2 className="text-lg font-semibold mb-4">Overview</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <KPICard label="Sources Monitored" value={summaryStats.totalSources} subtitle="OpenAlex, Crossref, OpenAIRE, CRIS, ORCID, ROR, DataCite" variant="accent" />
+          <KPICard label="Sources Monitored" value={summaryStats.totalSources.toLocaleString()} subtitle={"OpenAlex, Crossref, OpenAIRE, CRIS\n"} variant="accent" />
           <KPICard label="Organisations" value={summaryStats.totalOrganisations} subtitle="Dutch Research Performing Organisations" />
           <KPICard label="Total Records" value={summaryStats.totalRecords.toLocaleString()} subtitle="Across all sources and organisations" />
           <KPICard label="Avg. Completeness" value={`${summaryStats.avgCompleteness}%`} subtitle="Metadata field coverage" variant="accent" />
