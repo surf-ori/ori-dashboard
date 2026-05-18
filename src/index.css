@@ -170,27 +170,30 @@
   :root {
     /* Surfaces */
     --background: 0 0% 100%;          /* surf-bg #FFFFFF */
-    --foreground: 0 0% 4%;            /* surf-black */
+    --foreground: 0 0% 0%;            /* surf-black #000 */
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 4%;
+    --card-foreground: 0 0% 0%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 4%;
+    --popover-foreground: 0 0% 0%;
 
     /* Primary = SURF orange #E67300 */
     --primary: 30 100% 45%;
     --primary-foreground: 0 0% 100%;
-    --primary-700: 30 100% 36%;       /* hover */
-    --primary-050: 30 100% 95%;       /* tint */
+    --primary-700: 30 100% 36%;       /* hover #B85B00 */
+    --primary-300: 28 86% 65%;        /* tint #F4A95A */
+    --primary-100: 30 89% 88%;        /* tint #FCE4C8 */
+    --primary-050: 33 100% 95%;       /* tint #FFF3E3 */
 
-    --secondary: 0 0% 96%;            /* bg-soft */
-    --secondary-foreground: 0 0% 4%;
+    --secondary: 0 0% 96%;            /* bg-soft #F5F5F5 */
+    --secondary-foreground: 0 0% 0%;
 
-    --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 32%;     /* fg-2 */
+    --muted: 0 0% 93%;                /* bg-muted #ECECEC */
+    --muted-foreground: 0 0% 42%;     /* fg-3 #6B6B6B */
+    --foreground-2: 0 0% 23%;         /* fg-2 #3A3A3A */
 
-    /* Accent = SURF blue #0077C0 (cool support colour for charts/links) */
+    /* Accent = SURF blue #0077C0 */
     --accent: 203 100% 38%;
     --accent-foreground: 0 0% 100%;
 
@@ -198,34 +201,49 @@
     --destructive: 4 73% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 0 0% 85%;               /* surf-border */
+    --border: 0 0% 85%;               /* #D9D9D9 */
+    --border-soft: 0 0% 93%;          /* #ECECEC */
     --input: 0 0% 85%;
-    --ring: 30 100% 45%;
+    --ring: 30 100% 45%;              /* orange focus ring */
 
-    --radius: 0.75rem;                /* SURF radii are softer */
+    --radius: 0.75rem;
 
     /* Sidebar = SURF basiskader black with orange accent */
-    --sidebar-background: 0 0% 4%;
+    --sidebar-background: 0 0% 0%;
     --sidebar-foreground: 0 0% 92%;
     --sidebar-primary: 30 100% 50%;
     --sidebar-primary-foreground: 0 0% 0%;
-    --sidebar-accent: 0 0% 12%;
-    --sidebar-accent-foreground: 0 0% 92%;
+    --sidebar-accent: 0 0% 10%;
+    --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 0 0% 18%;
     --sidebar-ring: 30 100% 50%;
 
     /* Status — SURF support palette */
     --success: 146 100% 27%;          /* green-dark #008942 */
     --success-foreground: 0 0% 100%;
-    --warning: 30 100% 45%;           /* re-use orange for warning */
-    --warning-foreground: 0 0% 100%;
-    --info: 203 100% 38%;             /* blue */
+    --warning: 52 100% 50%;           /* yellow #FEDB00 */
+    --warning-foreground: 0 0% 0%;
+    --info: 203 100% 38%;             /* blue #0077C0 */
     --info-foreground: 0 0% 100%;
 
-    /* Brand support colours (chart palette) */
-    --surf-purple: 291 57% 33%;
-    --surf-green-light: 146 47% 81%;
+    /* Full SURF support palette (HSL) — chart + decorative use */
+    --surf-orange: 30 100% 45%;
+    --surf-red: 4 73% 51%;
     --surf-yellow: 52 100% 50%;
+    --surf-blue: 203 100% 38%;
+    --surf-green-dark: 146 100% 27%;
+    --surf-green-light: 142 47% 81%;
+    --surf-purple: 291 57% 33%;
+
+    /* Soft tinted backgrounds for badges */
+    --tint-orange: 33 100% 95%;
+    --tint-blue: 203 73% 94%;
+    --tint-green: 138 38% 93%;
+    --tint-red: 4 86% 95%;
+    --tint-purple: 291 27% 93%;
+
+    /* Brand shadow (single SURF elevation) */
+    --shadow-surf: 0 4px 14px rgba(0,0,0,0.08);
   }
 
   .dark {
@@ -236,7 +254,7 @@
     --popover: 0 0% 9%;
     --popover-foreground: 0 0% 95%;
     --primary: 30 100% 50%;
-    --primary-foreground: 0 0% 4%;
+    --primary-foreground: 0 0% 0%;
     --secondary: 0 0% 14%;
     --secondary-foreground: 0 0% 95%;
     --muted: 0 0% 14%;
@@ -269,7 +287,20 @@
     line-height: 1.15;
   }
 
-  /* SURF sentence-case discipline — never auto-capitalise headings */
+  /* SURF orange focus ring — accessibility-first */
+  :focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+  }
+
+  /* Hover darkens by ~12% on primary surfaces (no lighten) */
+  a {
+    color: hsl(var(--primary));
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    transition: color var(--dur-base, 200ms) ease;
+  }
+  a:hover { color: hsl(var(--primary-700)); }
 }
 
 @layer components {
@@ -284,8 +315,45 @@
     border-radius: 32px;
   }
 
+  /* SURF capsule — for text-on-image (orange/black solid container) */
+  .capsule-orange {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+  }
+  .capsule-black {
+    background: hsl(var(--foreground));
+    color: hsl(var(--background));
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+  }
+
+  /* SURF secondary button — solid black */
+  .btn-surf-secondary {
+    @apply inline-flex items-center justify-center rounded-md px-5 py-2.5 text-sm font-bold transition-colors;
+    background: hsl(var(--foreground));
+    color: hsl(var(--background));
+  }
+  .btn-surf-secondary:hover { opacity: 0.88; }
+
   /* Underlined inline link, SURF style */
   .link {
-    @apply text-primary underline underline-offset-2 hover:opacity-80;
+    @apply text-primary underline underline-offset-2;
+  }
+  .link:hover { color: hsl(var(--primary-700)); }
+
+  /* SURF card — soft white surface with subtle border OR shadow, never both */
+  .surf-card {
+    background: hsl(var(--card));
+    border: 1px solid hsl(var(--border-soft));
+    border-radius: 16px;
+    padding: 1.5rem;
+  }
+  .surf-card-elevated {
+    background: hsl(var(--card));
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-surf);
   }
 }
