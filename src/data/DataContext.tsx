@@ -8,6 +8,7 @@ import {
   interventions as defaultInterventions,
   enrichmentEntities as defaultEnrichmentEntities,
   accuracyComparison as defaultAccuracyComparison,
+  overviewCards as defaultOverviewCards,
 } from './mockData';
 import type {
   Organisation,
