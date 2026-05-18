@@ -23,8 +23,9 @@ export function CompletenessScreen({ filters }: Props) {
       <div>
         <div className="eyebrow mb-2">Data quality</div>
         <h1 className="font-display text-3xl font-extrabold tracking-tight mb-1">Completeness</h1>
-        <p className="text-sm" style={{ color: 'hsl(var(--foreground-2))' }}>
-          How complete is the metadata across your records? Click a metric card to drill down.
+        <p className="max-w-3xl text-[17px] leading-relaxed" style={{ color: 'hsl(var(--foreground-2))' }}>
+          See how complete the metadata is across your records, field by field. Select a metric to look
+          closer at the records that still need attention.
         </p>
       </div>
 
