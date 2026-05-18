@@ -71,6 +71,12 @@ export interface EnrichmentEntity {
   recoverable: { source: Source; percentage: number; count: number }[];
 }
 
+export interface OverviewCard {
+  title: string;
+  value: string;
+  details: string;
+}
+
 export interface AccuracyComparison {
   primarySource: Source;
   compareSource: Source;
