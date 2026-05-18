@@ -1,4 +1,4 @@
-import type { Organisation, CompletenessMetric, TimelinePoint, CoverageComparison, DetailRecord, Intervention, Source, EnrichmentEntity, AccuracyComparison } from './types';
+import type { Organisation, CompletenessMetric, TimelinePoint, CoverageComparison, DetailRecord, Intervention, Source, EnrichmentEntity, AccuracyComparison, OverviewCard } from './types';
 
 // Dutch signatories of the Barcelona Declaration on Open Research Information
 // Source: https://barcelona-declaration.org/signatories_by_country/
