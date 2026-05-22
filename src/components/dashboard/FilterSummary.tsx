@@ -1,5 +1,4 @@
 import { Badge } from '@/components/ui/badge';
-import { organisations } from '@/data/mockData';
 import { useDashboardData } from '@/data/DataContext';
 import type { DashboardFilters } from '@/data/types';
 
@@ -9,9 +8,16 @@ interface FilterSummaryProps {
 }
 
 export function FilterSummary({ filters }: FilterSummaryProps) {
-  const { totalRecords } = useDashboardData();
+  const { organisations } = useDashboardData();
   const org = organisations.find(o => o.id === filters.organisation);
   const orgLabel = org ? org.abbreviation : filters.organisation;
+
+  let recordCount: number | null = null;
+  if (org && filters.cerifEntity === 'Publications') {
+    if (filters.source === 'CRIS') recordCount = org.crisPublications;
+    else if (filters.source === 'OpenAlex') recordCount = org.openAlexPublications;
+    else if (filters.source === 'OpenAIRE') recordCount = org.openairePublications;
+  }
 
   return (
     <div className="rounded-2xl border border-border-soft bg-card px-5 py-3 flex flex-wrap items-center gap-x-4 gap-y-2">
@@ -21,7 +27,9 @@ export function FilterSummary({ filters }: FilterSummaryProps) {
       <Badge variant="green">Entity: <span className="ml-1 font-bold">{filters.cerifEntity}</span></Badge>
       <Badge variant="purple">Type: <span className="ml-1 font-bold">{filters.publicationType}</span></Badge>
       <span className="ml-auto text-sm" style={{ color: 'hsl(var(--foreground-2))' }}>
-        → <span className="font-display font-extrabold text-foreground">{totalRecords.toLocaleString()}</span> records
+        → <span className="font-display font-extrabold text-foreground">
+          {recordCount != null ? recordCount.toLocaleString() : '—'}
+        </span> records
       </span>
     </div>
   );
