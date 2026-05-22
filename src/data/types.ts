@@ -18,10 +18,10 @@ export type PublicationType = 'Journal Article' | 'Conference Paper' | 'Book Cha
 export type MatchingMethod = 'doi' | 'ror';
 
 export interface FilterContext {
-  organisation: string;
-  primarySource: string;
-  entityTable: string;
-  type: string;
+  filterOrganisation: string;
+  filterPrimarySource: string;
+  filterEntityTable: string;
+  filterType: string;
 }
 
 export interface CompletenessMetric extends FilterContext {
