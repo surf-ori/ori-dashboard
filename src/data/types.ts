@@ -3,6 +3,10 @@ export interface Organisation {
   name: string;
   rorId: string;
   abbreviation: string;
+  crisRecords: number | null;
+  crisRepository: string | null;
+  openalexWorks: number | null;
+  openaireePubs: number | null;
 }
 
 export type CerifEntity = 'Publications' | 'Persons' | 'Organisations' | 'Projects' | 'Datasets';
