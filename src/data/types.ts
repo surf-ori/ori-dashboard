@@ -56,6 +56,17 @@ export interface DetailRecord extends FilterContext {
   missingFields: string[];
 }
 
+export type InterventionPage = 'Coverage' | 'Completeness' | 'Enrichment' | 'Accuracy';
+
+export type MetadataEntity =
+  | 'improveDOI'
+  | 'improveORCID'
+  | 'improveROR'
+  | 'improveGrantDOI'
+  | 'improveISSN'
+  | 'improveOAstatus'
+  | 'improveCorrespondingAuthor';
+
 export interface Intervention {
   id: string;
   title: string;
@@ -64,6 +75,13 @@ export interface Intervention {
   impact: 'Low' | 'Medium' | 'High';
   actionUrl?: string;
   actionLabel?: string;
+  page?: InterventionPage;
+  // Coverage-page filtering
+  coverageOnlyInSource?: Source;
+  coverageNotInCompared?: Source;
+  // Completeness-page filtering
+  completenessSource?: Source;
+  metadataEntity?: MetadataEntity;
 }
 
 export interface DashboardFilters {
