@@ -83,7 +83,7 @@ export function CompletenessScreen({ filters }: Props) {
             title={`Records Missing: ${selectedMetric.label}`}
             sqlQuery={mockQuery}
           />
-          <InterventionPanel interventions={interventions.slice(0, 3)} />
+          <InterventionPanel interventions={pageInterventions} />
         </>
       )}
     </div>
