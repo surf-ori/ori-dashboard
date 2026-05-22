@@ -153,25 +153,76 @@ export const enrichmentEntities: EnrichmentEntity[] = [
       { source: 'Crossref', percentage: 7, count: 12270 },
     ],
   },
+  {
+    ...fcRug, entity: 'ror', label: 'ROR', missingPercentage: 69, missingCount: 217941, totalRecords: 315857,
+    recoverable: [
+      { source: 'OpenAIRE', percentage: 12, count: 26153 },
+      { source: 'OpenAlex', percentage: 11, count: 23974 },
+    ],
+  },
+  {
+    ...fcRug, entity: 'orcid', label: 'ORCID', missingPercentage: 58, missingCount: 183197, totalRecords: 315857,
+    recoverable: [
+      { source: 'OpenAIRE', percentage: 22, count: 40303 },
+      { source: 'OpenAlex', percentage: 12, count: 21984 },
+    ],
+  },
+  {
+    ...fcRug, entity: 'doi', label: 'DOI', missingPercentage: 31, missingCount: 97916, totalRecords: 315857,
+    recoverable: [
+      { source: 'OpenAIRE', percentage: 17, count: 16646 },
+      { source: 'OpenAlex', percentage: 12, count: 11750 },
+      { source: 'Crossref', percentage: 22, count: 21542 },
+    ],
+  },
+  {
+    ...fcRug, entity: 'grantDoi', label: 'Grant DOI', missingPercentage: 77, missingCount: 243210, totalRecords: 315857,
+    recoverable: [
+      { source: 'OpenAIRE', percentage: 20, count: 48642 },
+      { source: 'Crossref', percentage: 8, count: 19457 },
+    ],
+  },
 ];
 
-export const accuracyComparison: AccuracyComparison = {
-  ...fc,
-  primarySource: 'CRIS',
-  compareSource: 'OpenAlex',
-  recordsInPrimary: 128000,
-  recordsInBoth: 84000,
-  recordsInCompare: 152000,
-  conflicts: [
-    { field: 'ror', label: 'different ROR affiliation id', count: 53000, percentage: 80 },
-    { field: 'orcid', label: 'different ORCiD', count: 53000, percentage: 80 },
-    { field: 'authors', label: 'different author list', count: 12600, percentage: 15 },
-    { field: 'year', label: 'different publication year', count: 4200, percentage: 5 },
-  ],
-  agreements: [
-    { field: 'ror', label: 'same ROR affiliation id', count: 21000, percentage: 20 },
-    { field: 'orcid', label: 'same ORCID', count: 21000, percentage: 20 },
-    { field: 'authors', label: 'matching author list', count: 71400, percentage: 85 },
-    { field: 'year', label: 'matching publication year', count: 79800, percentage: 95 },
-  ],
-};
+export const accuracyComparison: AccuracyComparison[] = [
+  {
+    ...fc,
+    primarySource: 'CRIS',
+    compareSource: 'OpenAlex',
+    recordsInPrimary: 128000,
+    recordsInBoth: 84000,
+    recordsInCompare: 152000,
+    conflicts: [
+      { field: 'ror', label: 'different ROR affiliation id', count: 53000, percentage: 80 },
+      { field: 'orcid', label: 'different ORCiD', count: 53000, percentage: 80 },
+      { field: 'authors', label: 'different author list', count: 12600, percentage: 15 },
+      { field: 'year', label: 'different publication year', count: 4200, percentage: 5 },
+    ],
+    agreements: [
+      { field: 'ror', label: 'same ROR affiliation id', count: 21000, percentage: 20 },
+      { field: 'orcid', label: 'same ORCID', count: 21000, percentage: 20 },
+      { field: 'authors', label: 'matching author list', count: 71400, percentage: 85 },
+      { field: 'year', label: 'matching publication year', count: 79800, percentage: 95 },
+    ],
+  },
+  {
+    ...fcRug,
+    primarySource: 'CRIS',
+    compareSource: 'OpenAlex',
+    recordsInPrimary: 163000,
+    recordsInBoth: 112000,
+    recordsInCompare: 175000,
+    conflicts: [
+      { field: 'ror', label: 'different ROR affiliation id', count: 67200, percentage: 75 },
+      { field: 'orcid', label: 'different ORCiD', count: 67200, percentage: 75 },
+      { field: 'authors', label: 'different author list', count: 14560, percentage: 13 },
+      { field: 'year', label: 'different publication year', count: 4480, percentage: 4 },
+    ],
+    agreements: [
+      { field: 'ror', label: 'same ROR affiliation id', count: 28000, percentage: 25 },
+      { field: 'orcid', label: 'same ORCID', count: 28000, percentage: 25 },
+      { field: 'authors', label: 'matching author list', count: 97440, percentage: 87 },
+      { field: 'year', label: 'matching publication year', count: 107520, percentage: 96 },
+    ],
+  },
+];
