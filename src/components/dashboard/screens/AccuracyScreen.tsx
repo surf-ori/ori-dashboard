@@ -12,7 +12,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   LineChart, Line, Area, AreaChart, Legend,
 } from 'recharts';
-import { useDashboardData } from '@/data/DataContext';
+import { useDashboardData, useFilteredData } from '@/data/DataContext';
 import { TimelineChart } from '@/components/dashboard/TimelineChart';
 import { InterventionPanel } from '@/components/dashboard/InterventionPanel';
 import { FilterSummary } from '@/components/dashboard/FilterSummary';
