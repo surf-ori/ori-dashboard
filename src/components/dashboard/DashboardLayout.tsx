@@ -115,7 +115,7 @@ export default function DashboardLayout() {
           </header>
 
           <main className="flex-1 px-8 py-8 overflow-y-auto bg-background">
-            {activeTab === 'start' && <StartScreen />}
+            {activeTab === 'start' && <StartScreen filters={filters} />}
             {activeTab === 'coverage' && <CoverageScreen filters={filters} onMatchingMethodChange={setMatchingMethod} />}
             {activeTab === 'completeness' && <CompletenessScreen filters={filters} />}
             {activeTab === 'enrichment' && <EnrichmentScreen filters={filters} onMatchingMethodChange={setMatchingMethod} />}
