@@ -12,7 +12,7 @@ import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
   LineChart, Line, Area, AreaChart, Legend,
 } from 'recharts';
-import { useDashboardData } from '@/data/DataContext';
+import { useDashboardData, useFilteredData } from '@/data/DataContext';
 import { TimelineChart } from '@/components/dashboard/TimelineChart';
 import { InterventionPanel } from '@/components/dashboard/InterventionPanel';
 import { FilterSummary } from '@/components/dashboard/FilterSummary';
@@ -172,17 +172,26 @@ function CrossSourceAgreement({
 }: {
   filters: DashboardFilters; onMatchingMethodChange: (m: MatchingMethod) => void; onSwitchToEmpirical: () => void;
 }) {
+  const { interventions, totalRecords: ctxTotal } = useDashboardData();
   const {
-    accuracyComparison, coverageComparisons, detailRecords, interventions,
-    completenessTimeline, totalRecords: ctxTotal,
-  } = useDashboardData();
+    accuracyComparison, coverageComparisons, detailRecords,
+    completenessTimeline,
+  } = useFilteredData(filters);
   const a = accuracyComparison[0];
   const primary = filters.source;
-  const [compare, setCompare] = useState<Source>(a.compareSource);
-  const [selected, setSelected] = useState<{ kind: 'conflict' | 'agreement'; field: string } | null>({
-    kind: 'conflict', field: a.conflicts[0].field,
-  });
+  const [compare, setCompare] = useState<Source>(a?.compareSource ?? 'OpenAlex');
+  const [selected, setSelected] = useState<{ kind: 'conflict' | 'agreement'; field: string } | null>(
+    a ? { kind: 'conflict', field: a.conflicts[0].field } : null,
+  );
   const matchBy = filters.matchingMethod;
+
+  if (!a) {
+    return (
+      <div className="rounded-2xl border border-border-soft bg-card p-6 text-sm" style={{ color: 'hsl(var(--foreground-2))' }}>
+        No accuracy data available for the current filter selection.
+      </div>
+    );
+  }
 
   const cov = coverageComparisons.find(c => c.compareSource === compare);
   const recordsInPrimary = ctxTotal;
