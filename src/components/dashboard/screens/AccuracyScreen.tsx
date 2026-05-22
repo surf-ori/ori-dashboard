@@ -389,7 +389,7 @@ function CrossSourceAgreement({
           </div>
 
           {selected!.kind === 'conflict' && (
-            <InterventionPanel interventions={interventions.slice(0, 4)} />
+            <InterventionPanel interventions={interventions.filter(i => i.page === 'Accuracy')} />
           )}
         </div>
       )}
