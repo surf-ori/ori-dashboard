@@ -37,8 +37,8 @@ interface DataContextValue {
   setInterventions: (v: Intervention[]) => void;
   enrichmentEntities: EnrichmentEntity[];
   setEnrichmentEntities: (v: EnrichmentEntity[]) => void;
-  accuracyComparison: AccuracyComparison;
-  setAccuracyComparison: (v: AccuracyComparison) => void;
+  accuracyComparison: AccuracyComparison[];
+  setAccuracyComparison: (v: AccuracyComparison[]) => void;
   overviewCards: OverviewCard[];
   setOverviewCards: (v: OverviewCard[]) => void;
   totalRecords: number;
@@ -58,7 +58,7 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
   const [detailRecords, setDetailRecords] = useState<DetailRecord[]>(defaultDetailRecords);
   const [interventions, setInterventions] = useState<Intervention[]>(defaultInterventions);
   const [enrichmentEntities, setEnrichmentEntities] = useState<EnrichmentEntity[]>(defaultEnrichmentEntities);
-  const [accuracyComparison, setAccuracyComparison] = useState<AccuracyComparison>(defaultAccuracyComparison);
+  const [accuracyComparison, setAccuracyComparison] = useState<AccuracyComparison[]>(defaultAccuracyComparison);
   const [overviewCards, setOverviewCards] = useState<OverviewCard[]>(defaultOverviewCards);
   const [totalRecords, setTotalRecords] = useState<number>(DEFAULT_TOTAL_RECORDS);
 

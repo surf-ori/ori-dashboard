@@ -26,7 +26,16 @@ export const sources: Source[] = ['OpenAlex', 'Crossref', 'OpenAIRE', 'CRIS', 'R
 
 // Filter context applied to seeded rows — represents the current selection in the sidebar filter bar.
 const fc = {
-  filterOrganisation: 'VU Amsterdam (008xxew50)',
+  filterOrganisationAbbreviation: 'VU Amsterdam',
+  filterOrganisationRORID: '008xxew50',
+  filterPrimarySource: 'CRIS',
+  filterEntityTable: 'Publications',
+  filterType: 'All Types',
+} as const;
+
+const fcRug = {
+  filterOrganisationAbbreviation: 'RUG',
+  filterOrganisationRORID: '012p63287',
   filterPrimarySource: 'CRIS',
   filterEntityTable: 'Publications',
   filterType: 'All Types',
@@ -40,6 +49,13 @@ export const completenessMetrics: CompletenessMetric[] = [
   { ...fc, field: 'issn', label: 'Has ISSN', percentage: 91.2, total: 216409, filled: 197365 },
   { ...fc, field: 'oaStatus', label: 'Has OA Status', percentage: 84.7, total: 216409, filled: 183298 },
   { ...fc, field: 'correspondingAuthor', label: 'Corresponding Author', percentage: 45.8, total: 216409, filled: 99115 },
+  { ...fcRug, field: 'doi', label: 'Has DOI', percentage: 89.1, total: 315857, filled: 281428 },
+  { ...fcRug, field: 'orcid', label: 'Has ORCID', percentage: 68.4, total: 315857, filled: 216046 },
+  { ...fcRug, field: 'ror', label: 'Has ROR', percentage: 81.2, total: 315857, filled: 256476 },
+  { ...fcRug, field: 'grantDoi', label: 'Has Grant DOI', percentage: 27.8, total: 315857, filled: 87808 },
+  { ...fcRug, field: 'issn', label: 'Has ISSN', percentage: 92.5, total: 315857, filled: 292168 },
+  { ...fcRug, field: 'oaStatus', label: 'Has OA Status', percentage: 86.3, total: 315857, filled: 272585 },
+  { ...fcRug, field: 'correspondingAuthor', label: 'Corresponding Author', percentage: 49.2, total: 315857, filled: 155402 },
 ];
 
 export const completenessTimeline: TimelinePoint[] = [
@@ -47,6 +63,10 @@ export const completenessTimeline: TimelinePoint[] = [
   { ...fc, date: '2021-Q1', value: 75.3 }, { ...fc, date: '2021-Q2', value: 76.9 }, { ...fc, date: '2021-Q3', value: 78.2 }, { ...fc, date: '2021-Q4', value: 79.1 },
   { ...fc, date: '2022-Q1', value: 80.4 }, { ...fc, date: '2022-Q2', value: 81.7 }, { ...fc, date: '2022-Q3', value: 82.3 }, { ...fc, date: '2022-Q4', value: 83.6 },
   { ...fc, date: '2023-Q1', value: 84.1 }, { ...fc, date: '2023-Q2', value: 85.2 }, { ...fc, date: '2023-Q3', value: 86.0 }, { ...fc, date: '2023-Q4', value: 87.3 },
+  { ...fcRug, date: '2020-Q1', value: 73.5 }, { ...fcRug, date: '2020-Q2', value: 74.6 }, { ...fcRug, date: '2020-Q3', value: 75.2 }, { ...fcRug, date: '2020-Q4', value: 76.1 },
+  { ...fcRug, date: '2021-Q1', value: 77.4 }, { ...fcRug, date: '2021-Q2', value: 78.5 }, { ...fcRug, date: '2021-Q3', value: 79.8 }, { ...fcRug, date: '2021-Q4', value: 80.6 },
+  { ...fcRug, date: '2022-Q1', value: 81.9 }, { ...fcRug, date: '2022-Q2', value: 83.0 }, { ...fcRug, date: '2022-Q3', value: 83.8 }, { ...fcRug, date: '2022-Q4', value: 84.7 },
+  { ...fcRug, date: '2023-Q1', value: 85.5 }, { ...fcRug, date: '2023-Q2', value: 86.6 }, { ...fcRug, date: '2023-Q3', value: 87.8 }, { ...fcRug, date: '2023-Q4', value: 89.1 },
 ];
 
 // With CRIS as the default primary source, comparison list includes OpenAlex (swapped in for CRIS)
@@ -54,6 +74,9 @@ export const coverageComparisons: CoverageComparison[] = [
   { ...fc, compareSource: 'OpenAlex', onlyInPrimary: 77386, inBoth: 139023, onlyInCompared: 41200, total: 257609 },
   { ...fc, compareSource: 'Crossref', onlyInPrimary: 26164, inBoth: 190245, onlyInCompared: 5600, total: 222009 },
   { ...fc, compareSource: 'OpenAIRE', onlyInPrimary: 48091, inBoth: 168318, onlyInCompared: 18900, total: 235309 },
+  { ...fcRug, compareSource: 'OpenAlex', onlyInPrimary: 152429, inBoth: 163428, onlyInCompared: 11000, total: 326857 },
+  { ...fcRug, compareSource: 'Crossref', onlyInPrimary: 38214, inBoth: 277643, onlyInCompared: 7800, total: 323657 },
+  { ...fcRug, compareSource: 'OpenAIRE', onlyInPrimary: 65872, inBoth: 249985, onlyInCompared: 25400, total: 341257 },
 ];
 
 export const detailRecords: DetailRecord[] = [
@@ -65,6 +88,11 @@ export const detailRecords: DetailRecord[] = [
   { ...fc, id: 'rec-006', title: 'Advances in Photovoltaic Cell Efficiency', doi: undefined, authors: 'van Dijk, E.', year: 2023, source: 'CRIS', missingFields: ['doi', 'issn', 'oaStatus'] },
   { ...fc, id: 'rec-007', title: 'Digital Humanities and the Dutch Golden Age Archives', doi: '10.7890/dh-golden-2023', authors: 'Bosman, J.; Kramer, B.', year: 2023, source: 'OpenAlex', missingFields: ['grantDoi'] },
   { ...fc, id: 'rec-008', title: 'Water Management Infrastructure Resilience', doi: '10.2345/water-infra-2022', authors: 'Visser, M.; ter Haar, D.', year: 2022, source: 'Crossref', missingFields: ['orcid', 'ror'] },
+  { ...fcRug, id: 'rug-001', title: 'Cold Atom Physics: Precision Measurements at Groningen', doi: '10.1234/cold-atom-2023', authors: 'Wiersma, D.; Postma, J.', year: 2023, source: 'OpenAlex', missingFields: ['grantDoi'] },
+  { ...fcRug, id: 'rug-002', title: 'Healthy Ageing Cohort Study: 20-Year Follow-up', doi: '10.5678/ageing-rug-2022', authors: 'Bakker, S.; Visser, A.; Dijkstra, T.', year: 2022, source: 'CRIS', missingFields: ['orcid'] },
+  { ...fcRug, id: 'rug-003', title: 'Frisian Language Revitalisation in Digital Media', doi: undefined, authors: 'de Boer, F.', year: 2023, source: 'CRIS', missingFields: ['doi', 'orcid', 'oaStatus'] },
+  { ...fcRug, id: 'rug-004', title: 'Sustainable Energy Transition in Northern Netherlands', doi: '10.9012/energy-north-2023', authors: 'Hoekstra, M.; van der Veen, R.', year: 2023, source: 'OpenAIRE', missingFields: ['correspondingAuthor'] },
+  { ...fcRug, id: 'rug-005', title: 'Archaeological Discoveries in the Terpen Region', doi: '10.3456/terpen-arch-2022', authors: 'Nieuwhof, A.', year: 2022, source: 'OpenAlex', missingFields: ['grantDoi', 'ror'] },
 ];
 
 export const interventions: Intervention[] = [
@@ -125,25 +153,76 @@ export const enrichmentEntities: EnrichmentEntity[] = [
       { source: 'Crossref', percentage: 7, count: 12270 },
     ],
   },
+  {
+    ...fcRug, entity: 'ror', label: 'ROR', missingPercentage: 69, missingCount: 217941, totalRecords: 315857,
+    recoverable: [
+      { source: 'OpenAIRE', percentage: 12, count: 26153 },
+      { source: 'OpenAlex', percentage: 11, count: 23974 },
+    ],
+  },
+  {
+    ...fcRug, entity: 'orcid', label: 'ORCID', missingPercentage: 58, missingCount: 183197, totalRecords: 315857,
+    recoverable: [
+      { source: 'OpenAIRE', percentage: 22, count: 40303 },
+      { source: 'OpenAlex', percentage: 12, count: 21984 },
+    ],
+  },
+  {
+    ...fcRug, entity: 'doi', label: 'DOI', missingPercentage: 31, missingCount: 97916, totalRecords: 315857,
+    recoverable: [
+      { source: 'OpenAIRE', percentage: 17, count: 16646 },
+      { source: 'OpenAlex', percentage: 12, count: 11750 },
+      { source: 'Crossref', percentage: 22, count: 21542 },
+    ],
+  },
+  {
+    ...fcRug, entity: 'grantDoi', label: 'Grant DOI', missingPercentage: 77, missingCount: 243210, totalRecords: 315857,
+    recoverable: [
+      { source: 'OpenAIRE', percentage: 20, count: 48642 },
+      { source: 'Crossref', percentage: 8, count: 19457 },
+    ],
+  },
 ];
 
-export const accuracyComparison: AccuracyComparison = {
-  ...fc,
-  primarySource: 'CRIS',
-  compareSource: 'OpenAlex',
-  recordsInPrimary: 128000,
-  recordsInBoth: 84000,
-  recordsInCompare: 152000,
-  conflicts: [
-    { field: 'ror', label: 'different ROR affiliation id', count: 53000, percentage: 80 },
-    { field: 'orcid', label: 'different ORCiD', count: 53000, percentage: 80 },
-    { field: 'authors', label: 'different author list', count: 12600, percentage: 15 },
-    { field: 'year', label: 'different publication year', count: 4200, percentage: 5 },
-  ],
-  agreements: [
-    { field: 'ror', label: 'same ROR affiliation id', count: 21000, percentage: 20 },
-    { field: 'orcid', label: 'same ORCID', count: 21000, percentage: 20 },
-    { field: 'authors', label: 'matching author list', count: 71400, percentage: 85 },
-    { field: 'year', label: 'matching publication year', count: 79800, percentage: 95 },
-  ],
-};
+export const accuracyComparison: AccuracyComparison[] = [
+  {
+    ...fc,
+    primarySource: 'CRIS',
+    compareSource: 'OpenAlex',
+    recordsInPrimary: 128000,
+    recordsInBoth: 84000,
+    recordsInCompare: 152000,
+    conflicts: [
+      { field: 'ror', label: 'different ROR affiliation id', count: 53000, percentage: 80 },
+      { field: 'orcid', label: 'different ORCiD', count: 53000, percentage: 80 },
+      { field: 'authors', label: 'different author list', count: 12600, percentage: 15 },
+      { field: 'year', label: 'different publication year', count: 4200, percentage: 5 },
+    ],
+    agreements: [
+      { field: 'ror', label: 'same ROR affiliation id', count: 21000, percentage: 20 },
+      { field: 'orcid', label: 'same ORCID', count: 21000, percentage: 20 },
+      { field: 'authors', label: 'matching author list', count: 71400, percentage: 85 },
+      { field: 'year', label: 'matching publication year', count: 79800, percentage: 95 },
+    ],
+  },
+  {
+    ...fcRug,
+    primarySource: 'CRIS',
+    compareSource: 'OpenAlex',
+    recordsInPrimary: 163000,
+    recordsInBoth: 112000,
+    recordsInCompare: 175000,
+    conflicts: [
+      { field: 'ror', label: 'different ROR affiliation id', count: 67200, percentage: 75 },
+      { field: 'orcid', label: 'different ORCiD', count: 67200, percentage: 75 },
+      { field: 'authors', label: 'different author list', count: 14560, percentage: 13 },
+      { field: 'year', label: 'different publication year', count: 4480, percentage: 4 },
+    ],
+    agreements: [
+      { field: 'ror', label: 'same ROR affiliation id', count: 28000, percentage: 25 },
+      { field: 'orcid', label: 'same ORCID', count: 28000, percentage: 25 },
+      { field: 'authors', label: 'matching author list', count: 97440, percentage: 87 },
+      { field: 'year', label: 'matching publication year', count: 107520, percentage: 96 },
+    ],
+  },
+];

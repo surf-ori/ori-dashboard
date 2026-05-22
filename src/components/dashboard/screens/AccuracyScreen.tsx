@@ -176,7 +176,7 @@ function CrossSourceAgreement({
     accuracyComparison, coverageComparisons, detailRecords, interventions,
     completenessTimeline, totalRecords: ctxTotal,
   } = useDashboardData();
-  const a = accuracyComparison;
+  const a = accuracyComparison[0];
   const primary = filters.source;
   const [compare, setCompare] = useState<Source>(a.compareSource);
   const [selected, setSelected] = useState<{ kind: 'conflict' | 'agreement'; field: string } | null>({
