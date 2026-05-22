@@ -5,9 +5,19 @@ import { InterventionPanel } from '@/components/dashboard/InterventionPanel';
 import { FilterSummary } from '@/components/dashboard/FilterSummary';
 import { useDashboardData, useFilteredData } from '@/data/DataContext';
 import { cn } from '@/lib/utils';
-import type { DashboardFilters } from '@/data/types';
+import type { DashboardFilters, MetadataEntity } from '@/data/types';
 
 interface Props { filters: DashboardFilters; }
+
+const fieldToMetadataEntity: Record<string, MetadataEntity> = {
+  doi: 'improveDOI',
+  orcid: 'improveORCID',
+  ror: 'improveROR',
+  grantDoi: 'improveGrantDOI',
+  issn: 'improveISSN',
+  oaStatus: 'improveOAstatus',
+  correspondingAuthor: 'improveCorrespondingAuthor',
+};
 
 export function CompletenessScreen({ filters }: Props) {
   const { interventions } = useDashboardData();
@@ -16,6 +26,12 @@ export function CompletenessScreen({ filters }: Props) {
   const selectedMetric = completenessMetrics.find(m => m.field === selectedField);
   const filteredRecords = detailRecords.filter(r => r.missingFields.includes(selectedField));
   const totalRecords = completenessMetrics[0]?.total ?? 0;
+  const selectedEntity = fieldToMetadataEntity[selectedField];
+  const pageInterventions = interventions.filter(
+    i => i.page === 'Completeness'
+      && i.completenessSource === filters.source
+      && i.metadataEntity === selectedEntity,
+  );
 
   const mockQuery = `SELECT * FROM publications\nWHERE organisation = '${filters.organisation}'\n  AND ${selectedField} IS NULL\nORDER BY year DESC\nLIMIT 100;`;
 
@@ -67,7 +83,7 @@ export function CompletenessScreen({ filters }: Props) {
             title={`Records Missing: ${selectedMetric.label}`}
             sqlQuery={mockQuery}
           />
-          <InterventionPanel interventions={interventions.slice(0, 3)} />
+          <InterventionPanel interventions={pageInterventions} />
         </>
       )}
     </div>

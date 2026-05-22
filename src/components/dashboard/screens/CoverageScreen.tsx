@@ -56,29 +56,43 @@ export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
         onBarClick={handleBarClick}
       />
 
-      {selectedComparison && (
-        <div className="space-y-4">
-          <div className="flex items-center gap-2">
-            <h2 className="text-lg font-semibold">Detail View</h2>
-            <Badge>{segmentLabel}</Badge>
-            <Badge variant="outline">{selectedComparison.comparison.compareSource}</Badge>
-            <Button variant="ghost" size="sm" onClick={() => setSelectedComparison(null)}>✕ Close</Button>
+      {selectedComparison && (() => {
+        const seg = selectedComparison.segment;
+        const cmp = selectedComparison.comparison.compareSource;
+        const onlyIn = seg === 'onlyInCompared' ? cmp : primarySource;
+        const notIn = seg === 'onlyInCompared' ? primarySource : cmp;
+        const pageInterventions = interventions.filter(i =>
+          i.page === 'Coverage'
+          && (seg === 'inBoth'
+            ? ((i.coverageOnlyInSource === primarySource && i.coverageNotInCompared === cmp)
+              || (i.coverageOnlyInSource === cmp && i.coverageNotInCompared === primarySource))
+            : (i.coverageOnlyInSource === onlyIn && i.coverageNotInCompared === notIn)),
+        );
+
+        return (
+          <div className="space-y-4">
+            <div className="flex items-center gap-2">
+              <h2 className="text-lg font-semibold">Detail View</h2>
+              <Badge>{segmentLabel}</Badge>
+              <Badge variant="outline">{selectedComparison.comparison.compareSource}</Badge>
+              <Button variant="ghost" size="sm" onClick={() => setSelectedComparison(null)}>✕ Close</Button>
+            </div>
+
+            <TimelineChart
+              data={completenessTimeline}
+              title={`Coverage Over Time: ${primarySource} ↔ ${selectedComparison.comparison.compareSource}`}
+              color="hsl(var(--accent))"
+            />
+
+            <DataTable
+              records={detailRecords.slice(0, 5)}
+              title={`Records — ${segmentLabel}`}
+            />
+
+            <InterventionPanel interventions={pageInterventions} />
           </div>
-
-          <TimelineChart
-            data={completenessTimeline}
-            title={`Coverage Over Time: ${primarySource} ↔ ${selectedComparison.comparison.compareSource}`}
-            color="hsl(var(--accent))"
-          />
-
-          <DataTable
-            records={detailRecords.slice(0, 5)}
-            title={`Records — ${segmentLabel}`}
-          />
-
-          <InterventionPanel interventions={interventions.filter(i => i.effort !== 'High')} />
-        </div>
-      )}
+        );
+      })()}
     </div>
   );
 }
