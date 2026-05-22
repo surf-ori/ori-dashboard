@@ -20,6 +20,8 @@ import type {
   EnrichmentEntity,
   AccuracyComparison,
   OverviewCard,
+  DashboardFilters,
+  FilterContext,
 } from './types';
 
 interface DataContextValue {
