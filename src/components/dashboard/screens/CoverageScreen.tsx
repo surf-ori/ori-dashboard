@@ -69,6 +69,12 @@ export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
             : (i.coverageOnlyInSource === onlyIn && i.coverageNotInCompared === notIn)),
         );
 
+        const segmentRecords = detailRecords.filter(r => {
+          const has = (s: string) => r.sources.includes(s as typeof r.sources[number]);
+          if (seg === 'inBoth') return has(primarySource) && has(cmp);
+          return has(onlyIn) && !has(notIn);
+        });
+
         return (
           <div className="space-y-4">
             <div className="flex items-center gap-2">
@@ -85,9 +91,10 @@ export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
             />
 
             <DataTable
-              records={detailRecords.slice(0, 5)}
+              records={segmentRecords.slice(0, 10)}
               title={`Records — ${segmentLabel}`}
             />
+
 
             <InterventionPanel interventions={pageInterventions} />
           </div>

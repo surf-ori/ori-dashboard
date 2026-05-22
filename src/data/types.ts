@@ -52,7 +52,7 @@ export interface DetailRecord extends FilterContext {
   doi?: string;
   authors: string;
   year: number;
-  source: Source;
+  sources: Source[];
   missingFields: string[];
 }
 
