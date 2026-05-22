@@ -1,23 +1,26 @@
-## Update README.md
+# Extend organisations mock data with record counts
 
-Rewrite `README.md` with a proper project description for the GitHub repo.
+Add four new columns to the `Organisation` records so each row carries CRIS, OpenAlex, and OpenAIRE record counts plus the CRIS repository host.
 
-### Steps
+## Data model changes
 
-1. Copy the uploaded screenshot `ORI-Dashboard_Screenshot_2026-05-22.png` to `docs/screenshot.png` (new `docs/` folder) so GitHub can render it.
-2. Replace `README.md` content with:
-   - **Title**: ORI Data Quality Dashboard
-   - **Intro paragraph**: Short description — a dashboard for Dutch Research Performing Organisations (RPOs) to monitor Open Research Information data quality across sources (OpenAlex, Crossref, OpenAIRE, CRIS), aligned with the Barcelona Declaration. Covers Completeness, Coverage, Accuracy, and Enrichment.
-   - **Screenshot**: Markdown image wrapped in a link, so clicking opens the live demo:
-     ```
-     [![ORI Dashboard screenshot](docs/screenshot.png)](https://ori-dashboard.lovable.app/)
-     ```
-     Caption underneath (italic): *Live demo: https://ori-dashboard.lovable.app/*
-   - **Background section**: Explain this dashboard is a result of the **PID to Portal** project ([link](https://communities.surf.nl/en/open-research-information/article/from-pid-to-portal-strengthening-the-open-research-information)), which is part of the **Open Research Information Program 2025–2030** ([link](https://communities.surf.nl/open-research-information/artikel/open-research-information-program-2025-2030-published)).
-   - **Mission blockquote**: > "All information about Dutch publicly funded research and its results are openly available and reusable."
-   - **Tech stack note** (brief): React + Vite + Tailwind + Recharts, mock data for demonstration.
+In `src/data/types.ts`, extend `Organisation`:
 
-### Files
+- `crisRecords: number | null` — null means "not in CRIS"
+- `crisRepository: string | null` — repository hostname, null when not in CRIS
+- `openalexWorks: number | null` — null when unknown ("—")
+- `openaireePubs: number | null` — null when unknown ("—")
 
-- New: `docs/screenshot.png` (copied from upload)
-- Modified: `README.md`
+Using `null` for "—" / "not in CRIS" keeps the type numeric where present and avoids magic strings.
+
+## Mock data updates
+
+In `src/data/mockData.ts`, update every entry in `organisations` with the values from the supplied table. Also correct the KNAW `rorId` to `043c0p156` and SURF `rorId` to `009vhk114` per the table.
+
+## Editable table compatibility
+
+`MockDataScreen` renders organisations through `EditableTable`. The component derives columns from object keys, so new fields will surface automatically. No UI changes required, but verify nullable numeric cells render cleanly (display as empty / "—").
+
+## Out of scope
+
+No new screens, charts, or KPIs that consume these fields — this plan only seeds the data. Downstream visualisations can be wired up in a follow-up.
