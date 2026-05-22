@@ -17,7 +17,14 @@ export type PublicationType = 'Journal Article' | 'Conference Paper' | 'Book Cha
 
 export type MatchingMethod = 'doi' | 'ror';
 
-export interface CompletenessMetric {
+export interface FilterContext {
+  organisation: string;
+  primarySource: string;
+  entityTable: string;
+  type: string;
+}
+
+export interface CompletenessMetric extends FilterContext {
   field: string;
   label: string;
   percentage: number;
@@ -25,12 +32,12 @@ export interface CompletenessMetric {
   filled: number;
 }
 
-export interface TimelinePoint {
+export interface TimelinePoint extends FilterContext {
   date: string;
   value: number;
 }
 
-export interface CoverageComparison {
+export interface CoverageComparison extends FilterContext {
   compareSource: Source;
   onlyInPrimary: number;
   inBoth: number;
@@ -38,7 +45,7 @@ export interface CoverageComparison {
   total: number;
 }
 
-export interface DetailRecord {
+export interface DetailRecord extends FilterContext {
   id: string;
   title: string;
   doi?: string;
@@ -66,7 +73,7 @@ export interface DashboardFilters {
   matchingMethod: MatchingMethod;
 }
 
-export interface EnrichmentEntity {
+export interface EnrichmentEntity extends FilterContext {
   entity: string;
   label: string;
   missingPercentage: number;
@@ -81,7 +88,7 @@ export interface OverviewCard {
   details: string;
 }
 
-export interface AccuracyComparison {
+export interface AccuracyComparison extends FilterContext {
   primarySource: Source;
   compareSource: Source;
   recordsInPrimary: number;
