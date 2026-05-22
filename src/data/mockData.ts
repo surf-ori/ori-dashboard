@@ -26,7 +26,16 @@ export const sources: Source[] = ['OpenAlex', 'Crossref', 'OpenAIRE', 'CRIS', 'R
 
 // Filter context applied to seeded rows — represents the current selection in the sidebar filter bar.
 const fc = {
-  filterOrganisation: 'VU Amsterdam (008xxew50)',
+  filterOrganisationAbbreviation: 'VU Amsterdam',
+  filterOrganisationRORID: '008xxew50',
+  filterPrimarySource: 'CRIS',
+  filterEntityTable: 'Publications',
+  filterType: 'All Types',
+} as const;
+
+const fcRug = {
+  filterOrganisationAbbreviation: 'RUG',
+  filterOrganisationRORID: '012p63287',
   filterPrimarySource: 'CRIS',
   filterEntityTable: 'Publications',
   filterType: 'All Types',
