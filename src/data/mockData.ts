@@ -24,39 +24,47 @@ export const organisations: Organisation[] = [
 
 export const sources: Source[] = ['OpenAlex', 'Crossref', 'OpenAIRE', 'CRIS', 'ROR'];
 
+// Filter context applied to seeded rows — represents the current selection in the sidebar filter bar.
+const fc = {
+  filterOrganisation: 'VU Amsterdam (008xxew50)',
+  filterPrimarySource: 'CRIS',
+  filterEntityTable: 'Publications',
+  filterType: 'All Types',
+} as const;
+
 export const completenessMetrics: CompletenessMetric[] = [
-  { field: 'doi', label: 'Has DOI', percentage: 87.3, total: 216409, filled: 188925 },
-  { field: 'orcid', label: 'Has ORCID', percentage: 62.1, total: 216409, filled: 134390 },
-  { field: 'ror', label: 'Has ROR', percentage: 78.5, total: 216409, filled: 169881 },
-  { field: 'grantDoi', label: 'Has Grant DOI', percentage: 23.4, total: 216409, filled: 50640 },
-  { field: 'issn', label: 'Has ISSN', percentage: 91.2, total: 216409, filled: 197365 },
-  { field: 'oaStatus', label: 'Has OA Status', percentage: 84.7, total: 216409, filled: 183298 },
-  { field: 'correspondingAuthor', label: 'Corresponding Author', percentage: 45.8, total: 216409, filled: 99115 },
+  { ...fc, field: 'doi', label: 'Has DOI', percentage: 87.3, total: 216409, filled: 188925 },
+  { ...fc, field: 'orcid', label: 'Has ORCID', percentage: 62.1, total: 216409, filled: 134390 },
+  { ...fc, field: 'ror', label: 'Has ROR', percentage: 78.5, total: 216409, filled: 169881 },
+  { ...fc, field: 'grantDoi', label: 'Has Grant DOI', percentage: 23.4, total: 216409, filled: 50640 },
+  { ...fc, field: 'issn', label: 'Has ISSN', percentage: 91.2, total: 216409, filled: 197365 },
+  { ...fc, field: 'oaStatus', label: 'Has OA Status', percentage: 84.7, total: 216409, filled: 183298 },
+  { ...fc, field: 'correspondingAuthor', label: 'Corresponding Author', percentage: 45.8, total: 216409, filled: 99115 },
 ];
 
 export const completenessTimeline: TimelinePoint[] = [
-  { date: '2020-Q1', value: 71.2 }, { date: '2020-Q2', value: 72.8 }, { date: '2020-Q3', value: 73.1 }, { date: '2020-Q4', value: 74.5 },
-  { date: '2021-Q1', value: 75.3 }, { date: '2021-Q2', value: 76.9 }, { date: '2021-Q3', value: 78.2 }, { date: '2021-Q4', value: 79.1 },
-  { date: '2022-Q1', value: 80.4 }, { date: '2022-Q2', value: 81.7 }, { date: '2022-Q3', value: 82.3 }, { date: '2022-Q4', value: 83.6 },
-  { date: '2023-Q1', value: 84.1 }, { date: '2023-Q2', value: 85.2 }, { date: '2023-Q3', value: 86.0 }, { date: '2023-Q4', value: 87.3 },
+  { ...fc, date: '2020-Q1', value: 71.2 }, { ...fc, date: '2020-Q2', value: 72.8 }, { ...fc, date: '2020-Q3', value: 73.1 }, { ...fc, date: '2020-Q4', value: 74.5 },
+  { ...fc, date: '2021-Q1', value: 75.3 }, { ...fc, date: '2021-Q2', value: 76.9 }, { ...fc, date: '2021-Q3', value: 78.2 }, { ...fc, date: '2021-Q4', value: 79.1 },
+  { ...fc, date: '2022-Q1', value: 80.4 }, { ...fc, date: '2022-Q2', value: 81.7 }, { ...fc, date: '2022-Q3', value: 82.3 }, { ...fc, date: '2022-Q4', value: 83.6 },
+  { ...fc, date: '2023-Q1', value: 84.1 }, { ...fc, date: '2023-Q2', value: 85.2 }, { ...fc, date: '2023-Q3', value: 86.0 }, { ...fc, date: '2023-Q4', value: 87.3 },
 ];
 
 // With CRIS as the default primary source, comparison list includes OpenAlex (swapped in for CRIS)
 export const coverageComparisons: CoverageComparison[] = [
-  { compareSource: 'OpenAlex', onlyInPrimary: 77386, inBoth: 139023, onlyInCompared: 41200, total: 257609 },
-  { compareSource: 'Crossref', onlyInPrimary: 26164, inBoth: 190245, onlyInCompared: 5600, total: 222009 },
-  { compareSource: 'OpenAIRE', onlyInPrimary: 48091, inBoth: 168318, onlyInCompared: 18900, total: 235309 },
+  { ...fc, compareSource: 'OpenAlex', onlyInPrimary: 77386, inBoth: 139023, onlyInCompared: 41200, total: 257609 },
+  { ...fc, compareSource: 'Crossref', onlyInPrimary: 26164, inBoth: 190245, onlyInCompared: 5600, total: 222009 },
+  { ...fc, compareSource: 'OpenAIRE', onlyInPrimary: 48091, inBoth: 168318, onlyInCompared: 18900, total: 235309 },
 ];
 
 export const detailRecords: DetailRecord[] = [
-  { id: 'rec-001', title: 'Machine Learning Applications in Climate Science: A Systematic Review', doi: '10.1234/ml-climate-2023', authors: 'van der Berg, J.; de Vries, A.', year: 2023, source: 'OpenAlex', missingFields: ['orcid', 'grantDoi'] },
-  { id: 'rec-002', title: 'Quantum Computing for Drug Discovery in the Netherlands', doi: undefined, authors: 'Jansen, P.; Bakker, M.; Singh, R.', year: 2023, source: 'CRIS', missingFields: ['doi', 'orcid', 'oaStatus'] },
-  { id: 'rec-003', title: 'Sustainable Urban Planning: Amsterdam Case Study', doi: '10.5678/urban-ams-2022', authors: 'de Groot, L.', year: 2022, source: 'OpenAlex', missingFields: ['correspondingAuthor', 'grantDoi'] },
-  { id: 'rec-004', title: 'Neural Networks for Dutch Language Processing', doi: '10.9012/nlp-dutch-2023', authors: 'Vermeer, K.; Hendriks, S.', year: 2023, source: 'Crossref', missingFields: ['ror', 'grantDoi'] },
-  { id: 'rec-005', title: 'Biodiversity Loss in the Wadden Sea: A Longitudinal Study', doi: '10.3456/wadden-bio-2022', authors: 'Smit, H.; de Jong, R.; Mulder, T.', year: 2022, source: 'OpenAIRE', missingFields: ['orcid', 'correspondingAuthor'] },
-  { id: 'rec-006', title: 'Advances in Photovoltaic Cell Efficiency', doi: undefined, authors: 'van Dijk, E.', year: 2023, source: 'CRIS', missingFields: ['doi', 'issn', 'oaStatus'] },
-  { id: 'rec-007', title: 'Digital Humanities and the Dutch Golden Age Archives', doi: '10.7890/dh-golden-2023', authors: 'Bosman, J.; Kramer, B.', year: 2023, source: 'OpenAlex', missingFields: ['grantDoi'] },
-  { id: 'rec-008', title: 'Water Management Infrastructure Resilience', doi: '10.2345/water-infra-2022', authors: 'Visser, M.; ter Haar, D.', year: 2022, source: 'Crossref', missingFields: ['orcid', 'ror'] },
+  { ...fc, id: 'rec-001', title: 'Machine Learning Applications in Climate Science: A Systematic Review', doi: '10.1234/ml-climate-2023', authors: 'van der Berg, J.; de Vries, A.', year: 2023, source: 'OpenAlex', missingFields: ['orcid', 'grantDoi'] },
+  { ...fc, id: 'rec-002', title: 'Quantum Computing for Drug Discovery in the Netherlands', doi: undefined, authors: 'Jansen, P.; Bakker, M.; Singh, R.', year: 2023, source: 'CRIS', missingFields: ['doi', 'orcid', 'oaStatus'] },
+  { ...fc, id: 'rec-003', title: 'Sustainable Urban Planning: Amsterdam Case Study', doi: '10.5678/urban-ams-2022', authors: 'de Groot, L.', year: 2022, source: 'OpenAlex', missingFields: ['correspondingAuthor', 'grantDoi'] },
+  { ...fc, id: 'rec-004', title: 'Neural Networks for Dutch Language Processing', doi: '10.9012/nlp-dutch-2023', authors: 'Vermeer, K.; Hendriks, S.', year: 2023, source: 'Crossref', missingFields: ['ror', 'grantDoi'] },
+  { ...fc, id: 'rec-005', title: 'Biodiversity Loss in the Wadden Sea: A Longitudinal Study', doi: '10.3456/wadden-bio-2022', authors: 'Smit, H.; de Jong, R.; Mulder, T.', year: 2022, source: 'OpenAIRE', missingFields: ['orcid', 'correspondingAuthor'] },
+  { ...fc, id: 'rec-006', title: 'Advances in Photovoltaic Cell Efficiency', doi: undefined, authors: 'van Dijk, E.', year: 2023, source: 'CRIS', missingFields: ['doi', 'issn', 'oaStatus'] },
+  { ...fc, id: 'rec-007', title: 'Digital Humanities and the Dutch Golden Age Archives', doi: '10.7890/dh-golden-2023', authors: 'Bosman, J.; Kramer, B.', year: 2023, source: 'OpenAlex', missingFields: ['grantDoi'] },
+  { ...fc, id: 'rec-008', title: 'Water Management Infrastructure Resilience', doi: '10.2345/water-infra-2022', authors: 'Visser, M.; ter Haar, D.', year: 2022, source: 'Crossref', missingFields: ['orcid', 'ror'] },
 ];
 
 export const interventions: Intervention[] = [
@@ -89,21 +97,21 @@ export const overviewCards: OverviewCard[] = [
 
 export const enrichmentEntities: EnrichmentEntity[] = [
   {
-    entity: 'ror', label: 'ROR', missingPercentage: 74, missingCount: 160143, totalRecords: 216409,
+    ...fc, entity: 'ror', label: 'ROR', missingPercentage: 74, missingCount: 160143, totalRecords: 216409,
     recoverable: [
       { source: 'OpenAIRE', percentage: 10, count: 16014 },
       { source: 'OpenAlex', percentage: 10, count: 16014 },
     ],
   },
   {
-    entity: 'orcid', label: 'ORCID', missingPercentage: 66, missingCount: 142830, totalRecords: 216409,
+    ...fc, entity: 'orcid', label: 'ORCID', missingPercentage: 66, missingCount: 142830, totalRecords: 216409,
     recoverable: [
       { source: 'OpenAIRE', percentage: 20, count: 28566 },
       { source: 'OpenAlex', percentage: 10, count: 14283 },
     ],
   },
   {
-    entity: 'doi', label: 'DOI', missingPercentage: 37, missingCount: 80071, totalRecords: 216409,
+    ...fc, entity: 'doi', label: 'DOI', missingPercentage: 37, missingCount: 80071, totalRecords: 216409,
     recoverable: [
       { source: 'OpenAIRE', percentage: 15, count: 12011 },
       { source: 'OpenAlex', percentage: 10, count: 8007 },
@@ -111,7 +119,7 @@ export const enrichmentEntities: EnrichmentEntity[] = [
     ],
   },
   {
-    entity: 'grantDoi', label: 'Grant DOI', missingPercentage: 81, missingCount: 175291, totalRecords: 216409,
+    ...fc, entity: 'grantDoi', label: 'Grant DOI', missingPercentage: 81, missingCount: 175291, totalRecords: 216409,
     recoverable: [
       { source: 'OpenAIRE', percentage: 18, count: 31552 },
       { source: 'Crossref', percentage: 7, count: 12270 },
@@ -120,6 +128,7 @@ export const enrichmentEntities: EnrichmentEntity[] = [
 ];
 
 export const accuracyComparison: AccuracyComparison = {
+  ...fc,
   primarySource: 'CRIS',
   compareSource: 'OpenAlex',
   recordsInPrimary: 128000,
