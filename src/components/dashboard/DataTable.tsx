@@ -40,7 +40,13 @@ export function DataTable({ records, title, sqlQuery }: DataTableProps) {
                   <TableCell className="text-xs font-mono">{r.doi ?? <span className="text-destructive">—</span>}</TableCell>
                   <TableCell className="text-sm">{r.authors}</TableCell>
                   <TableCell>{r.year}</TableCell>
-                  <TableCell><Badge variant="secondary" className="text-xs">{r.source}</Badge></TableCell>
+                  <TableCell>
+                    <div className="flex gap-1 flex-wrap">
+                      {r.sources.map(s => (
+                        <Badge key={s} variant="secondary" className="text-xs">{s}</Badge>
+                      ))}
+                    </div>
+                  </TableCell>
                   <TableCell>
                     <div className="flex gap-1 flex-wrap">
                       {r.missingFields.map(f => (
