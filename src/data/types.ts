@@ -18,7 +18,8 @@ export type PublicationType = 'Journal Article' | 'Conference Paper' | 'Book Cha
 export type MatchingMethod = 'doi' | 'ror';
 
 export interface FilterContext {
-  filterOrganisation: string;
+  filterOrganisationAbbreviation: string;
+  filterOrganisationRORID: string;
   filterPrimarySource: string;
   filterEntityTable: string;
   filterType: string;
