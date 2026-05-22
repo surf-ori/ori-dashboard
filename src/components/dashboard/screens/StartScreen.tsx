@@ -1,9 +1,32 @@
 import { KPICard } from '@/components/dashboard/KPICard';
 import { useDashboardData } from '@/data/DataContext';
 import { Sparkles, CheckCircle2, Layers, Target } from 'lucide-react';
+import type { DashboardFilters } from '@/data/types';
 
-export function StartScreen() {
+interface StartScreenProps {
+  filters?: DashboardFilters;
+}
+
+export function StartScreen({ filters }: StartScreenProps) {
   const { organisations, overviewCards } = useDashboardData();
+
+  const selectedOrg = filters ? organisations.find(o => o.id === filters.organisation) : undefined;
+
+  const filteredRecordsValue = (() => {
+    if (!selectedOrg || !filters) return null;
+    if (filters.cerifEntity !== 'Publications') return null;
+    switch (filters.source) {
+      case 'CRIS': return selectedOrg.crisPublications;
+      case 'OpenAlex': return selectedOrg.openAlexPublications;
+      case 'OpenAIRE': return selectedOrg.openairePublications;
+      default: return null;
+    }
+  })();
+
+  const filteredRecordsDetails = selectedOrg && filters
+    ? `${filters.cerifEntity}, for ${selectedOrg.abbreviation}, in ${filters.source}`
+    : undefined;
+
   return (
     <div className="space-y-10">
       <div>
@@ -30,17 +53,25 @@ export function StartScreen() {
         <div className="eyebrow mb-2">Overview</div>
         <h2 className="font-display text-xl font-extrabold mb-4">Key metrics</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {overviewCards.map((c, i) => (
-            <KPICard
-              key={c.title}
-              label={c.title}
-              value={c.value}
-              subtitle={c.details}
-              eyebrowColor={(['orange', 'blue', 'green', 'purple'] as const)[i % 4]}
-            />
-          ))}
+          {overviewCards.map((c, i) => {
+            const isFiltered = c.title === 'Filtered Records';
+            const value = isFiltered
+              ? (filteredRecordsValue !== null ? filteredRecordsValue.toLocaleString('en-US') : '—')
+              : c.value;
+            const subtitle = isFiltered && filteredRecordsDetails ? filteredRecordsDetails : c.details;
+            return (
+              <KPICard
+                key={c.title}
+                label={c.title}
+                value={value}
+                subtitle={subtitle}
+                eyebrowColor={(['orange', 'blue', 'green', 'purple'] as const)[i % 4]}
+              />
+            );
+          })}
         </div>
       </div>
+
 
       <div>
         <div className="eyebrow mb-2">Members</div>
