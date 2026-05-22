@@ -95,16 +95,6 @@ export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
               title={`Records — ${segmentLabel}`}
             />
 
-            <TimelineChart
-              data={completenessTimeline}
-              title={`Coverage Over Time: ${primarySource} ↔ ${selectedComparison.comparison.compareSource}`}
-              color="hsl(var(--accent))"
-            />
-
-            <DataTable
-              records={detailRecords.slice(0, 5)}
-              title={`Records — ${segmentLabel}`}
-            />
 
             <InterventionPanel interventions={pageInterventions} />
           </div>
