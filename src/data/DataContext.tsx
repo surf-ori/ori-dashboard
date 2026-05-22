@@ -103,3 +103,29 @@ export function useDashboardData() {
   if (!ctx) throw new Error('useDashboardData must be used within DashboardDataProvider');
   return ctx;
 }
+
+/**
+ * Returns mock-data arrays filtered by the current sidebar selection.
+ * Matches rows by RORID, primary source, entity table and type.
+ */
+export function useFilteredData(filters: DashboardFilters) {
+  const ctx = useDashboardData();
+  const org = ctx.organisations.find(o => o.id === filters.organisation);
+  const orgRor = org?.rorId ?? '';
+  const typeMatch = filters.publicationType === 'All' ? 'All Types' : filters.publicationType;
+
+  const matches = (item: FilterContext) =>
+    item.filterOrganisationRORID === orgRor &&
+    item.filterPrimarySource === filters.source &&
+    item.filterEntityTable === filters.cerifEntity &&
+    item.filterType === typeMatch;
+
+  return {
+    completenessMetrics: ctx.completenessMetrics.filter(matches),
+    completenessTimeline: ctx.completenessTimeline.filter(matches),
+    coverageComparisons: ctx.coverageComparisons.filter(matches),
+    detailRecords: ctx.detailRecords.filter(matches),
+    enrichmentEntities: ctx.enrichmentEntities.filter(matches),
+    accuracyComparison: ctx.accuracyComparison.filter(matches),
+  };
+}
