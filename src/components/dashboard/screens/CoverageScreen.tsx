@@ -5,7 +5,7 @@ import { DataTable } from '@/components/dashboard/DataTable';
 import { InterventionPanel } from '@/components/dashboard/InterventionPanel';
 import { FilterSummary } from '@/components/dashboard/FilterSummary';
 import { MatchingMethodSelector } from '@/components/dashboard/MatchingMethodSelector';
-import { useDashboardData } from '@/data/DataContext';
+import { useDashboardData, useFilteredData } from '@/data/DataContext';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import type { CoverageComparison, DashboardFilters, MatchingMethod } from '@/data/types';
@@ -16,7 +16,8 @@ interface Props {
 }
 
 export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
-  const { coverageComparisons, completenessTimeline, detailRecords, interventions } = useDashboardData();
+  const { interventions } = useDashboardData();
+  const { coverageComparisons, completenessTimeline, detailRecords } = useFilteredData(filters);
   const primarySource = filters.source;
   const [selectedComparison, setSelectedComparison] = useState<{ comparison: CoverageComparison; segment: string } | null>(null);
 
