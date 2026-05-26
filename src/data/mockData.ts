@@ -80,22 +80,22 @@ export const coverageComparisons: CoverageComparison[] = [
 ];
 
 export const detailRecords: DetailRecord[] = [
-  { ...fc, id: 'rec-001', title: 'Machine Learning Applications in Climate Science: A Systematic Review', doi: '10.1234/ml-climate-2023', authors: 'van der Berg, J.; de Vries, A.', year: 2023, sources: ['CRIS', 'OpenAlex', 'Crossref', 'OpenAIRE'], missingFields: ['orcid', 'grantDoi'] },
-  { ...fc, id: 'rec-002', title: 'Quantum Computing for Drug Discovery in the Netherlands', doi: '10.1234/qc-drug-2023', authors: 'Jansen, P.; Bakker, M.; Singh, R.', year: 2023, sources: ['CRIS'], missingFields: ['orcid', 'oaStatus'] },
-  { ...fc, id: 'rec-003', title: 'Sustainable Urban Planning: Amsterdam Case Study', doi: '10.5678/urban-ams-2022', authors: 'de Groot, L.', year: 2022, sources: ['OpenAlex', 'Crossref'], missingFields: ['correspondingAuthor', 'grantDoi'] },
-  { ...fc, id: 'rec-004', title: 'Neural Networks for Dutch Language Processing', doi: '10.9012/nlp-dutch-2023', authors: 'Vermeer, K.; Hendriks, S.', year: 2023, sources: ['CRIS', 'Crossref', 'OpenAIRE'], missingFields: ['ror', 'grantDoi'] },
-  { ...fc, id: 'rec-005', title: 'Biodiversity Loss in the Wadden Sea: A Longitudinal Study', doi: '10.3456/wadden-bio-2022', authors: 'Smit, H.; de Jong, R.; Mulder, T.', year: 2022, sources: ['CRIS', 'OpenAIRE'], missingFields: ['orcid', 'correspondingAuthor'] },
-  { ...fc, id: 'rec-006', title: 'Advances in Photovoltaic Cell Efficiency', doi: '10.5678/pv-eff-2023', authors: 'van Dijk, E.', year: 2023, sources: ['CRIS', 'OpenAIRE'], missingFields: ['issn', 'oaStatus'] },
-  { ...fc, id: 'rec-007', title: 'Digital Humanities and the Dutch Golden Age Archives', doi: '10.7890/dh-golden-2023', authors: 'Bosman, J.; Kramer, B.', year: 2023, sources: ['OpenAlex', 'Crossref', 'OpenAIRE'], missingFields: ['grantDoi'] },
-  { ...fc, id: 'rec-008', title: 'Water Management Infrastructure Resilience', doi: '10.2345/water-infra-2022', authors: 'Visser, M.; ter Haar, D.', year: 2022, sources: ['CRIS', 'Crossref'], missingFields: ['orcid', 'ror'] },
-  { ...fc, id: 'rec-009', title: 'Open Science Practices in Dutch Social Sciences', doi: '10.4567/open-soc-2023', authors: 'Peters, R.; van Leeuwen, J.', year: 2023, sources: ['CRIS', 'OpenAlex', 'OpenAIRE'], missingFields: ['grantDoi'] },
-  { ...fc, id: 'rec-010', title: 'AI Ethics Frameworks in European Research', doi: '10.6789/ai-ethics-2022', authors: 'Klein, A.', year: 2022, sources: ['OpenAlex', 'OpenAIRE'], missingFields: ['ror', 'orcid'] },
-  { ...fcRug, id: 'rug-001', title: 'Cold Atom Physics: Precision Measurements at Groningen', doi: '10.1234/cold-atom-2023', authors: 'Wiersma, D.; Postma, J.', year: 2023, sources: ['CRIS', 'OpenAlex', 'Crossref'], missingFields: ['grantDoi'] },
-  { ...fcRug, id: 'rug-002', title: 'Healthy Ageing Cohort Study: 20-Year Follow-up', doi: '10.5678/ageing-rug-2022', authors: 'Bakker, S.; Visser, A.; Dijkstra, T.', year: 2022, sources: ['CRIS', 'OpenAIRE'], missingFields: ['orcid'] },
-  { ...fcRug, id: 'rug-003', title: 'Frisian Language Revitalisation in Digital Media', doi: '10.2468/frisian-rug-2023', authors: 'de Boer, F.', year: 2023, sources: ['CRIS'], missingFields: ['orcid', 'oaStatus'] },
-  { ...fcRug, id: 'rug-004', title: 'Sustainable Energy Transition in Northern Netherlands', doi: '10.9012/energy-north-2023', authors: 'Hoekstra, M.; van der Veen, R.', year: 2023, sources: ['CRIS', 'OpenAIRE', 'Crossref'], missingFields: ['correspondingAuthor'] },
-  { ...fcRug, id: 'rug-005', title: 'Archaeological Discoveries in the Terpen Region', doi: '10.3456/terpen-arch-2022', authors: 'Nieuwhof, A.', year: 2022, sources: ['OpenAlex', 'Crossref'], missingFields: ['grantDoi', 'ror'] },
-  { ...fcRug, id: 'rug-006', title: 'Marine Microbiology of the North Sea', doi: '10.7890/marine-rug-2023', authors: 'Stomp, M.; Huisman, J.', year: 2023, sources: ['CRIS', 'OpenAlex', 'Crossref', 'OpenAIRE'], missingFields: [] },
+  { ...fc, id: 'rec-001', title: 'Machine Learning Applications in Climate Science: A Systematic Review', doi: '10.1234/ml-climate-2023', authors: 'van der Berg, J.; de Vries, A.', year: 2023, sources: ['CRIS', 'OpenAlex', 'Crossref', 'OpenAIRE'] },
+  { ...fc, id: 'rec-002', title: 'Quantum Computing for Drug Discovery in the Netherlands', doi: '10.1234/qc-drug-2023', authors: 'Jansen, P.; Bakker, M.; Singh, R.', year: 2023, sources: ['CRIS'] },
+  { ...fc, id: 'rec-003', title: 'Sustainable Urban Planning: Amsterdam Case Study', doi: '10.5678/urban-ams-2022', authors: 'de Groot, L.', year: 2022, sources: ['OpenAlex', 'Crossref'] },
+  { ...fc, id: 'rec-004', title: 'Neural Networks for Dutch Language Processing', doi: '10.9012/nlp-dutch-2023', authors: 'Vermeer, K.; Hendriks, S.', year: 2023, sources: ['CRIS', 'Crossref', 'OpenAIRE'] },
+  { ...fc, id: 'rec-005', title: 'Biodiversity Loss in the Wadden Sea: A Longitudinal Study', doi: '10.3456/wadden-bio-2022', authors: 'Smit, H.; de Jong, R.; Mulder, T.', year: 2022, sources: ['CRIS', 'OpenAIRE'] },
+  { ...fc, id: 'rec-006', title: 'Advances in Photovoltaic Cell Efficiency', doi: '10.5678/pv-eff-2023', authors: 'van Dijk, E.', year: 2023, sources: ['CRIS', 'OpenAIRE'] },
+  { ...fc, id: 'rec-007', title: 'Digital Humanities and the Dutch Golden Age Archives', doi: '10.7890/dh-golden-2023', authors: 'Bosman, J.; Kramer, B.', year: 2023, sources: ['OpenAlex', 'Crossref', 'OpenAIRE'] },
+  { ...fc, id: 'rec-008', title: 'Water Management Infrastructure Resilience', doi: '10.2345/water-infra-2022', authors: 'Visser, M.; ter Haar, D.', year: 2022, sources: ['CRIS', 'Crossref'] },
+  { ...fc, id: 'rec-009', title: 'Open Science Practices in Dutch Social Sciences', doi: '10.4567/open-soc-2023', authors: 'Peters, R.; van Leeuwen, J.', year: 2023, sources: ['CRIS', 'OpenAlex', 'OpenAIRE'] },
+  { ...fc, id: 'rec-010', title: 'AI Ethics Frameworks in European Research', doi: '10.6789/ai-ethics-2022', authors: 'Klein, A.', year: 2022, sources: ['OpenAlex', 'OpenAIRE'] },
+  { ...fcRug, id: 'rug-001', title: 'Cold Atom Physics: Precision Measurements at Groningen', doi: '10.1234/cold-atom-2023', authors: 'Wiersma, D.; Postma, J.', year: 2023, sources: ['CRIS', 'OpenAlex', 'Crossref'] },
+  { ...fcRug, id: 'rug-002', title: 'Healthy Ageing Cohort Study: 20-Year Follow-up', doi: '10.5678/ageing-rug-2022', authors: 'Bakker, S.; Visser, A.; Dijkstra, T.', year: 2022, sources: ['CRIS', 'OpenAIRE'] },
+  { ...fcRug, id: 'rug-003', title: 'Frisian Language Revitalisation in Digital Media', doi: '10.2468/frisian-rug-2023', authors: 'de Boer, F.', year: 2023, sources: ['CRIS'] },
+  { ...fcRug, id: 'rug-004', title: 'Sustainable Energy Transition in Northern Netherlands', doi: '10.9012/energy-north-2023', authors: 'Hoekstra, M.; van der Veen, R.', year: 2023, sources: ['CRIS', 'OpenAIRE', 'Crossref'] },
+  { ...fcRug, id: 'rug-005', title: 'Archaeological Discoveries in the Terpen Region', doi: '10.3456/terpen-arch-2022', authors: 'Nieuwhof, A.', year: 2022, sources: ['OpenAlex', 'Crossref'] },
+  { ...fcRug, id: 'rug-006', title: 'Marine Microbiology of the North Sea', doi: '10.7890/marine-rug-2023', authors: 'Stomp, M.; Huisman, J.', year: 2023, sources: ['CRIS', 'OpenAlex', 'Crossref', 'OpenAIRE'] },
 ];
 
 // Populate per-source missing fields deterministically so the Completeness page can show
