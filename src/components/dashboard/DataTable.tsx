@@ -30,7 +30,6 @@ export function DataTable({ records, title, sqlQuery }: DataTableProps) {
                 <TableHead>Authors</TableHead>
                 <TableHead>Year</TableHead>
                 <TableHead>Source</TableHead>
-                <TableHead>Missing Fields</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
