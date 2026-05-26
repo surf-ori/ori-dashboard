@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { TimelineChart } from '@/components/dashboard/TimelineChart';
-import { DataTable } from '@/components/dashboard/DataTable';
+import { CompletenessRecordsTable } from '@/components/dashboard/CompletenessRecordsTable';
 import { InterventionPanel } from '@/components/dashboard/InterventionPanel';
 import { FilterSummary } from '@/components/dashboard/FilterSummary';
 import { useDashboardData, useFilteredData } from '@/data/DataContext';
