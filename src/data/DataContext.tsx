@@ -61,6 +61,7 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
   const [completenessMetrics, setCompletenessMetrics] = useState<CompletenessMetric[]>(defaultCompletenessMetrics);
   const [completenessTimeline, setCompletenessTimeline] = useState<TimelinePoint[]>(defaultCompletenessTimeline);
   const [coverageComparisons, setCoverageComparisons] = useState<CoverageComparison[]>(defaultCoverageComparisons);
+  const [coverageTimeline, setCoverageTimeline] = useState<CoverageTimelinePoint[]>(defaultCoverageTimeline);
   const [detailRecords, setDetailRecords] = useState<DetailRecord[]>(defaultDetailRecords);
   const [interventions, setInterventions] = useState<Intervention[]>(defaultInterventions);
   const [enrichmentEntities, setEnrichmentEntities] = useState<EnrichmentEntity[]>(defaultEnrichmentEntities);
