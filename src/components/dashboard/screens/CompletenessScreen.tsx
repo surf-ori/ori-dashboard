@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TimelineChart } from '@/components/dashboard/TimelineChart';
+import { CompletenessTimelineChart, FIELD_COLORS } from '@/components/dashboard/CompletenessTimelineChart';
 import { CompletenessRecordsTable } from '@/components/dashboard/CompletenessRecordsTable';
 import { InterventionPanel } from '@/components/dashboard/InterventionPanel';
 import { FilterSummary } from '@/components/dashboard/FilterSummary';
