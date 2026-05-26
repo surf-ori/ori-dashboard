@@ -36,6 +36,19 @@ export interface CompletenessMetric extends FilterContext {
 export interface TimelinePoint extends FilterContext {
   date: string;
   value: number;
+  /** Metadata field this point is for (e.g. 'doi', 'orcid'). Omitted for legacy aggregate rows. */
+  field?: string;
+}
+
+export interface CoverageTimelinePoint extends FilterContext {
+  date: string;
+  compareSource: Source;
+  /** Percentage (0–100) of DOI-matched records that appear in both sources at this point in time. */
+  inBoth: number;
+  /** Percentage only in the primary source (should trend down with interventions). */
+  onlyInPrimary: number;
+  /** Percentage only in the compared source (should trend down with interventions). */
+  onlyInCompared: number;
 }
 
 export interface CoverageComparison extends FilterContext {
