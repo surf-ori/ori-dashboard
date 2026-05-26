@@ -30,7 +30,6 @@ export function DataTable({ records, title, sqlQuery }: DataTableProps) {
                 <TableHead>Authors</TableHead>
                 <TableHead>Year</TableHead>
                 <TableHead>Source</TableHead>
-                <TableHead>Missing Fields</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -44,13 +43,6 @@ export function DataTable({ records, title, sqlQuery }: DataTableProps) {
                     <div className="flex gap-1 flex-wrap">
                       {r.sources.map(s => (
                         <Badge key={s} variant="secondary" className="text-xs">{s}</Badge>
-                      ))}
-                    </div>
-                  </TableCell>
-                  <TableCell>
-                    <div className="flex gap-1 flex-wrap">
-                      {r.missingFields.map(f => (
-                        <Badge key={f} variant="outline" className="text-xs border-destructive/40 text-destructive">{f}</Badge>
                       ))}
                     </div>
                   </TableCell>

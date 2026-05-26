@@ -25,7 +25,7 @@ export function CompletenessScreen({ filters }: Props) {
   const [selectedField, setSelectedField] = useState('doi');
   const selectedMetric = completenessMetrics.find(m => m.field === selectedField);
   const filteredRecords = detailRecords.filter(r => {
-    const missingInPrimary = r.missingFieldsBySource?.[filters.source] ?? r.missingFields;
+    const missingInPrimary = r.missingFieldsBySource?.[filters.source] ?? [];
     return missingInPrimary.includes(selectedField);
   });
   const totalRecords = completenessMetrics[0]?.total ?? 0;

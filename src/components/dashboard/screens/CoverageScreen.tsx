@@ -29,10 +29,10 @@ export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
 
   const segmentLabel = selectedComparison
     ? selectedComparison.segment === 'onlyInPrimary'
-      ? `Only in ${primarySource}`
+      ? `Only in ${primarySource} — NOT in ${selectedComparison.comparison.compareSource}`
       : selectedComparison.segment === 'inBoth'
-        ? 'In Both Sources'
-        : `Only in ${selectedComparison.comparison.compareSource}`
+        ? `In both ${primarySource} and ${selectedComparison.comparison.compareSource}`
+        : `Only in ${selectedComparison.comparison.compareSource} — NOT in ${primarySource}`
     : '';
 
   return (
@@ -77,12 +77,18 @@ export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
 
         return (
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <h2 className="text-lg font-semibold">Detail View</h2>
               <Badge>{segmentLabel}</Badge>
-              <Badge variant="outline">{selectedComparison.comparison.compareSource}</Badge>
               <Button variant="ghost" size="sm" onClick={() => setSelectedComparison(null)}>✕ Close</Button>
             </div>
+            <p className="text-sm" style={{ color: 'hsl(var(--foreground-2))' }}>
+              Showing records that {selectedComparison.segment === 'inBoth'
+                ? `appear in BOTH ${primarySource} and ${selectedComparison.comparison.compareSource}.`
+                : selectedComparison.segment === 'onlyInPrimary'
+                  ? `appear in ${primarySource} but are NOT present in ${selectedComparison.comparison.compareSource}.`
+                  : `appear in ${selectedComparison.comparison.compareSource} but are NOT present in ${primarySource}.`}
+            </p>
 
             <TimelineChart
               data={completenessTimeline}
