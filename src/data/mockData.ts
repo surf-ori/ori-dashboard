@@ -81,7 +81,7 @@ export const coverageComparisons: CoverageComparison[] = [
 
 export const detailRecords: DetailRecord[] = [
   { ...fc, id: 'rec-001', title: 'Machine Learning Applications in Climate Science: A Systematic Review', doi: '10.1234/ml-climate-2023', authors: 'van der Berg, J.; de Vries, A.', year: 2023, sources: ['CRIS', 'OpenAlex', 'Crossref', 'OpenAIRE'], missingFields: ['orcid', 'grantDoi'] },
-  { ...fc, id: 'rec-002', title: 'Quantum Computing for Drug Discovery in the Netherlands', doi: undefined, authors: 'Jansen, P.; Bakker, M.; Singh, R.', year: 2023, sources: ['CRIS'], missingFields: ['doi', 'orcid', 'oaStatus'] },
+  { ...fc, id: 'rec-002', title: 'Quantum Computing for Drug Discovery in the Netherlands', doi: '10.1234/qc-drug-2023', authors: 'Jansen, P.; Bakker, M.; Singh, R.', year: 2023, sources: ['CRIS'], missingFields: ['orcid', 'oaStatus'] },
   { ...fc, id: 'rec-003', title: 'Sustainable Urban Planning: Amsterdam Case Study', doi: '10.5678/urban-ams-2022', authors: 'de Groot, L.', year: 2022, sources: ['OpenAlex', 'Crossref'], missingFields: ['correspondingAuthor', 'grantDoi'] },
   { ...fc, id: 'rec-004', title: 'Neural Networks for Dutch Language Processing', doi: '10.9012/nlp-dutch-2023', authors: 'Vermeer, K.; Hendriks, S.', year: 2023, sources: ['CRIS', 'Crossref', 'OpenAIRE'], missingFields: ['ror', 'grantDoi'] },
   { ...fc, id: 'rec-005', title: 'Biodiversity Loss in the Wadden Sea: A Longitudinal Study', doi: '10.3456/wadden-bio-2022', authors: 'Smit, H.; de Jong, R.; Mulder, T.', year: 2022, sources: ['CRIS', 'OpenAIRE'], missingFields: ['orcid', 'correspondingAuthor'] },
