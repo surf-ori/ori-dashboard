@@ -46,13 +46,6 @@ export function DataTable({ records, title, sqlQuery }: DataTableProps) {
                       ))}
                     </div>
                   </TableCell>
-                  <TableCell>
-                    <div className="flex gap-1 flex-wrap">
-                      {r.missingFields.map(f => (
-                        <Badge key={f} variant="outline" className="text-xs border-destructive/40 text-destructive">{f}</Badge>
-                      ))}
-                    </div>
-                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
