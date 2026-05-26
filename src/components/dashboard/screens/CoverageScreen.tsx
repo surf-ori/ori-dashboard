@@ -17,7 +17,7 @@ interface Props {
 
 export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
   const { interventions } = useDashboardData();
-  const { coverageComparisons, completenessTimeline, detailRecords } = useFilteredData(filters);
+  const { coverageComparisons, coverageTimeline, detailRecords } = useFilteredData(filters);
   const primarySource = filters.source;
   const [selectedComparison, setSelectedComparison] = useState<{ comparison: CoverageComparison; segment: string } | null>(null);
 
@@ -91,10 +91,9 @@ export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
             </p>
 
             <CoverageTimelineChart
-              dates={completenessTimeline}
-              comparison={selectedComparison.comparison}
+              data={coverageTimeline.filter(p => p.compareSource === cmp)}
               primarySource={primarySource}
-              comparedSource={selectedComparison.comparison.compareSource}
+              comparedSource={cmp}
             />
 
 

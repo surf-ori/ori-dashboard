@@ -4,6 +4,7 @@ import {
   completenessMetrics as defaultCompletenessMetrics,
   completenessTimeline as defaultCompletenessTimeline,
   coverageComparisons as defaultCoverageComparisons,
+  coverageTimeline as defaultCoverageTimeline,
   detailRecords as defaultDetailRecords,
   interventions as defaultInterventions,
   enrichmentEntities as defaultEnrichmentEntities,
@@ -15,6 +16,7 @@ import type {
   CompletenessMetric,
   TimelinePoint,
   CoverageComparison,
+  CoverageTimelinePoint,
   DetailRecord,
   Intervention,
   EnrichmentEntity,
@@ -33,6 +35,8 @@ interface DataContextValue {
   setCompletenessTimeline: (v: TimelinePoint[]) => void;
   coverageComparisons: CoverageComparison[];
   setCoverageComparisons: (v: CoverageComparison[]) => void;
+  coverageTimeline: CoverageTimelinePoint[];
+  setCoverageTimeline: (v: CoverageTimelinePoint[]) => void;
   detailRecords: DetailRecord[];
   setDetailRecords: (v: DetailRecord[]) => void;
   interventions: Intervention[];
@@ -57,6 +61,7 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
   const [completenessMetrics, setCompletenessMetrics] = useState<CompletenessMetric[]>(defaultCompletenessMetrics);
   const [completenessTimeline, setCompletenessTimeline] = useState<TimelinePoint[]>(defaultCompletenessTimeline);
   const [coverageComparisons, setCoverageComparisons] = useState<CoverageComparison[]>(defaultCoverageComparisons);
+  const [coverageTimeline, setCoverageTimeline] = useState<CoverageTimelinePoint[]>(defaultCoverageTimeline);
   const [detailRecords, setDetailRecords] = useState<DetailRecord[]>(defaultDetailRecords);
   const [interventions, setInterventions] = useState<Intervention[]>(defaultInterventions);
   const [enrichmentEntities, setEnrichmentEntities] = useState<EnrichmentEntity[]>(defaultEnrichmentEntities);
@@ -69,6 +74,7 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
     setCompletenessMetrics(defaultCompletenessMetrics);
     setCompletenessTimeline(defaultCompletenessTimeline);
     setCoverageComparisons(defaultCoverageComparisons);
+    setCoverageTimeline(defaultCoverageTimeline);
     setDetailRecords(defaultDetailRecords);
     setInterventions(defaultInterventions);
     setEnrichmentEntities(defaultEnrichmentEntities);
@@ -84,6 +90,7 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
         completenessMetrics, setCompletenessMetrics,
         completenessTimeline, setCompletenessTimeline,
         coverageComparisons, setCoverageComparisons,
+        coverageTimeline, setCoverageTimeline,
         detailRecords, setDetailRecords,
         interventions, setInterventions,
         enrichmentEntities, setEnrichmentEntities,
@@ -124,6 +131,7 @@ export function useFilteredData(filters: DashboardFilters) {
     completenessMetrics: ctx.completenessMetrics.filter(matches),
     completenessTimeline: ctx.completenessTimeline.filter(matches),
     coverageComparisons: ctx.coverageComparisons.filter(matches),
+    coverageTimeline: ctx.coverageTimeline.filter(matches),
     detailRecords: ctx.detailRecords.filter(matches),
     enrichmentEntities: ctx.enrichmentEntities.filter(matches),
     accuracyComparison: ctx.accuracyComparison.filter(matches),

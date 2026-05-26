@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { TimelineChart } from '@/components/dashboard/TimelineChart';
+import { CompletenessTimelineChart, FIELD_COLORS } from '@/components/dashboard/CompletenessTimelineChart';
 import { CompletenessRecordsTable } from '@/components/dashboard/CompletenessRecordsTable';
 import { InterventionPanel } from '@/components/dashboard/InterventionPanel';
 import { FilterSummary } from '@/components/dashboard/FilterSummary';
@@ -52,41 +52,48 @@ export function CompletenessScreen({ filters }: Props) {
       <FilterSummary filters={filters} recordCount={totalRecords} />
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-        {completenessMetrics.map(m => (
-          <button
-            key={m.field}
-            onClick={() => setSelectedField(m.field)}
-            className={cn(
-              'text-left rounded-2xl border border-border-soft bg-card p-4 transition-all hover:shadow-surf',
-              selectedField === m.field && 'border-primary bg-[hsl(var(--primary-050))]'
-            )}
-          >
-            <p className="text-[11px] font-semibold uppercase tracking-[0.08em] text-primary">{m.label}</p>
-            <p className={cn(
-              'font-display text-2xl font-extrabold mt-1.5',
-              m.percentage >= 80 ? 'text-success' : m.percentage >= 50 ? 'text-surf-orange-700' : 'text-destructive'
-            )}>
-              {m.percentage}%
-            </p>
-            <p className="text-xs mt-1" style={{ color: 'hsl(var(--muted-foreground))' }}>
-              {m.filled.toLocaleString()} / {m.total.toLocaleString()}
-            </p>
-          </button>
-        ))}
+        {completenessMetrics.map(m => {
+          const isSelected = selectedField === m.field;
+          const color = FIELD_COLORS[m.field] ?? 'hsl(var(--primary))';
+          return (
+            <button
+              key={m.field}
+              onClick={() => setSelectedField(m.field)}
+              className={cn(
+                'text-left rounded-2xl border bg-card p-4 transition-all hover:shadow-surf border-l-4',
+                isSelected ? 'border-primary shadow-surf' : 'border-border-soft',
+              )}
+              style={{ borderLeftColor: color }}
+            >
+              <p className="text-[11px] font-semibold uppercase tracking-[0.08em]" style={{ color }}>
+                {m.label}
+              </p>
+              <p className={cn(
+                'font-display text-2xl font-extrabold mt-1.5',
+                m.percentage >= 80 ? 'text-success' : m.percentage >= 50 ? 'text-surf-orange-700' : 'text-destructive'
+              )}>
+                {m.percentage}%
+              </p>
+              <p className="text-xs mt-1" style={{ color: 'hsl(var(--muted-foreground))' }}>
+                {m.filled.toLocaleString()} / {m.total.toLocaleString()}
+              </p>
+            </button>
+          );
+        })}
       </div>
 
       {selectedMetric && (
         <>
-          <TimelineChart
-            data={completenessTimeline}
-            title={`${selectedMetric.label} — progress of interventions over time`}
-            description={`Shows the effect of interventions to add or correct ${selectedMetric.label} in ${filters.source} records. The line should trend upward as missing metadata is filled in across successive harvests and source snapshots.`}
-            valueLabel={`${selectedMetric.label} present`}
+          <CompletenessTimelineChart
+            timeline={completenessTimeline}
+            metrics={completenessMetrics}
+            selectedField={selectedField}
+            primarySource={filters.source}
           />
 
           <CompletenessRecordsTable
             records={filteredRecords}
-            title={`Records Missing: ${selectedMetric.label}`}
+            title={`Metadata field missing: where ${filters.source} records have no ${selectedMetric.label}`}
             selectedField={selectedField}
             selectedFieldLabel={selectedMetric.label}
             primarySource={filters.source}

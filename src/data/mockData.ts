@@ -1,4 +1,4 @@
-import type { Organisation, CompletenessMetric, TimelinePoint, CoverageComparison, DetailRecord, Intervention, Source, EnrichmentEntity, AccuracyComparison, OverviewCard } from './types';
+import type { Organisation, CompletenessMetric, TimelinePoint, CoverageComparison, CoverageTimelinePoint, DetailRecord, Intervention, Source, EnrichmentEntity, AccuracyComparison, OverviewCard } from './types';
 
 // Dutch signatories of the Barcelona Declaration on Open Research Information
 // Source: https://barcelona-declaration.org/signatories_by_country/
@@ -58,16 +58,71 @@ export const completenessMetrics: CompletenessMetric[] = [
   { ...fcRug, field: 'correspondingAuthor', label: 'Corresponding Author', percentage: 49.2, total: 315857, filled: 155402 },
 ];
 
-export const completenessTimeline: TimelinePoint[] = [
-  { ...fc, date: '2020-Q1', value: 71.2 }, { ...fc, date: '2020-Q2', value: 72.8 }, { ...fc, date: '2020-Q3', value: 73.1 }, { ...fc, date: '2020-Q4', value: 74.5 },
-  { ...fc, date: '2021-Q1', value: 75.3 }, { ...fc, date: '2021-Q2', value: 76.9 }, { ...fc, date: '2021-Q3', value: 78.2 }, { ...fc, date: '2021-Q4', value: 79.1 },
-  { ...fc, date: '2022-Q1', value: 80.4 }, { ...fc, date: '2022-Q2', value: 81.7 }, { ...fc, date: '2022-Q3', value: 82.3 }, { ...fc, date: '2022-Q4', value: 83.6 },
-  { ...fc, date: '2023-Q1', value: 84.1 }, { ...fc, date: '2023-Q2', value: 85.2 }, { ...fc, date: '2023-Q3', value: 86.0 }, { ...fc, date: '2023-Q4', value: 87.3 },
-  { ...fcRug, date: '2020-Q1', value: 73.5 }, { ...fcRug, date: '2020-Q2', value: 74.6 }, { ...fcRug, date: '2020-Q3', value: 75.2 }, { ...fcRug, date: '2020-Q4', value: 76.1 },
-  { ...fcRug, date: '2021-Q1', value: 77.4 }, { ...fcRug, date: '2021-Q2', value: 78.5 }, { ...fcRug, date: '2021-Q3', value: 79.8 }, { ...fcRug, date: '2021-Q4', value: 80.6 },
-  { ...fcRug, date: '2022-Q1', value: 81.9 }, { ...fcRug, date: '2022-Q2', value: 83.0 }, { ...fcRug, date: '2022-Q3', value: 83.8 }, { ...fcRug, date: '2022-Q4', value: 84.7 },
-  { ...fcRug, date: '2023-Q1', value: 85.5 }, { ...fcRug, date: '2023-Q2', value: 86.6 }, { ...fcRug, date: '2023-Q3', value: 87.8 }, { ...fcRug, date: '2023-Q4', value: 89.1 },
+const TIMELINE_DATES = [
+  '2020-Q1','2020-Q2','2020-Q3','2020-Q4',
+  '2021-Q1','2021-Q2','2021-Q3','2021-Q4',
+  '2022-Q1','2022-Q2','2022-Q3','2022-Q4',
+  '2023-Q1','2023-Q2','2023-Q3','2023-Q4',
 ];
+
+// Per-field starting points (pp below the current value at 2020-Q1).
+const FIELD_GROWTH_PP: Record<string, number> = {
+  doi: 16, orcid: 28, ror: 22, grantDoi: 14, issn: 8, oaStatus: 18, correspondingAuthor: 24,
+};
+
+function buildCompletenessTimeline(ctx: typeof fc | typeof fcRug, metrics: CompletenessMetric[]): TimelinePoint[] {
+  const out: TimelinePoint[] = [];
+  metrics.filter(m => m.filterOrganisationRORID === ctx.filterOrganisationRORID).forEach(m => {
+    const end = m.percentage;
+    const start = Math.max(0, end - (FIELD_GROWTH_PP[m.field] ?? 15));
+    const n = TIMELINE_DATES.length;
+    TIMELINE_DATES.forEach((date, i) => {
+      const t = i / (n - 1);
+      // Gentle ease so the line isn't perfectly linear.
+      const eased = t * t * (3 - 2 * t);
+      const value = +(start + (end - start) * eased).toFixed(1);
+      out.push({ ...ctx, field: m.field, date, value });
+    });
+  });
+  return out;
+}
+
+export const completenessTimeline: TimelinePoint[] = [
+  ...buildCompletenessTimeline(fc, completenessMetrics),
+  ...buildCompletenessTimeline(fcRug, completenessMetrics),
+];
+
+// Coverage progress over time — percentage shares of the three overlap segments per
+// (organisation, compared source). Interpolated to show interventions improving "in both"
+// while "only in primary" / "only in compared" trend downward.
+function buildCoverageTimeline(ctx: typeof fc | typeof fcRug, comps: CoverageComparison[]): CoverageTimelinePoint[] {
+  const out: CoverageTimelinePoint[] = [];
+  comps.filter(c => c.filterOrganisationRORID === ctx.filterOrganisationRORID).forEach(c => {
+    const total = c.onlyInPrimary + c.inBoth + c.onlyInCompared || 1;
+    const endBoth = (c.inBoth / total) * 100;
+    const endOnlyP = (c.onlyInPrimary / total) * 100;
+    const endOnlyC = (c.onlyInCompared / total) * 100;
+    const shift = Math.min(18, endBoth);
+    const startBoth = Math.max(0, endBoth - shift);
+    const onlySum = endOnlyP + endOnlyC || 1;
+    const startOnlyP = endOnlyP + shift * (endOnlyP / onlySum);
+    const startOnlyC = endOnlyC + shift * (endOnlyC / onlySum);
+    const n = TIMELINE_DATES.length;
+    TIMELINE_DATES.forEach((date, i) => {
+      const t = i / (n - 1);
+      const eased = t * t * (3 - 2 * t);
+      out.push({
+        ...ctx,
+        compareSource: c.compareSource,
+        date,
+        inBoth: +(startBoth + (endBoth - startBoth) * eased).toFixed(1),
+        onlyInPrimary: +(startOnlyP + (endOnlyP - startOnlyP) * eased).toFixed(1),
+        onlyInCompared: +(startOnlyC + (endOnlyC - startOnlyC) * eased).toFixed(1),
+      });
+    });
+  });
+  return out;
+}
 
 // With CRIS as the default primary source, comparison list includes OpenAlex (swapped in for CRIS)
 export const coverageComparisons: CoverageComparison[] = [
@@ -77,6 +132,11 @@ export const coverageComparisons: CoverageComparison[] = [
   { ...fcRug, compareSource: 'OpenAlex', onlyInPrimary: 152429, inBoth: 163428, onlyInCompared: 11000, total: 326857 },
   { ...fcRug, compareSource: 'Crossref', onlyInPrimary: 38214, inBoth: 277643, onlyInCompared: 7800, total: 323657 },
   { ...fcRug, compareSource: 'OpenAIRE', onlyInPrimary: 65872, inBoth: 249985, onlyInCompared: 25400, total: 341257 },
+];
+
+export const coverageTimeline: CoverageTimelinePoint[] = [
+  ...buildCoverageTimeline(fc, coverageComparisons),
+  ...buildCoverageTimeline(fcRug, coverageComparisons),
 ];
 
 export const detailRecords: DetailRecord[] = [
