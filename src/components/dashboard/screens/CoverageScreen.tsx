@@ -91,10 +91,9 @@ export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
             </p>
 
             <CoverageTimelineChart
-              dates={completenessTimeline}
-              comparison={selectedComparison.comparison}
+              data={coverageTimeline.filter(p => p.compareSource === cmp)}
               primarySource={primarySource}
-              comparedSource={selectedComparison.comparison.compareSource}
+              comparedSource={cmp}
             />
 
 
