@@ -124,10 +124,6 @@ function buildCoverageTimeline(ctx: typeof fc | typeof fcRug, comps: CoverageCom
   return out;
 }
 
-export const coverageTimeline: CoverageTimelinePoint[] = [];
-
-
-
 // With CRIS as the default primary source, comparison list includes OpenAlex (swapped in for CRIS)
 export const coverageComparisons: CoverageComparison[] = [
   { ...fc, compareSource: 'OpenAlex', onlyInPrimary: 77386, inBoth: 139023, onlyInCompared: 41200, total: 257609 },
@@ -136,6 +132,11 @@ export const coverageComparisons: CoverageComparison[] = [
   { ...fcRug, compareSource: 'OpenAlex', onlyInPrimary: 152429, inBoth: 163428, onlyInCompared: 11000, total: 326857 },
   { ...fcRug, compareSource: 'Crossref', onlyInPrimary: 38214, inBoth: 277643, onlyInCompared: 7800, total: 323657 },
   { ...fcRug, compareSource: 'OpenAIRE', onlyInPrimary: 65872, inBoth: 249985, onlyInCompared: 25400, total: 341257 },
+];
+
+export const coverageTimeline: CoverageTimelinePoint[] = [
+  ...buildCoverageTimeline(fc, coverageComparisons),
+  ...buildCoverageTimeline(fcRug, coverageComparisons),
 ];
 
 export const detailRecords: DetailRecord[] = [
