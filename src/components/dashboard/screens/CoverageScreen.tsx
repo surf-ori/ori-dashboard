@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { CoverageBarChart } from '@/components/dashboard/CoverageBarChart';
-import { TimelineChart } from '@/components/dashboard/TimelineChart';
+import { CoverageTimelineChart } from '@/components/dashboard/CoverageTimelineChart';
 import { DataTable } from '@/components/dashboard/DataTable';
 import { InterventionPanel } from '@/components/dashboard/InterventionPanel';
 import { FilterSummary } from '@/components/dashboard/FilterSummary';
