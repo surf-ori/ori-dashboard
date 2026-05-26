@@ -1,10 +1,9 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import type { CoverageComparison, TimelinePoint } from '@/data/types';
+import type { CoverageTimelinePoint } from '@/data/types';
 
 interface Props {
-  dates: TimelinePoint[];
-  comparison: CoverageComparison;
+  data: CoverageTimelinePoint[];
   primarySource: string;
   comparedSource: string;
 }
@@ -14,34 +13,7 @@ const SURF_BLUE = 'hsl(203, 100%, 38%)';
 const SURF_ORANGE = 'hsl(30, 100%, 45%)';
 const SURF_GREEN = 'hsl(146, 100%, 27%)';
 
-export function CoverageTimelineChart({ dates, comparison, primarySource, comparedSource }: Props) {
-  const total = comparison.onlyInPrimary + comparison.inBoth + comparison.onlyInCompared || 1;
-  const endBoth = (comparison.inBoth / total) * 100;
-  const endOnlyP = (comparison.onlyInPrimary / total) * 100;
-  const endOnlyC = (comparison.onlyInCompared / total) * 100;
-
-  // Synthesize a plausible progression: "both" started lower, "only" sides started higher.
-  // Shift 18 percentage points worth of share from the "only" buckets into "both" over time.
-  const shift = Math.min(18, endBoth);
-  const startBoth = Math.max(0, endBoth - shift);
-  const onlySum = endOnlyP + endOnlyC || 1;
-  const startOnlyP = endOnlyP + shift * (endOnlyP / onlySum);
-  const startOnlyC = endOnlyC + shift * (endOnlyC / onlySum);
-
-  const n = Math.max(2, dates.length);
-  const data = dates.map((d, i) => {
-    const t = i / (n - 1);
-    const both = startBoth + (endBoth - startBoth) * t;
-    const onlyP = startOnlyP + (endOnlyP - startOnlyP) * t;
-    const onlyC = startOnlyC + (endOnlyC - startOnlyC) * t;
-    return {
-      date: d.date,
-      both: +both.toFixed(1),
-      onlyPrimary: +onlyP.toFixed(1),
-      onlyCompared: +onlyC.toFixed(1),
-    };
-  });
-
+export function CoverageTimelineChart({ data, primarySource, comparedSource }: Props) {
   return (
     <Card>
       <CardHeader className="pb-2">
@@ -64,22 +36,22 @@ export function CoverageTimelineChart({ dates, comparison, primarySource, compar
               <Tooltip
                 formatter={(value: number, name: string) => {
                   const label =
-                    name === 'both' ? `In both ${primarySource} & ${comparedSource}`
-                    : name === 'onlyPrimary' ? `Only in ${primarySource}`
+                    name === 'inBoth' ? `In both ${primarySource} & ${comparedSource}`
+                    : name === 'onlyInPrimary' ? `Only in ${primarySource}`
                     : `Only in ${comparedSource}`;
-                  return [`${value.toFixed(1)}%`, label];
+                  return [`${(value as number).toFixed(1)}%`, label];
                 }}
               />
               <Legend
                 formatter={(value: string) =>
-                  value === 'both' ? `In both ${primarySource} & ${comparedSource} (should go up)`
-                  : value === 'onlyPrimary' ? `Only in ${primarySource} (should go down)`
+                  value === 'inBoth' ? `In both ${primarySource} & ${comparedSource} (should go up)`
+                  : value === 'onlyInPrimary' ? `Only in ${primarySource} (should go down)`
                   : `Only in ${comparedSource} (should go down)`
                 }
               />
-              <Line type="monotone" dataKey="onlyPrimary" stroke={SURF_BLUE} strokeWidth={2} dot={{ r: 3 }} activeDot={{ r: 5 }} />
-              <Line type="monotone" dataKey="both" stroke={SURF_ORANGE} strokeWidth={2.5} dot={{ r: 3 }} activeDot={{ r: 5 }} />
-              <Line type="monotone" dataKey="onlyCompared" stroke={SURF_GREEN} strokeWidth={2} dot={{ r: 3 }} activeDot={{ r: 5 }} />
+              <Line type="monotone" dataKey="onlyInPrimary" stroke={SURF_BLUE} strokeWidth={2} dot={{ r: 3 }} activeDot={{ r: 5 }} />
+              <Line type="monotone" dataKey="inBoth" stroke={SURF_ORANGE} strokeWidth={2.5} dot={{ r: 3 }} activeDot={{ r: 5 }} />
+              <Line type="monotone" dataKey="onlyInCompared" stroke={SURF_GREEN} strokeWidth={2} dot={{ r: 3 }} activeDot={{ r: 5 }} />
             </LineChart>
           </ResponsiveContainer>
         </div>
