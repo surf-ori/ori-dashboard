@@ -74,6 +74,7 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
     setCompletenessMetrics(defaultCompletenessMetrics);
     setCompletenessTimeline(defaultCompletenessTimeline);
     setCoverageComparisons(defaultCoverageComparisons);
+    setCoverageTimeline(defaultCoverageTimeline);
     setDetailRecords(defaultDetailRecords);
     setInterventions(defaultInterventions);
     setEnrichmentEntities(defaultEnrichmentEntities);
