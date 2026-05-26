@@ -98,6 +98,27 @@ export const detailRecords: DetailRecord[] = [
   { ...fcRug, id: 'rug-006', title: 'Marine Microbiology of the North Sea', doi: '10.7890/marine-rug-2023', authors: 'Stomp, M.; Huisman, J.', year: 2023, sources: ['CRIS', 'OpenAlex', 'Crossref', 'OpenAIRE'], missingFields: [] },
 ];
 
+// Populate per-source missing fields deterministically so the Completeness page can show
+// cross-source presence/absence (e.g. CRIS missing ROR but OpenAlex has it → enrichable).
+const ALL_METADATA_FIELDS = ['doi', 'orcid', 'ror', 'grantDoi', 'issn', 'oaStatus', 'correspondingAuthor'] as const;
+detailRecords.forEach(rec => {
+  const seed = rec.id.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+  const bySource: Partial<Record<Source, string[]>> = {};
+  rec.sources.forEach((src, sIdx) => {
+    if (src === 'CRIS') {
+      // Primary source — reflect the record's headline missingFields
+      bySource[src] = [...rec.missingFields];
+    } else {
+      // Other sources — different but overlapping pattern, generally more complete
+      const missing = ALL_METADATA_FIELDS.filter(
+        (_f, fIdx) => ((seed + sIdx * 5 + fIdx * 11) % 6) === 0,
+      );
+      bySource[src] = missing;
+    }
+  });
+  rec.missingFieldsBySource = bySource;
+});
+
 export const interventions: Intervention[] = [
   // Generic / cross-page (kept for Enrichment and Accuracy panels)
   { id: 'int-001', page: 'Enrichment', title: 'Add DOIs via Crossref registration', description: 'Register publications with Crossref to obtain DOIs for records currently missing them. This improves discoverability and linking across systems.', effort: 'Medium', impact: 'High', actionUrl: 'https://www.crossref.org/documentation/', actionLabel: 'Crossref Docs' },
