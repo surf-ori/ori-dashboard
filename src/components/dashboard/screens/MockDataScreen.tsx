@@ -80,6 +80,16 @@ export function MockDataScreen() {
       </Card>
 
       <Card>
+        <CardHeader>
+          <CardTitle className="text-base">Coverage timeline</CardTitle>
+          <p className="text-xs text-muted-foreground">Progress of overlap segments per compared source over time. Drives the line chart on the Coverage page.</p>
+        </CardHeader>
+        <CardContent>
+          <EditableTable rows={d.coverageTimeline} onChange={d.setCoverageTimeline} />
+        </CardContent>
+      </Card>
+
+      <Card>
         <CardHeader><CardTitle className="text-base">Detail records</CardTitle></CardHeader>
         <CardContent>
           <EditableTable rows={d.detailRecords} onChange={d.setDetailRecords} />
