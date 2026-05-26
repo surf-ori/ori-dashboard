@@ -88,8 +88,44 @@ function buildCompletenessTimeline(ctx: typeof fc | typeof fcRug, metrics: Compl
 }
 
 export const completenessTimeline: TimelinePoint[] = [
-  ...buildCompletenessTimeline(fc, []),
+  ...buildCompletenessTimeline(fc, completenessMetrics),
+  ...buildCompletenessTimeline(fcRug, completenessMetrics),
 ];
+
+// Coverage progress over time — percentage shares of the three overlap segments per
+// (organisation, compared source). Interpolated to show interventions improving "in both"
+// while "only in primary" / "only in compared" trend downward.
+function buildCoverageTimeline(ctx: typeof fc | typeof fcRug, comps: CoverageComparison[]): CoverageTimelinePoint[] {
+  const out: CoverageTimelinePoint[] = [];
+  comps.filter(c => c.filterOrganisationRORID === ctx.filterOrganisationRORID).forEach(c => {
+    const total = c.onlyInPrimary + c.inBoth + c.onlyInCompared || 1;
+    const endBoth = (c.inBoth / total) * 100;
+    const endOnlyP = (c.onlyInPrimary / total) * 100;
+    const endOnlyC = (c.onlyInCompared / total) * 100;
+    const shift = Math.min(18, endBoth);
+    const startBoth = Math.max(0, endBoth - shift);
+    const onlySum = endOnlyP + endOnlyC || 1;
+    const startOnlyP = endOnlyP + shift * (endOnlyP / onlySum);
+    const startOnlyC = endOnlyC + shift * (endOnlyC / onlySum);
+    const n = TIMELINE_DATES.length;
+    TIMELINE_DATES.forEach((date, i) => {
+      const t = i / (n - 1);
+      const eased = t * t * (3 - 2 * t);
+      out.push({
+        ...ctx,
+        compareSource: c.compareSource,
+        date,
+        inBoth: +(startBoth + (endBoth - startBoth) * eased).toFixed(1),
+        onlyInPrimary: +(startOnlyP + (endOnlyP - startOnlyP) * eased).toFixed(1),
+        onlyInCompared: +(startOnlyC + (endOnlyC - startOnlyC) * eased).toFixed(1),
+      });
+    });
+  });
+  return out;
+}
+
+export const coverageTimeline: CoverageTimelinePoint[] = [];
+
 
 
 // With CRIS as the default primary source, comparison list includes OpenAlex (swapped in for CRIS)
