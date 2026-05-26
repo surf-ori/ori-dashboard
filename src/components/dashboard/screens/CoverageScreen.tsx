@@ -92,9 +92,12 @@ export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
 
             <TimelineChart
               data={completenessTimeline}
-              title={`Coverage Over Time: ${primarySource} ↔ ${selectedComparison.comparison.compareSource}`}
+              title={`Progress of interventions: ${primarySource} ↔ ${selectedComparison.comparison.compareSource}`}
+              description={`Tracks the effect of interventions on overlap between ${primarySource} and ${selectedComparison.comparison.compareSource}. As records are added where they were missing, the "only in ${primarySource}" and "only in ${selectedComparison.comparison.compareSource}" shares should go down, and the "in both" share should go up.`}
+              valueLabel="Share of records"
               color="hsl(var(--accent))"
             />
+
 
             <DataTable
               records={segmentRecords.slice(0, 10)}
