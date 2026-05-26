@@ -81,9 +81,12 @@ export function CompletenessScreen({ filters }: Props) {
             data={completenessTimeline}
             title={`${selectedMetric.label} — Completeness Over Time`}
           />
-          <DataTable
+          <CompletenessRecordsTable
             records={filteredRecords}
             title={`Records Missing: ${selectedMetric.label}`}
+            selectedField={selectedField}
+            selectedFieldLabel={selectedMetric.label}
+            primarySource={filters.source}
             sqlQuery={mockQuery}
           />
           <InterventionPanel interventions={pageInterventions} />
