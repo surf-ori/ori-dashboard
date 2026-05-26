@@ -54,6 +54,11 @@ export interface DetailRecord extends FilterContext {
   year: number;
   sources: Source[];
   missingFields: string[];
+  /**
+   * For each source where the record exists, which metadata fields are missing in that source.
+   * Enables cross-source presence/absence comparison on the Completeness page.
+   */
+  missingFieldsBySource?: Partial<Record<Source, string[]>>;
 }
 
 export type InterventionPage = 'Coverage' | 'Completeness' | 'Enrichment' | 'Accuracy';
