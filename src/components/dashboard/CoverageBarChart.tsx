@@ -16,9 +16,9 @@ const SURF_GREEN = 'hsl(146, 100%, 27%)';     // success
 export function CoverageBarChart({ data, primarySource, onBarClick }: CoverageBarChartProps) {
   const chartData = data.map(d => ({
     name: d.compareSource,
-    [`Only in ${primarySource}`]: d.onlyInPrimary,
-    'In Both': d.inBoth,
-    [`Only in compared`]: d.onlyInCompared,
+    [`Only in ${primarySource} (not in ${d.compareSource})`]: d.onlyInPrimary,
+    [`In both ${primarySource} and ${d.compareSource}`]: d.inBoth,
+    [`Only in ${d.compareSource} (not in ${primarySource})`]: d.onlyInCompared,
     _raw: d,
   }));
 
