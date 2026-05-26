@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { TimelineChart } from '@/components/dashboard/TimelineChart';
-import { DataTable } from '@/components/dashboard/DataTable';
+import { CompletenessRecordsTable } from '@/components/dashboard/CompletenessRecordsTable';
 import { InterventionPanel } from '@/components/dashboard/InterventionPanel';
 import { FilterSummary } from '@/components/dashboard/FilterSummary';
 import { useDashboardData, useFilteredData } from '@/data/DataContext';
@@ -24,7 +24,10 @@ export function CompletenessScreen({ filters }: Props) {
   const { completenessMetrics, completenessTimeline, detailRecords } = useFilteredData(filters);
   const [selectedField, setSelectedField] = useState('doi');
   const selectedMetric = completenessMetrics.find(m => m.field === selectedField);
-  const filteredRecords = detailRecords.filter(r => r.missingFields.includes(selectedField));
+  const filteredRecords = detailRecords.filter(r => {
+    const missingInPrimary = r.missingFieldsBySource?.[filters.source] ?? r.missingFields;
+    return missingInPrimary.includes(selectedField);
+  });
   const totalRecords = completenessMetrics[0]?.total ?? 0;
   const selectedEntity = fieldToMetadataEntity[selectedField];
   const pageInterventions = interventions.filter(
@@ -78,9 +81,12 @@ export function CompletenessScreen({ filters }: Props) {
             data={completenessTimeline}
             title={`${selectedMetric.label} — Completeness Over Time`}
           />
-          <DataTable
+          <CompletenessRecordsTable
             records={filteredRecords}
             title={`Records Missing: ${selectedMetric.label}`}
+            selectedField={selectedField}
+            selectedFieldLabel={selectedMetric.label}
+            primarySource={filters.source}
             sqlQuery={mockQuery}
           />
           <InterventionPanel interventions={pageInterventions} />
