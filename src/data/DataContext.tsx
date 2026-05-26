@@ -131,6 +131,7 @@ export function useFilteredData(filters: DashboardFilters) {
     completenessMetrics: ctx.completenessMetrics.filter(matches),
     completenessTimeline: ctx.completenessTimeline.filter(matches),
     coverageComparisons: ctx.coverageComparisons.filter(matches),
+    coverageTimeline: ctx.coverageTimeline.filter(matches),
     detailRecords: ctx.detailRecords.filter(matches),
     enrichmentEntities: ctx.enrichmentEntities.filter(matches),
     accuracyComparison: ctx.accuracyComparison.filter(matches),
