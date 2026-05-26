@@ -90,6 +90,7 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
         completenessMetrics, setCompletenessMetrics,
         completenessTimeline, setCompletenessTimeline,
         coverageComparisons, setCoverageComparisons,
+        coverageTimeline, setCoverageTimeline,
         detailRecords, setDetailRecords,
         interventions, setInterventions,
         enrichmentEntities, setEnrichmentEntities,
