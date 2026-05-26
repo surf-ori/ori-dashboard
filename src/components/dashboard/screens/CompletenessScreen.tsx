@@ -24,7 +24,10 @@ export function CompletenessScreen({ filters }: Props) {
   const { completenessMetrics, completenessTimeline, detailRecords } = useFilteredData(filters);
   const [selectedField, setSelectedField] = useState('doi');
   const selectedMetric = completenessMetrics.find(m => m.field === selectedField);
-  const filteredRecords = detailRecords.filter(r => r.missingFields.includes(selectedField));
+  const filteredRecords = detailRecords.filter(r => {
+    const missingInPrimary = r.missingFieldsBySource?.[filters.source] ?? r.missingFields;
+    return missingInPrimary.includes(selectedField);
+  });
   const totalRecords = completenessMetrics[0]?.total ?? 0;
   const selectedEntity = fieldToMetadataEntity[selectedField];
   const pageInterventions = interventions.filter(
