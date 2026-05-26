@@ -29,10 +29,10 @@ export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
 
   const segmentLabel = selectedComparison
     ? selectedComparison.segment === 'onlyInPrimary'
-      ? `Only in ${primarySource}`
+      ? `Only in ${primarySource} — NOT in ${selectedComparison.comparison.compareSource}`
       : selectedComparison.segment === 'inBoth'
-        ? 'In Both Sources'
-        : `Only in ${selectedComparison.comparison.compareSource}`
+        ? `In both ${primarySource} and ${selectedComparison.comparison.compareSource}`
+        : `Only in ${selectedComparison.comparison.compareSource} — NOT in ${primarySource}`
     : '';
 
   return (
