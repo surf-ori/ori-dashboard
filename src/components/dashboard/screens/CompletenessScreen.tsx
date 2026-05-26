@@ -79,8 +79,11 @@ export function CompletenessScreen({ filters }: Props) {
         <>
           <TimelineChart
             data={completenessTimeline}
-            title={`${selectedMetric.label} — Completeness Over Time`}
+            title={`${selectedMetric.label} — progress of interventions over time`}
+            description={`Shows the effect of interventions to add or correct ${selectedMetric.label} in ${filters.source} records. The line should trend upward as missing metadata is filled in across successive harvests and source snapshots.`}
+            valueLabel={`${selectedMetric.label} present`}
           />
+
           <CompletenessRecordsTable
             records={filteredRecords}
             title={`Records Missing: ${selectedMetric.label}`}
