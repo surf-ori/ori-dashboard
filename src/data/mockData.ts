@@ -105,16 +105,11 @@ detailRecords.forEach(rec => {
   const seed = rec.id.split('').reduce((a, c) => a + c.charCodeAt(0), 0);
   const bySource: Partial<Record<Source, string[]>> = {};
   rec.sources.forEach((src, sIdx) => {
-    if (src === 'CRIS') {
-      // Primary source — reflect the record's headline missingFields
-      bySource[src] = [...rec.missingFields];
-    } else {
-      // Other sources — different but overlapping pattern, generally more complete
-      const missing = ALL_METADATA_FIELDS.filter(
-        (_f, fIdx) => ((seed + sIdx * 5 + fIdx * 11) % 6) === 0,
-      );
-      bySource[src] = missing;
-    }
+    const offset = src === 'CRIS' ? 0 : sIdx * 5;
+    const missing = ALL_METADATA_FIELDS.filter(
+      (_f, fIdx) => ((seed + offset + fIdx * 11) % (src === 'CRIS' ? 4 : 6)) === 0,
+    );
+    bySource[src] = missing;
   });
   rec.missingFieldsBySource = bySource;
 });
