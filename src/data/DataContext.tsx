@@ -35,6 +35,8 @@ interface DataContextValue {
   setCompletenessTimeline: (v: TimelinePoint[]) => void;
   coverageComparisons: CoverageComparison[];
   setCoverageComparisons: (v: CoverageComparison[]) => void;
+  coverageTimeline: CoverageTimelinePoint[];
+  setCoverageTimeline: (v: CoverageTimelinePoint[]) => void;
   detailRecords: DetailRecord[];
   setDetailRecords: (v: DetailRecord[]) => void;
   interventions: Intervention[];
