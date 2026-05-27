@@ -175,12 +175,24 @@ detailRecords.forEach(rec => {
 });
 
 export const interventions: Intervention[] = [
-  // Generic / cross-page (kept for Enrichment and Accuracy panels)
-  { id: 'int-001', page: 'Enrichment', title: 'Add DOIs via Crossref registration', description: 'Register publications with Crossref to obtain DOIs for records currently missing them. This improves discoverability and linking across systems.', effort: 'Medium', impact: 'High', actionUrl: 'https://www.crossref.org/documentation/', actionLabel: 'Crossref Docs' },
-  { id: 'int-002', page: 'Enrichment', title: 'Link ORCID profiles to publications', description: 'Encourage researchers to claim their publications in ORCID, or use institutional ORCID integration to auto-link.', effort: 'Low', impact: 'High', actionUrl: 'https://orcid.org/', actionLabel: 'ORCID Portal' },
+  // Accuracy interventions
   { id: 'int-003', page: 'Accuracy', title: 'Update ROR affiliations in CRIS', description: 'Ensure all institutional affiliations in CRIS use ROR identifiers for consistent linking.', effort: 'Low', impact: 'Medium', actionUrl: 'https://ror.org/', actionLabel: 'ROR Registry' },
-  { id: 'int-004', page: 'Enrichment', title: 'Enrich grant metadata via OpenAIRE', description: 'Use OpenAIRE APIs to match publications to funded projects and add grant DOIs.', effort: 'High', impact: 'Medium', actionUrl: 'https://api.openaire.eu/', actionLabel: 'OpenAIRE API' },
   { id: 'int-005', page: 'Accuracy', title: 'Resolve DOI conflicts', description: 'Use the DOI resolver to check and fix broken or redirected DOIs in your records.', effort: 'Medium', impact: 'Medium', actionUrl: 'https://doi.org/', actionLabel: 'DOI Resolver' },
+
+  // Enrichment interventions — per missing metadata entity in CRIS and the source it can be recovered from
+  { id: 'enr-doi-openaire', page: 'Enrichment', enrichmentEntity: 'doi', enrichmentRecoverableFrom: 'OpenAIRE', title: 'Recover missing DOIs from OpenAIRE', description: 'Match CRIS records to OpenAIRE entries by title and authors, then write back the DOI surfaced by OpenAIRE\'s deduplication pipeline.', effort: 'Medium', impact: 'High', actionUrl: 'https://graph.openaire.eu/', actionLabel: 'OpenAIRE Graph' },
+  { id: 'enr-doi-openalex', page: 'Enrichment', enrichmentEntity: 'doi', enrichmentRecoverableFrom: 'OpenAlex', title: 'Recover missing DOIs from OpenAlex', description: 'Query OpenAlex by ROR id and title; persist the DOI returned for matched works back into your CRIS.', effort: 'Low', impact: 'High', actionUrl: 'https://docs.openalex.org', actionLabel: 'OpenAlex Docs' },
+  { id: 'enr-doi-crossref', page: 'Enrichment', enrichmentEntity: 'doi', enrichmentRecoverableFrom: 'Crossref', title: 'Recover missing DOIs from Crossref', description: 'Use the Crossref REST API with title + author + year to locate registered DOIs for records that are missing them in CRIS.', effort: 'Medium', impact: 'High', actionUrl: 'https://www.crossref.org/documentation/', actionLabel: 'Crossref Docs' },
+
+  { id: 'enr-orcid-openaire', page: 'Enrichment', enrichmentEntity: 'orcid', enrichmentRecoverableFrom: 'OpenAIRE', title: 'Recover author ORCID iDs from OpenAIRE', description: 'OpenAIRE harvests ORCID claims; join on DOI and copy ORCID values back into the CRIS author table.', effort: 'Low', impact: 'High' },
+  { id: 'enr-orcid-openalex', page: 'Enrichment', enrichmentEntity: 'orcid', enrichmentRecoverableFrom: 'OpenAlex', title: 'Recover author ORCID iDs from OpenAlex', description: 'Use OpenAlex authorships endpoint to pull verified ORCID iDs and link them to CRIS researchers.', effort: 'Low', impact: 'High', actionUrl: 'https://docs.openalex.org', actionLabel: 'OpenAlex Docs' },
+
+  { id: 'enr-ror-openaire', page: 'Enrichment', enrichmentEntity: 'ror', enrichmentRecoverableFrom: 'OpenAIRE', title: 'Recover ROR affiliations from OpenAIRE', description: 'OpenAIRE resolves affiliation strings to ROR ids; use this to backfill ROR ids missing from CRIS affiliations.', effort: 'Medium', impact: 'Medium' },
+  { id: 'enr-ror-openalex', page: 'Enrichment', enrichmentEntity: 'ror', enrichmentRecoverableFrom: 'OpenAlex', title: 'Recover ROR affiliations from OpenAlex', description: 'OpenAlex returns institution objects with ROR ids on every authorship. Match on DOI to enrich CRIS.', effort: 'Low', impact: 'Medium', actionUrl: 'https://ror.org', actionLabel: 'ROR' },
+
+  { id: 'enr-grant-openaire', page: 'Enrichment', enrichmentEntity: 'grantDoi', enrichmentRecoverableFrom: 'OpenAIRE', title: 'Recover grant DOIs from OpenAIRE', description: 'Use OpenAIRE Project Search and the Crossref Funder Registry to attach grant DOIs to publications in CRIS.', effort: 'High', impact: 'Medium', actionUrl: 'https://api.openaire.eu/', actionLabel: 'OpenAIRE API' },
+  { id: 'enr-grant-crossref', page: 'Enrichment', enrichmentEntity: 'grantDoi', enrichmentRecoverableFrom: 'Crossref', title: 'Recover grant DOIs from Crossref', description: 'Crossref exposes funder award ids on registered DOIs; harvest them and persist as grant DOIs in CRIS.', effort: 'Medium', impact: 'Medium', actionUrl: 'https://www.crossref.org/services/funder-registry/', actionLabel: 'Funder Registry' },
+
 
   // Coverage interventions — what to do when records appear only in one source and not in the compared one
   { id: 'cov-001', page: 'Coverage', coverageOnlyInSource: 'CRIS', coverageNotInCompared: 'OpenAlex', title: 'Push CRIS-only records to OpenAlex', description: 'Records present in CRIS but missing from OpenAlex usually lack a registered DOI. Mint Crossref DOIs from your CRIS so OpenAlex picks them up automatically.', effort: 'Medium', impact: 'High', actionUrl: 'https://www.crossref.org/', actionLabel: 'Crossref' },

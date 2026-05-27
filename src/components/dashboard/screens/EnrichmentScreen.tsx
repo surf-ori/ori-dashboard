@@ -102,7 +102,15 @@ export function EnrichmentScreen({ filters, onMatchingMethodChange }: Props) {
             title={`Records missing ${selected.entity.toUpperCase()} that can be enriched from ${selected.source}`}
             
           />
-          <InterventionPanel interventions={interventions.filter(i => i.page === 'Enrichment')} />
+          <InterventionPanel
+            interventions={interventions.filter(
+              i =>
+                i.page === 'Enrichment' &&
+                i.enrichmentEntity === selected.entity &&
+                i.enrichmentRecoverableFrom === selected.source,
+            )}
+          />
+
         </div>
       )}
     </div>
