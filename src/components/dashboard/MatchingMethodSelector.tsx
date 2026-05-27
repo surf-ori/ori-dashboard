@@ -1,4 +1,3 @@
-import { cn } from '@/lib/utils';
 import { Info } from 'lucide-react';
 import {
   HoverCard,
@@ -8,28 +7,23 @@ import {
 import type { MatchingMethod } from '@/data/types';
 
 interface MatchingMethodSelectorProps {
-  value: MatchingMethod;
-  onChange: (v: MatchingMethod) => void;
+  value?: MatchingMethod;
+  onChange?: (v: MatchingMethod) => void;
   className?: string;
 }
 
-const methods: { id: MatchingMethod; label: string }[] = [
-  { id: 'doi', label: 'DOI-based' },
-  { id: 'ror', label: 'ROR-based' },
-];
-
-export function MatchingMethodSelector({ value, onChange, className }: MatchingMethodSelectorProps) {
+export function MatchingMethodSelector({ className }: MatchingMethodSelectorProps) {
   return (
     <div className={className}>
-      <div className="flex items-center gap-1.5 mb-1.5">
+      <div className="flex items-center gap-1.5">
         <span className="text-[11px] font-semibold uppercase tracking-[0.08em] text-primary">
-          Matching method
+          ROR &amp; DOI based matching method
         </span>
         <HoverCard openDelay={120} closeDelay={80}>
           <HoverCardTrigger asChild>
             <button
               type="button"
-              aria-label="About matching methods"
+              aria-label="About the matching method"
               className="inline-flex h-4 w-4 items-center justify-center rounded-full text-[hsl(var(--foreground-2))] hover:text-foreground transition-colors"
             >
               <Info className="h-3.5 w-3.5" />
@@ -38,64 +32,31 @@ export function MatchingMethodSelector({ value, onChange, className }: MatchingM
           <HoverCardContent align="start" className="w-96 p-0 text-sm">
             <div className="p-4 border-b border-border">
               <div className="text-[11px] font-semibold uppercase tracking-[0.08em] text-primary mb-1">
-                ROR-based matching
+                Step 1 — Select records by ROR
               </div>
               <p className="text-[13px] leading-relaxed text-foreground">
-                The <strong>institution-level lens</strong>. Records are linked to your
-                organisation through a ROR identifier on the affiliation. Answers:
-                <em> which outputs belong to this institution?</em>
-              </p>
-              <p className="mt-2 text-[12px] leading-relaxed text-[hsl(var(--foreground-2))]">
-                <strong>Limitation:</strong> outputs can be missed when affiliation metadata
-                is absent or untagged with a ROR — not because the record is missing from
-                the source.
+                <strong>ROR</strong> is used to select the records belonging to the
+                organisation across the open sources (OpenAlex, OpenAIRE, Crossref). For
+                <strong> CRIS</strong>, no ROR filter is applied — all records in the
+                institution's CRIS are considered to be from that organisation.
               </p>
             </div>
             <div className="p-4">
               <div className="text-[11px] font-semibold uppercase tracking-[0.08em] text-primary mb-1">
-                DOI-based matching
+                Step 2 — Match records by DOI
               </div>
               <p className="text-[13px] leading-relaxed text-foreground">
-                The <strong>output-level lens</strong>. Records are matched across sources
-                by their DOI, enabling deduplication. Answers:
-                <em> where does this record appear?</em>
-              </p>
-              <p className="mt-2 text-[12px] leading-relaxed text-[hsl(var(--foreground-2))]">
-                <strong>Limitation:</strong> non-DOI outputs (datasets, theses, reports)
-                fall outside this view.
+                Once the organisation's records are selected per source, records are
+                matched across sources by their <strong>DOI</strong>. This DOI-based match
+                is what powers the comparisons for coverage, completeness, enrichment and
+                accuracy.
               </p>
             </div>
             <div className="px-4 py-2.5 border-t border-border bg-muted/40 text-[12px] leading-relaxed text-[hsl(var(--foreground-2))] rounded-b-md">
-              The two methods are <strong>complementary</strong> — use them together for a
-              fuller picture of coverage and completeness.
+              Non-DOI outputs (datasets, theses, reports) fall outside this matched view.
             </div>
           </HoverCardContent>
         </HoverCard>
-      </div>
-      <div
-        className="inline-flex rounded-lg border border-border bg-card p-1"
-        role="tablist"
-      >
-        {methods.map((m) => {
-          const active = value === m.id;
-          return (
-            <button
-              key={m.id}
-              type="button"
-              role="tab"
-              aria-selected={active}
-              onClick={() => onChange(m.id)}
-              className={cn(
-                'h-9 px-4 rounded-md text-[13px] font-bold transition-colors',
-                active
-                  ? 'bg-primary text-primary-foreground'
-                  : 'text-[hsl(var(--foreground-2))] hover:text-foreground',
-              )}
-            >
-              {m.label}
-            </button>
-          );
-        })}
       </div>
     </div>
   );
