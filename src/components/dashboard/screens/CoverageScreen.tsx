@@ -90,21 +90,27 @@ export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
                   : `appear in ${selectedComparison.comparison.compareSource} but are NOT present in ${primarySource}.`}
             </p>
 
-            <CoverageTimelineChart
-              data={coverageTimeline.filter(p => p.compareSource === cmp)}
-              primarySource={primarySource}
-              comparedSource={cmp}
-            />
-
-
-
             <DataTable
               records={segmentRecords.slice(0, 10)}
               title={`Records — ${segmentLabel}`}
             />
 
-
-            <InterventionPanel interventions={pageInterventions} />
+            <InterventionPanel
+              interventions={pageInterventions}
+              introText={
+                <>
+                  Interventions and their effect over time belong together. Apply the actions below to
+                  shift records from “only in one source” into the shared overlap — the timeline shows
+                  whether those efforts are paying off across successive harvests and snapshots.
+                </>
+              }
+            >
+              <CoverageTimelineChart
+                data={coverageTimeline.filter(p => p.compareSource === cmp)}
+                primarySource={primarySource}
+                comparedSource={cmp}
+              />
+            </InterventionPanel>
           </div>
         );
       })()}
