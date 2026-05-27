@@ -84,13 +84,6 @@ export function CompletenessScreen({ filters }: Props) {
 
       {selectedMetric && (
         <>
-          <CompletenessTimelineChart
-            timeline={completenessTimeline}
-            metrics={completenessMetrics}
-            selectedField={selectedField}
-            primarySource={filters.source}
-          />
-
           <CompletenessRecordsTable
             records={filteredRecords}
             title={`Metadata field missing: where ${filters.source} records have no ${selectedMetric.label}`}
@@ -99,7 +92,24 @@ export function CompletenessScreen({ filters }: Props) {
             primarySource={filters.source}
             sqlQuery={mockQuery}
           />
-          <InterventionPanel interventions={pageInterventions} />
+          <InterventionPanel
+            interventions={pageInterventions}
+            introText={
+              <>
+                Interventions and their effect over time belong together. The actions below aim to fill
+                missing <span className="font-medium">{selectedMetric.label}</span> values in{' '}
+                <span className="font-medium">{filters.source}</span> — the timeline shows whether those
+                efforts move the line upward across successive harvests and snapshots.
+              </>
+            }
+          >
+            <CompletenessTimelineChart
+              timeline={completenessTimeline}
+              metrics={completenessMetrics}
+              selectedField={selectedField}
+              primarySource={filters.source}
+            />
+          </InterventionPanel>
         </>
       )}
     </div>
