@@ -100,6 +100,10 @@ export interface Intervention {
   // Completeness-page filtering
   completenessSource?: Source;
   metadataEntity?: MetadataEntity;
+  // Enrichment-page filtering
+  enrichmentEntity?: 'doi' | 'orcid' | 'ror' | 'grantDoi';
+  enrichmentRecoverableFrom?: Source;
+
 }
 
 export interface DashboardFilters {
