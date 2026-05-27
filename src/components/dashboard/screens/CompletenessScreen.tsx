@@ -36,7 +36,7 @@ export function CompletenessScreen({ filters }: Props) {
       && i.metadataEntity === selectedEntity,
   );
 
-  const mockQuery = `SELECT * FROM publications\nWHERE organisation = '${filters.organisation}'\n  AND ${selectedField} IS NULL\nORDER BY year DESC\nLIMIT 100;`;
+  
 
   return (
     <div className="space-y-6">
@@ -90,8 +90,8 @@ export function CompletenessScreen({ filters }: Props) {
             selectedField={selectedField}
             selectedFieldLabel={selectedMetric.label}
             primarySource={filters.source}
-            sqlQuery={mockQuery}
           />
+
           <InterventionPanel
             interventions={pageInterventions}
             introText={
