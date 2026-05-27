@@ -175,9 +175,19 @@ detailRecords.forEach(rec => {
 });
 
 export const interventions: Intervention[] = [
-  // Accuracy interventions
-  { id: 'int-003', page: 'Accuracy', title: 'Update ROR affiliations in CRIS', description: 'Ensure all institutional affiliations in CRIS use ROR identifiers for consistent linking.', effort: 'Low', impact: 'Medium', actionUrl: 'https://ror.org/', actionLabel: 'ROR Registry' },
-  { id: 'int-005', page: 'Accuracy', title: 'Resolve DOI conflicts', description: 'Use the DOI resolver to check and fix broken or redirected DOIs in your records.', effort: 'Medium', impact: 'Medium', actionUrl: 'https://doi.org/', actionLabel: 'DOI Resolver' },
+  // Accuracy interventions — per conflicting field between the primary source and the comparison source
+  { id: 'acc-ror-1', page: 'Accuracy', accuracyField: 'ror', title: 'Reconcile ROR affiliations with the registry', description: 'When CRIS and the comparison source disagree on the institutional ROR id, run both values through ror.org and pick the active canonical id; persist it back into CRIS.', effort: 'Low', impact: 'High', actionUrl: 'https://ror.org/', actionLabel: 'ROR Registry' },
+  { id: 'acc-ror-2', page: 'Accuracy', accuracyField: 'ror', title: 'Submit affiliation corrections upstream', description: 'For disagreements where CRIS is right, submit corrections to OpenAlex (institution feedback) or OpenAIRE (Broker) so the wrong ROR does not keep coming back.', effort: 'Medium', impact: 'Medium', actionUrl: 'https://docs.openalex.org', actionLabel: 'OpenAlex feedback' },
+
+  { id: 'acc-orcid-1', page: 'Accuracy', accuracyField: 'orcid', title: 'Verify conflicting ORCID iDs against orcid.org', description: 'ORCID conflicts usually come from author disambiguation in the comparison source. Use the ORCID public API to confirm the iD that owns the work.', effort: 'Low', impact: 'High', actionUrl: 'https://orcid.org/', actionLabel: 'ORCID' },
+  { id: 'acc-orcid-2', page: 'Accuracy', accuracyField: 'orcid', title: 'Ask researchers to claim the work in ORCID', description: 'A confirmed ORCID claim propagates to OpenAlex and OpenAIRE within a release cycle and removes the conflict at the source.', effort: 'Low', impact: 'Medium' },
+
+  { id: 'acc-authors-1', page: 'Accuracy', accuracyField: 'authors', title: 'Re-harvest author lists from the publisher record', description: 'Author-list disagreements often trace back to truncated or "et al." lists in one source. Re-harvest from the publisher landing page or Crossref REST and overwrite the shorter list.', effort: 'Medium', impact: 'Medium', actionUrl: 'https://www.crossref.org/documentation/', actionLabel: 'Crossref Docs' },
+  { id: 'acc-authors-2', page: 'Accuracy', accuracyField: 'authors', title: 'Normalise author name formats in CRIS', description: 'Standardise on "Family, Given" with full first names; many "different author list" flags are actually formatting drift, not real disagreement.', effort: 'Low', impact: 'Low' },
+
+  { id: 'acc-year-1', page: 'Accuracy', accuracyField: 'year', title: 'Prefer published year over online-first year', description: 'Year conflicts almost always come from one source recording the online-first date and another the issue year. Pick the issued year from Crossref as the canonical value.', effort: 'Low', impact: 'High', actionUrl: 'https://www.crossref.org/documentation/', actionLabel: 'Crossref Docs' },
+  { id: 'acc-year-2', page: 'Accuracy', accuracyField: 'year', title: 'Resolve DOI metadata drift', description: 'Cross-check the disagreeing year with doi.org and update CRIS with the resolved metadata.', effort: 'Medium', impact: 'Medium', actionUrl: 'https://doi.org/', actionLabel: 'DOI Resolver' },
+
 
   // Enrichment interventions — per missing metadata entity in CRIS and the source it can be recovered from
   { id: 'enr-doi-openaire', page: 'Enrichment', enrichmentEntity: 'doi', enrichmentRecoverableFrom: 'OpenAIRE', title: 'Recover missing DOIs from OpenAIRE', description: 'Match CRIS records to OpenAIRE entries by title and authors, then write back the DOI surfaced by OpenAIRE\'s deduplication pipeline.', effort: 'Medium', impact: 'High', actionUrl: 'https://graph.openaire.eu/', actionLabel: 'OpenAIRE Graph' },

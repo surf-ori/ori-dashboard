@@ -103,6 +103,9 @@ export interface Intervention {
   // Enrichment-page filtering
   enrichmentEntity?: 'doi' | 'orcid' | 'ror' | 'grantDoi';
   enrichmentRecoverableFrom?: Source;
+  // Accuracy-page filtering — which conflicting field this intervention addresses
+  accuracyField?: 'ror' | 'orcid' | 'authors' | 'year' | 'doi';
+
 
 }
 

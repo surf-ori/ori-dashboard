@@ -389,8 +389,13 @@ function CrossSourceAgreement({
           </div>
 
           {selected!.kind === 'conflict' && (
-            <InterventionPanel interventions={interventions.filter(i => i.page === 'Accuracy')} />
+            <InterventionPanel
+              interventions={interventions.filter(
+                i => i.page === 'Accuracy' && i.accuracyField === selected!.field,
+              )}
+            />
           )}
+
         </div>
       )}
     </div>
