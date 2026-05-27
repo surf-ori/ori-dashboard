@@ -645,6 +645,19 @@ function EmpiricalValidation({ truthSource }: { truthSource: Source }) {
 
   return (
     <div className="space-y-5">
+      {/* Truth source banner */}
+      <div
+        className="rounded-lg border-l-4 px-4 py-3 text-sm flex items-start gap-3"
+        style={{ background: 'hsl(var(--primary-050))', borderColor: 'hsl(var(--primary))', color: 'hsl(var(--primary))' }}
+      >
+        <ShieldCheck className="h-4 w-4 mt-0.5 shrink-0" />
+        <div>
+          <strong className="font-bold">Ground truth:</strong>{' '}
+          values are validated against <strong>{truthSource}</strong> (the source selected in the sidebar).
+          Every other source is compared to it.
+        </div>
+      </div>
+
       {/* method picker */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <MethodCard
@@ -657,7 +670,7 @@ function EmpiricalValidation({ truthSource }: { truthSource: Source }) {
           active={method === 'external'}
           onClick={() => setMethod('external')}
           title="External validation"
-          description="Compare against publisher version of record (Crossref VoR XML)"
+          description={`Compare against ${truthSource} (selected as truth)`}
         />
       </div>
 
