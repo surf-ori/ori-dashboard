@@ -62,7 +62,7 @@ export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
           {proxyMethod === 'extrapolation' && <StatisticalExtrapolation />}
         </>
       ) : (
-        <EmpiricalValidation />
+        <EmpiricalValidation truthSource={filters.source} />
       )}
 
       <WhichApproachFooter />
