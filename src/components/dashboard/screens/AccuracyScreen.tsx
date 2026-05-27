@@ -62,7 +62,7 @@ export function AccuracyScreen({ filters, onMatchingMethodChange }: Props) {
           {proxyMethod === 'extrapolation' && <StatisticalExtrapolation />}
         </>
       ) : (
-        <EmpiricalValidation />
+        <EmpiricalValidation truthSource={filters.source} />
       )}
 
       <WhichApproachFooter />
@@ -618,7 +618,7 @@ function StatCard({
 }
 
 /* -------------------------- 5: Empirical validation -------------------------- */
-function EmpiricalValidation() {
+function EmpiricalValidation({ truthSource }: { truthSource: Source }) {
   const [method, setMethod] = useState<EmpiricalMethod>('internal');
   const [recordIdx, setRecordIdx] = useState(0);
 
@@ -628,7 +628,7 @@ function EmpiricalValidation() {
       doi: '10.1234/ml-climate-2023',
       cris: { ror: '04tavf782', raw: '"Vrije Univ Amsterdam, Dept of CS"', assigned: 'Assigned: manual, 2023-09' },
       openalex: { ror: '02n6c9938', raw: '"VU University, Amsterdam"', assigned: 'Assigned: string-match algorithm' },
-      publisher: { ror: '04tavf782', raw: '"Vrije Universiteit Amsterdam"', source: 'Fetched: Crossref VoR XML' },
+      publisher: { ror: '04tavf782', raw: '"Vrije Universiteit Amsterdam"', source: `Fetched from ${truthSource}` },
       verdict: 'conflict' as const,
     },
     {
@@ -636,7 +636,7 @@ function EmpiricalValidation() {
       doi: '10.1234/qc-2023',
       cris: { ror: '04tavf782', raw: '"Vrije Universiteit Amsterdam"', assigned: 'Assigned: manual, 2023-11' },
       openalex: { ror: '04tavf782', raw: '"Vrije Universiteit Amsterdam"', assigned: 'Assigned: string-match algorithm' },
-      publisher: { ror: '04tavf782', raw: '"Vrije Universiteit Amsterdam"', source: 'Fetched: Crossref VoR XML' },
+      publisher: { ror: '04tavf782', raw: '"Vrije Universiteit Amsterdam"', source: `Fetched from ${truthSource}` },
       verdict: 'match' as const,
     },
   ];
@@ -645,6 +645,19 @@ function EmpiricalValidation() {
 
   return (
     <div className="space-y-5">
+      {/* Truth source banner */}
+      <div
+        className="rounded-lg border-l-4 px-4 py-3 text-sm flex items-start gap-3"
+        style={{ background: 'hsl(var(--primary-050))', borderColor: 'hsl(var(--primary))', color: 'hsl(var(--primary))' }}
+      >
+        <ShieldCheck className="h-4 w-4 mt-0.5 shrink-0" />
+        <div>
+          <strong className="font-bold">Ground truth:</strong>{' '}
+          values are validated against <strong>{truthSource}</strong> (the source selected in the sidebar).
+          Every other source is compared to it.
+        </div>
+      </div>
+
       {/* method picker */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <MethodCard
@@ -657,7 +670,7 @@ function EmpiricalValidation() {
           active={method === 'external'}
           onClick={() => setMethod('external')}
           title="External validation"
-          description="Compare against publisher version of record (Crossref VoR XML)"
+          description={`Compare against ${truthSource} (selected as truth)`}
         />
       </div>
 
@@ -721,7 +734,7 @@ function EmpiricalValidation() {
               raw={r.openalex.raw}
               meta={r.openalex.assigned}
             />
-            <Lane label="Publisher (truth)" mono={r.publisher.ror} raw={r.publisher.raw} meta={r.publisher.source} variant="info" />
+            <Lane label={`${truthSource} (truth)`} mono={r.publisher.ror} raw={r.publisher.raw} meta={r.publisher.source} variant="info" />
             <div className="rounded-lg border border-border-soft p-3">
               <div className="text-[10px] uppercase tracking-[0.05em] font-semibold mb-1.5" style={{ color: 'hsl(var(--foreground-2))' }}>Verdict</div>
               {r.verdict === 'conflict' ? (
