@@ -95,11 +95,6 @@ export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
 
         return (
           <div className="space-y-4">
-            <div className="flex flex-wrap items-center gap-2">
-              <h2 className="text-lg font-semibold">Detail View</h2>
-              <Badge>{segmentLabel}</Badge>
-              <Button variant="ghost" size="sm" onClick={() => setSelectedComparison(null)}>✕ Close</Button>
-            </div>
             <p className="text-sm" style={{ color: 'hsl(var(--foreground-2))' }}>
               Showing records that {selectedComparison.segment === 'inBoth'
                 ? `appear in BOTH ${primarySource} and ${selectedComparison.comparison.compareSource}.`
