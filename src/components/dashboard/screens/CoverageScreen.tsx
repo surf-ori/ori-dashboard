@@ -56,6 +56,24 @@ export function CoverageScreen({ filters, onMatchingMethodChange }: Props) {
         onBarClick={handleBarClick}
       />
 
+      <div className="space-y-3">
+        <div className="flex flex-wrap items-center gap-2">
+          <h2 className="text-lg font-semibold">Detail view</h2>
+          {selectedComparison && (
+            <>
+              <Badge>{segmentLabel}</Badge>
+              <Button variant="ghost" size="sm" onClick={() => setSelectedComparison(null)}>✕ Close</Button>
+            </>
+          )}
+        </div>
+        {!selectedComparison && (
+          <div className="rounded-2xl border border-dashed border-border-soft bg-muted/30 px-5 py-6 text-sm" style={{ color: 'hsl(var(--foreground-2))' }}>
+            Click a bar segment above to see the records, timeline and recommended interventions for that
+            slice of the comparison.
+          </div>
+        )}
+      </div>
+
       {selectedComparison && (() => {
         const seg = selectedComparison.segment;
         const cmp = selectedComparison.comparison.compareSource;
