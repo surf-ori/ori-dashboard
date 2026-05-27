@@ -734,7 +734,7 @@ function EmpiricalValidation({ truthSource }: { truthSource: Source }) {
               raw={r.openalex.raw}
               meta={r.openalex.assigned}
             />
-            <Lane label="Publisher (truth)" mono={r.publisher.ror} raw={r.publisher.raw} meta={r.publisher.source} variant="info" />
+            <Lane label={`${truthSource} (truth)`} mono={r.publisher.ror} raw={r.publisher.raw} meta={r.publisher.source} variant="info" />
             <div className="rounded-lg border border-border-soft p-3">
               <div className="text-[10px] uppercase tracking-[0.05em] font-semibold mb-1.5" style={{ color: 'hsl(var(--foreground-2))' }}>Verdict</div>
               {r.verdict === 'conflict' ? (
