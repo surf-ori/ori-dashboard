@@ -618,7 +618,7 @@ function StatCard({
 }
 
 /* -------------------------- 5: Empirical validation -------------------------- */
-function EmpiricalValidation() {
+function EmpiricalValidation({ truthSource }: { truthSource: Source }) {
   const [method, setMethod] = useState<EmpiricalMethod>('internal');
   const [recordIdx, setRecordIdx] = useState(0);
 
@@ -628,7 +628,7 @@ function EmpiricalValidation() {
       doi: '10.1234/ml-climate-2023',
       cris: { ror: '04tavf782', raw: '"Vrije Univ Amsterdam, Dept of CS"', assigned: 'Assigned: manual, 2023-09' },
       openalex: { ror: '02n6c9938', raw: '"VU University, Amsterdam"', assigned: 'Assigned: string-match algorithm' },
-      publisher: { ror: '04tavf782', raw: '"Vrije Universiteit Amsterdam"', source: 'Fetched: Crossref VoR XML' },
+      publisher: { ror: '04tavf782', raw: '"Vrije Universiteit Amsterdam"', source: `Fetched from ${truthSource}` },
       verdict: 'conflict' as const,
     },
     {
@@ -636,7 +636,7 @@ function EmpiricalValidation() {
       doi: '10.1234/qc-2023',
       cris: { ror: '04tavf782', raw: '"Vrije Universiteit Amsterdam"', assigned: 'Assigned: manual, 2023-11' },
       openalex: { ror: '04tavf782', raw: '"Vrije Universiteit Amsterdam"', assigned: 'Assigned: string-match algorithm' },
-      publisher: { ror: '04tavf782', raw: '"Vrije Universiteit Amsterdam"', source: 'Fetched: Crossref VoR XML' },
+      publisher: { ror: '04tavf782', raw: '"Vrije Universiteit Amsterdam"', source: `Fetched from ${truthSource}` },
       verdict: 'match' as const,
     },
   ];
