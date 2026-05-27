@@ -1,24 +1,30 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Download } from 'lucide-react';
+import { exportRecordsToCsv } from '@/lib/exportCsv';
 import type { DetailRecord } from '@/data/types';
 
 interface DataTableProps {
   records: DetailRecord[];
   title: string;
-  sqlQuery?: string;
 }
 
-export function DataTable({ records, title, sqlQuery }: DataTableProps) {
+export function DataTable({ records, title }: DataTableProps) {
   return (
     <Card>
-      <CardHeader className="pb-2">
+      <CardHeader className="pb-2 flex flex-row items-start justify-between gap-3 space-y-0">
         <CardTitle className="text-base font-semibold">{title}</CardTitle>
-        {sqlQuery && (
-          <pre className="mt-2 rounded bg-muted p-3 text-xs font-mono text-muted-foreground overflow-x-auto">
-            {sqlQuery}
-          </pre>
-        )}
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => exportRecordsToCsv(records, title)}
+          disabled={records.length === 0}
+        >
+          <Download className="mr-1.5 h-3.5 w-3.5" />
+          Export CSV
+        </Button>
       </CardHeader>
       <CardContent>
         <div className="overflow-x-auto">
