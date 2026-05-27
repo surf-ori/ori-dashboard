@@ -1,7 +1,9 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Check, X, Minus } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Check, X, Minus, Download } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { exportCompletenessRecordsToCsv } from '@/lib/exportCsv';
 import type { DetailRecord, Source } from '@/data/types';
 
 interface CompletenessRecordsTableProps {
@@ -10,7 +12,6 @@ interface CompletenessRecordsTableProps {
   selectedField: string;
   selectedFieldLabel: string;
   primarySource: Source;
-  sqlQuery?: string;
 }
 
 const COMPARE_SOURCES: Source[] = ['CRIS', 'OpenAlex', 'OpenAIRE', 'Crossref'];
@@ -54,23 +55,28 @@ export function CompletenessRecordsTable({
   selectedField,
   selectedFieldLabel,
   primarySource,
-  sqlQuery,
 }: CompletenessRecordsTableProps) {
   return (
     <Card>
       <CardHeader className="pb-2">
-        <CardTitle className="text-base font-semibold">{title}</CardTitle>
+        <div className="flex flex-row items-start justify-between gap-3">
+          <CardTitle className="text-base font-semibold">{title}</CardTitle>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => exportCompletenessRecordsToCsv(records, COMPARE_SOURCES, selectedField, title)}
+            disabled={records.length === 0}
+          >
+            <Download className="mr-1.5 h-3.5 w-3.5" />
+            Export CSV
+          </Button>
+        </div>
         <p className="text-xs text-muted-foreground mt-1">
           Records where <span className="font-medium">{selectedFieldLabel}</span> is missing in{' '}
           <span className="font-medium">{primarySource}</span>. The per-source columns show whether the
           same field is available elsewhere — a green check means the value can be reused to enrich your{' '}
           {primarySource} record.
         </p>
-        {sqlQuery && (
-          <pre className="mt-2 rounded bg-muted p-3 text-xs font-mono text-muted-foreground overflow-x-auto">
-            {sqlQuery}
-          </pre>
-        )}
       </CardHeader>
       <CardContent>
         <div className="overflow-x-auto">

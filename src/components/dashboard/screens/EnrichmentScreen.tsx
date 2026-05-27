@@ -100,7 +100,7 @@ export function EnrichmentScreen({ filters, onMatchingMethodChange }: Props) {
           <DataTable
             records={detailRecords.slice(0, 6)}
             title={`Records missing ${selected.entity.toUpperCase()} that can be enriched from ${selected.source}`}
-            sqlQuery={`SELECT p.id, p.title, c.${selected.entity} AS proposed_value\nFROM primary_source p\nJOIN ${selected.source.toLowerCase()} c ON p.${filters.matchingMethod} = c.${filters.matchingMethod}\nWHERE p.${selected.entity} IS NULL\n  AND c.${selected.entity} IS NOT NULL;`}
+            
           />
           <InterventionPanel interventions={interventions.filter(i => i.page === 'Enrichment')} />
         </div>
