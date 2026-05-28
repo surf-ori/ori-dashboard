@@ -10,6 +10,7 @@ import {
   enrichmentEntities as defaultEnrichmentEntities,
   accuracyComparison as defaultAccuracyComparison,
   overviewCards as defaultOverviewCards,
+  announcement as defaultAnnouncement,
 } from './mockData';
 import type {
   Organisation,
@@ -22,6 +23,7 @@ import type {
   EnrichmentEntity,
   AccuracyComparison,
   OverviewCard,
+  Announcement,
   DashboardFilters,
   FilterContext,
 } from './types';
