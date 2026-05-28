@@ -9,7 +9,7 @@ import { CoverageScreen } from '@/components/dashboard/screens/CoverageScreen';
 import { EnrichmentScreen } from '@/components/dashboard/screens/EnrichmentScreen';
 import { AccuracyScreen } from '@/components/dashboard/screens/AccuracyScreen';
 import { MockDataScreen } from '@/components/dashboard/screens/MockDataScreen';
-import { DashboardDataProvider } from '@/data/DataContext';
+import { DashboardDataProvider, useDashboardData } from '@/data/DataContext';
 import type { CerifEntity, DashboardFilters, MatchingMethod, PublicationType, Source } from '@/data/types';
 import {
   Sidebar,
