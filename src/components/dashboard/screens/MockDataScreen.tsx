@@ -87,12 +87,6 @@ export function MockDataScreen() {
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader><CardTitle className="text-base">Organisations</CardTitle></CardHeader>
-        <CardContent>
-          <EditableTable rows={d.organisations} onChange={d.setOrganisations} />
-        </CardContent>
-      </Card>
 
       <Card>
         <CardHeader><CardTitle className="text-base">Completeness metrics</CardTitle></CardHeader>
