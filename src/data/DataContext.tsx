@@ -103,6 +103,7 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
         accuracyComparison, setAccuracyComparison,
         overviewCards, setOverviewCards,
         totalRecords, setTotalRecords,
+        announcement, setAnnouncement,
         resetAll,
       }}
     >
