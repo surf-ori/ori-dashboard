@@ -116,3 +116,17 @@ export default function DashboardLayout() {
     </DashboardDataProvider>
   );
 }
+
+function AnnouncementBanner() {
+  const { announcement } = useDashboardData();
+  if (!announcement.enabled) return null;
+  return (
+    <div
+      role="status"
+      className="flex items-start gap-3 border-l-4 px-4 py-2.5 text-sm font-semibold"
+      style={{ background: '#FFF8DC', borderLeftColor: '#E6B800', color: '#735900' }}
+    >
+      <span className="uppercase tracking-[0.08em] text-[11px] font-bold">{announcement.label}</span>
+      <span className="font-medium">{announcement.text}</span>
+    </div>
+  );
