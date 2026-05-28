@@ -98,7 +98,6 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
         enrichmentEntities, setEnrichmentEntities,
         accuracyComparison, setAccuracyComparison,
         overviewCards, setOverviewCards,
-        totalRecords, setTotalRecords,
         announcement, setAnnouncement,
         resetAll,
       }}
