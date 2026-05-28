@@ -130,3 +130,4 @@ function AnnouncementBanner() {
       <span className="font-medium">{announcement.text}</span>
     </div>
   );
+}
