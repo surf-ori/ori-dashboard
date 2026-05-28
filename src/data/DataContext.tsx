@@ -51,8 +51,6 @@ interface DataContextValue {
   setOverviewCards: (v: OverviewCard[]) => void;
   announcement: Announcement;
   setAnnouncement: (v: Announcement) => void;
-  totalRecords: number;
-  setTotalRecords: (v: number) => void;
   resetAll: () => void;
 }
 
