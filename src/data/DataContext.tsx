@@ -72,6 +72,7 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
   const [accuracyComparison, setAccuracyComparison] = useState<AccuracyComparison[]>(defaultAccuracyComparison);
   const [overviewCards, setOverviewCards] = useState<OverviewCard[]>(defaultOverviewCards);
   const [totalRecords, setTotalRecords] = useState<number>(DEFAULT_TOTAL_RECORDS);
+  const [announcement, setAnnouncement] = useState<Announcement>(defaultAnnouncement);
 
   const resetAll = () => {
     setOrganisations(defaultOrganisations);
