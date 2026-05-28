@@ -9,7 +9,7 @@ import { CoverageScreen } from '@/components/dashboard/screens/CoverageScreen';
 import { EnrichmentScreen } from '@/components/dashboard/screens/EnrichmentScreen';
 import { AccuracyScreen } from '@/components/dashboard/screens/AccuracyScreen';
 import { MockDataScreen } from '@/components/dashboard/screens/MockDataScreen';
-import { DashboardDataProvider } from '@/data/DataContext';
+import { DashboardDataProvider, useDashboardData } from '@/data/DataContext';
 import type { CerifEntity, DashboardFilters, MatchingMethod, PublicationType, Source } from '@/data/types';
 import {
   Sidebar,
@@ -72,20 +72,8 @@ export default function DashboardLayout() {
         </Sidebar>
 
         <div className="flex-1 flex flex-col min-w-0">
-          <div
-            role="status"
-            className="flex items-start gap-3 border-l-4 px-4 py-2.5 text-sm font-semibold"
-            style={{
-              background: '#FFF8DC',
-              borderLeftColor: '#E6B800',
-              color: '#735900',
-            }}
-          >
-            <span className="uppercase tracking-[0.08em] text-[11px] font-bold">Demo</span>
-            <span className="font-medium">
-              This is a mockup version of the dashboard for demonstration purposes — figures and records are illustrative, not live data.
-            </span>
-          </div>
+          <AnnouncementBanner />
+
           <header className="sticky top-0 z-10 flex items-center gap-6 border-b border-border-soft bg-background px-6 h-16">
             <SidebarTrigger className="text-foreground" />
             <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1">
@@ -126,5 +114,20 @@ export default function DashboardLayout() {
       </div>
     </SidebarProvider>
     </DashboardDataProvider>
+  );
+}
+
+function AnnouncementBanner() {
+  const { announcement } = useDashboardData();
+  if (!announcement.enabled) return null;
+  return (
+    <div
+      role="status"
+      className="flex items-start gap-3 border-l-4 px-4 py-2.5 text-sm font-semibold"
+      style={{ background: '#FFF8DC', borderLeftColor: '#E6B800', color: '#735900' }}
+    >
+      <span className="uppercase tracking-[0.08em] text-[11px] font-bold">{announcement.label}</span>
+      <span className="font-medium">{announcement.text}</span>
+    </div>
   );
 }

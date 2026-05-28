@@ -1,5 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 import { RotateCcw } from 'lucide-react';
 import { EditableTable, JsonEditor } from '@/components/dashboard/EditableTable';
 import { useDashboardData } from '@/data/DataContext';
@@ -22,6 +26,43 @@ export function MockDataScreen() {
           <RotateCcw className="h-3.5 w-3.5" /> Reset all
         </Button>
       </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-base">Announcement banner</CardTitle>
+          <p className="text-xs text-muted-foreground">Shown at the top of every page. Toggle visibility and edit the label and message.</p>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="flex items-center gap-3">
+            <Switch
+              id="announcement-enabled"
+              checked={d.announcement.enabled}
+              onCheckedChange={(checked) => d.setAnnouncement({ ...d.announcement, enabled: checked })}
+            />
+            <Label htmlFor="announcement-enabled" className="cursor-pointer">
+              {d.announcement.enabled ? 'Visible on all pages' : 'Hidden'}
+            </Label>
+          </div>
+          <div className="space-y-1.5">
+            <Label htmlFor="announcement-label">Label</Label>
+            <Input
+              id="announcement-label"
+              value={d.announcement.label}
+              onChange={(e) => d.setAnnouncement({ ...d.announcement, label: e.target.value })}
+              className="max-w-xs"
+            />
+          </div>
+          <div className="space-y-1.5">
+            <Label htmlFor="announcement-text">Message</Label>
+            <Textarea
+              id="announcement-text"
+              value={d.announcement.text}
+              onChange={(e) => d.setAnnouncement({ ...d.announcement, text: e.target.value })}
+              rows={3}
+            />
+          </div>
+        </CardContent>
+      </Card>
 
       <Card>
         <CardHeader>

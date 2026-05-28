@@ -10,6 +10,7 @@ import {
   enrichmentEntities as defaultEnrichmentEntities,
   accuracyComparison as defaultAccuracyComparison,
   overviewCards as defaultOverviewCards,
+  announcement as defaultAnnouncement,
 } from './mockData';
 import type {
   Organisation,
@@ -22,6 +23,7 @@ import type {
   EnrichmentEntity,
   AccuracyComparison,
   OverviewCard,
+  Announcement,
   DashboardFilters,
   FilterContext,
 } from './types';
@@ -47,6 +49,8 @@ interface DataContextValue {
   setAccuracyComparison: (v: AccuracyComparison[]) => void;
   overviewCards: OverviewCard[];
   setOverviewCards: (v: OverviewCard[]) => void;
+  announcement: Announcement;
+  setAnnouncement: (v: Announcement) => void;
   totalRecords: number;
   setTotalRecords: (v: number) => void;
   resetAll: () => void;
@@ -68,6 +72,7 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
   const [accuracyComparison, setAccuracyComparison] = useState<AccuracyComparison[]>(defaultAccuracyComparison);
   const [overviewCards, setOverviewCards] = useState<OverviewCard[]>(defaultOverviewCards);
   const [totalRecords, setTotalRecords] = useState<number>(DEFAULT_TOTAL_RECORDS);
+  const [announcement, setAnnouncement] = useState<Announcement>(defaultAnnouncement);
 
   const resetAll = () => {
     setOrganisations(defaultOrganisations);
@@ -81,6 +86,7 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
     setAccuracyComparison(defaultAccuracyComparison);
     setOverviewCards(defaultOverviewCards);
     setTotalRecords(DEFAULT_TOTAL_RECORDS);
+    setAnnouncement(defaultAnnouncement);
   };
 
   return (
@@ -97,6 +103,7 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
         accuracyComparison, setAccuracyComparison,
         overviewCards, setOverviewCards,
         totalRecords, setTotalRecords,
+        announcement, setAnnouncement,
         resetAll,
       }}
     >

@@ -117,6 +117,12 @@ export interface DashboardFilters {
   matchingMethod: MatchingMethod;
 }
 
+export interface Announcement {
+  enabled: boolean;
+  label: string;
+  text: string;
+}
+
 export interface EnrichmentEntity extends FilterContext {
   entity: string;
   label: string;
