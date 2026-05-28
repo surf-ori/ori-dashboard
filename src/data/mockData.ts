@@ -253,6 +253,12 @@ export const overviewCards: OverviewCard[] = [
   { title: 'Avg. Accuracy', value: '80.4%', details: 'Conflict-free shared records' },
 ];
 
+export const announcement = {
+  enabled: true,
+  label: 'Demo',
+  text: 'This is a mockup version of the dashboard for demonstration purposes — figures and records are illustrative, not live data.',
+};
+
 export const enrichmentEntities: EnrichmentEntity[] = [
   {
     ...fc, entity: 'ror', label: 'ROR', missingPercentage: 74, missingCount: 160143, totalRecords: 216409,
