@@ -236,7 +236,6 @@ export const interventions: Intervention[] = [
 export const summaryStats = {
   totalSources: 5,
   totalOrganisations: organisations.length,
-  totalRecords: 216409,
   avgCompleteness: 67.6,
   avgCoverage: 72.4,
   avgAccuracy: 'N/A' as const,
