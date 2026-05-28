@@ -1,5 +1,9 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Switch } from '@/components/ui/switch';
+import { Label } from '@/components/ui/label';
 import { RotateCcw } from 'lucide-react';
 import { EditableTable, JsonEditor } from '@/components/dashboard/EditableTable';
 import { useDashboardData } from '@/data/DataContext';
