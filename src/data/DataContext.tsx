@@ -86,6 +86,7 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
     setAccuracyComparison(defaultAccuracyComparison);
     setOverviewCards(defaultOverviewCards);
     setTotalRecords(DEFAULT_TOTAL_RECORDS);
+    setAnnouncement(defaultAnnouncement);
   };
 
   return (
