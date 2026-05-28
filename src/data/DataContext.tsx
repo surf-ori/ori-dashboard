@@ -49,6 +49,8 @@ interface DataContextValue {
   setAccuracyComparison: (v: AccuracyComparison[]) => void;
   overviewCards: OverviewCard[];
   setOverviewCards: (v: OverviewCard[]) => void;
+  announcement: Announcement;
+  setAnnouncement: (v: Announcement) => void;
   totalRecords: number;
   setTotalRecords: (v: number) => void;
   resetAll: () => void;
