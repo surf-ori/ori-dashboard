@@ -172,11 +172,19 @@ function CrossSourceAgreement({
 }: {
   filters: DashboardFilters; onMatchingMethodChange: (m: MatchingMethod) => void; onSwitchToEmpirical: () => void;
 }) {
-  const { interventions, totalRecords: ctxTotal } = useDashboardData();
+  const { interventions, organisations } = useDashboardData();
   const {
     accuracyComparison, coverageComparisons, detailRecords,
     completenessTimeline,
   } = useFilteredData(filters);
+  const org = organisations.find(o => o.id === filters.organisation);
+  const ctxTotal =
+    filters.cerifEntity === 'Publications' && org
+      ? (filters.source === 'CRIS' ? org.crisPublications
+        : filters.source === 'OpenAlex' ? org.openAlexPublications
+        : filters.source === 'OpenAIRE' ? org.openairePublications
+        : null) ?? 0
+      : 0;
   const a = accuracyComparison[0];
   const primary = filters.source;
   const [compare, setCompare] = useState<Source>(a?.compareSource ?? 'OpenAlex');

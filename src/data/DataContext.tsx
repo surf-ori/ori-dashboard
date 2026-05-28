@@ -51,12 +51,10 @@ interface DataContextValue {
   setOverviewCards: (v: OverviewCard[]) => void;
   announcement: Announcement;
   setAnnouncement: (v: Announcement) => void;
-  totalRecords: number;
-  setTotalRecords: (v: number) => void;
   resetAll: () => void;
 }
 
-const DEFAULT_TOTAL_RECORDS = 216409;
+
 
 const DataContext = createContext<DataContextValue | null>(null);
 
@@ -71,7 +69,6 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
   const [enrichmentEntities, setEnrichmentEntities] = useState<EnrichmentEntity[]>(defaultEnrichmentEntities);
   const [accuracyComparison, setAccuracyComparison] = useState<AccuracyComparison[]>(defaultAccuracyComparison);
   const [overviewCards, setOverviewCards] = useState<OverviewCard[]>(defaultOverviewCards);
-  const [totalRecords, setTotalRecords] = useState<number>(DEFAULT_TOTAL_RECORDS);
   const [announcement, setAnnouncement] = useState<Announcement>(defaultAnnouncement);
 
   const resetAll = () => {
@@ -85,7 +82,6 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
     setEnrichmentEntities(defaultEnrichmentEntities);
     setAccuracyComparison(defaultAccuracyComparison);
     setOverviewCards(defaultOverviewCards);
-    setTotalRecords(DEFAULT_TOTAL_RECORDS);
     setAnnouncement(defaultAnnouncement);
   };
 
@@ -102,7 +98,6 @@ export function DashboardDataProvider({ children }: { children: ReactNode }) {
         enrichmentEntities, setEnrichmentEntities,
         accuracyComparison, setAccuracyComparison,
         overviewCards, setOverviewCards,
-        totalRecords, setTotalRecords,
         announcement, setAnnouncement,
         resetAll,
       }}

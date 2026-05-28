@@ -66,19 +66,14 @@ export function MockDataScreen() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Total records</CardTitle>
+          <CardTitle className="text-base">Organisations</CardTitle>
           <p className="text-xs text-muted-foreground">
-            Shown in the filter bar on every screen and used to scale the Coverage chart so
-            "Only in {`{primary}`}" + "In Both" sums to this value.
+            Per-source publication counts (CRIS, OpenAlex, OpenAIRE) drive the record totals
+            shown in the filter bar and accuracy comparisons on every screen.
           </p>
         </CardHeader>
         <CardContent>
-          <input
-            type="number"
-            value={d.totalRecords}
-            onChange={e => d.setTotalRecords(Number(e.target.value) || 0)}
-            className="w-48 rounded-md border bg-background px-3 py-2 text-sm font-mono"
-          />
+          <EditableTable rows={d.organisations} onChange={d.setOrganisations} />
         </CardContent>
       </Card>
 
@@ -92,12 +87,6 @@ export function MockDataScreen() {
         </CardContent>
       </Card>
 
-      <Card>
-        <CardHeader><CardTitle className="text-base">Organisations</CardTitle></CardHeader>
-        <CardContent>
-          <EditableTable rows={d.organisations} onChange={d.setOrganisations} />
-        </CardContent>
-      </Card>
 
       <Card>
         <CardHeader><CardTitle className="text-base">Completeness metrics</CardTitle></CardHeader>
