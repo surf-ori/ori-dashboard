@@ -54,7 +54,7 @@ interface DataContextValue {
   resetAll: () => void;
 }
 
-const DEFAULT_TOTAL_RECORDS = 216409;
+
 
 const DataContext = createContext<DataContextValue | null>(null);
 
