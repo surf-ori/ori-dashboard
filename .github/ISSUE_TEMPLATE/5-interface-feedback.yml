@@ -1,0 +1,38 @@
+name: Interface & clarity feedback
+description: Something in the interface is confusing, hard to find or could be explained better.
+title: "[UX] <screen>: <short summary>"
+labels: ["ux", "workshop-feedback"]
+body:
+  - type: input
+    id: workshop
+    attributes:
+      label: Workshop / session (optional)
+  - type: dropdown
+    id: screen
+    attributes:
+      label: Where in the dashboard?
+      options: [Start / overview, Coverage, Completeness, Enrichment, Accuracy, Filters, Intervention panel, Detail tables / export, Navigation, Other]
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of feedback?
+      options: [Confusing wording / terminology, Unclear chart or metric, Hard to find something, Layout / visual design, Accessibility, Other]
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What was unclear or difficult?
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: How could it be improved?
+  - type: input
+    id: role
+    attributes:
+      label: Your role (optional)
+      placeholder: "e.g. metadata specialist, CRIS manager, library director"

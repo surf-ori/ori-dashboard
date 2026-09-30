@@ -1,0 +1,111 @@
+name: Intervention – Completeness
+description: An action to improve how completely a source fills a specific metadata element (DOI, ORCID, ROR, ISSN, …).
+title: "[Intervention/Completeness] <source> – <element>: <short action>"
+labels: ["intervention", "completeness", "workshop-feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for an **action a university could take** to raise the completeness of one metadata
+        element in one source (Completeness / Enrichment screens).
+        Please do not include personal or confidential data.
+  - type: input
+    id: workshop
+    attributes:
+      label: Workshop / session (optional)
+  - type: input
+    id: organisation
+    attributes:
+      label: Organisation
+      description: Name or ROR ID.
+    validations:
+      required: true
+  - type: dropdown
+    id: source
+    attributes:
+      label: Source whose completeness should improve
+      options: [CRIS, OpenAlex, OpenAIRE, Crossref, ROR]
+    validations:
+      required: true
+  - type: dropdown
+    id: element
+    attributes:
+      label: Metadata element
+      options:
+        - DOI
+        - ORCID
+        - ROR
+        - Grant DOI / funder
+        - ISSN
+        - Open access status
+        - Corresponding author
+        - License
+        - Abstract
+        - Other (describe below)
+    validations:
+      required: true
+  - type: dropdown
+    id: entity
+    attributes:
+      label: CERIF entity
+      options: [Publications, Persons, Organisations, Projects, Datasets]
+    validations:
+      required: true
+  - type: dropdown
+    id: pubtype
+    attributes:
+      label: Publication type
+      options: [All, Journal Article, Conference Paper, Book Chapter, Preprint, Thesis, Report]
+  - type: input
+    id: current
+    attributes:
+      label: Current value shown
+      description: The percentage / counts you see on the dashboard.
+      placeholder: "e.g. Has ORCID 62.1% (134,390 of 216,409)"
+  - type: dropdown
+    id: route
+    attributes:
+      label: Route to improvement
+      options:
+        - Fix at the source (process, form, mandate)
+        - Enrich from another source (Enrichment screen)
+        - Bulk correction / clean-up
+        - Ask external source owner to correct
+        - Other
+    validations:
+      required: true
+  - type: dropdown
+    id: enrich_from
+    attributes:
+      label: If enriching – recover from which source?
+      options: [None / not applicable, CRIS, OpenAlex, OpenAIRE, Crossref, ROR]
+  - type: textarea
+    id: action
+    attributes:
+      label: Proposed intervention
+    validations:
+      required: true
+  - type: dropdown
+    id: effort
+    attributes:
+      label: Estimated effort
+      options: [Low, Medium, High]
+    validations:
+      required: true
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Expected impact
+      options: [Low, Medium, High]
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies, risks or existing initiatives (optional)
+  - type: checkboxes
+    id: dashboard
+    attributes:
+      label: Should this appear in the dashboard?
+      options:
+        - label: Add this as a recommended intervention on the Completeness / Enrichment screen

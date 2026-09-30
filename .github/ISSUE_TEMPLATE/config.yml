@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Live dashboard
+    url: https://ori-dashboard.lovable.app/
+    about: Open the ORI dashboard (proof of concept, mock data) to reproduce or look up what you saw.
+  - name: SURF Open Research Information community
+    url: https://communities.surf.nl/en/open-research-information
+    about: Questions about the ORI programme in general (not about this dashboard).

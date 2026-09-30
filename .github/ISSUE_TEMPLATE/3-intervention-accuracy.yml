@@ -1,0 +1,68 @@
+name: Intervention – Accuracy
+description: An action to resolve conflicting values (ORCID, ROR, DOI, year, authors) between two sources.
+title: "[Intervention/Accuracy] <source A> vs <source B> – <field>: <short action>"
+labels: ["intervention", "accuracy", "workshop-feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for an **action to resolve conflicting values** for the same record across two sources
+        (Accuracy screen). Please do not include personal or confidential data.
+  - type: input
+    id: workshop
+    attributes:
+      label: Workshop / session (optional)
+  - type: input
+    id: organisation
+    attributes:
+      label: Organisation
+    validations:
+      required: true
+  - type: dropdown
+    id: primary_source
+    attributes:
+      label: Primary source
+      options: [CRIS, OpenAlex, OpenAIRE, Crossref, ROR]
+    validations:
+      required: true
+  - type: dropdown
+    id: compared_source
+    attributes:
+      label: Compared source
+      options: [CRIS, OpenAlex, OpenAIRE, Crossref, ROR]
+    validations:
+      required: true
+  - type: dropdown
+    id: field
+    attributes:
+      label: Conflicting field
+      options: [ORCID, ROR, DOI, Publication year, Authors, Other]
+    validations:
+      required: true
+  - type: textarea
+    id: observation
+    attributes:
+      label: What did you observe?
+    validations:
+      required: true
+  - type: textarea
+    id: action
+    attributes:
+      label: Proposed intervention
+      description: Which source is (probably) right, and who should correct what?
+    validations:
+      required: true
+  - type: dropdown
+    id: effort
+    attributes:
+      label: Estimated effort
+      options: [Low, Medium, High]
+    validations:
+      required: true
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Expected impact
+      options: [Low, Medium, High]
+    validations:
+      required: true

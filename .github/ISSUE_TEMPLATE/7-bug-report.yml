@@ -1,0 +1,42 @@
+name: Bug report
+description: Something in the dashboard does not work as expected.
+title: "[Bug] <short summary>"
+labels: ["bug"]
+body:
+  - type: input
+    id: workshop
+    attributes:
+      label: Workshop / session (optional)
+  - type: dropdown
+    id: screen
+    attributes:
+      label: Screen
+      options: [Start / overview, Coverage, Completeness, Enrichment, Accuracy, Filters, Export, Other]
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Select organisation …
+        2. Go to …
+        3. Click …
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected vs. actual behaviour
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: Browser and OS
+      placeholder: "e.g. Firefox 130 on Windows 11"
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshots / console errors (optional)
+      description: Drag and drop images here.

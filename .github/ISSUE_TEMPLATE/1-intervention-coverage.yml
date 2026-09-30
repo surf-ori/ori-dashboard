@@ -1,0 +1,111 @@
+name: Intervention – Coverage
+description: An action your institution could take to improve coverage (records present in one source but missing in another).
+title: "[Intervention/Coverage] <source A> vs <source B>: <short action>"
+labels: ["intervention", "coverage", "workshop-feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for an **action a university could take** to close a coverage gap between two sources
+        (Coverage screen). Example: *"Records only in CRIS, not in OpenAlex → register missing DOIs at Crossref."*
+        Please do not include personal or confidential data.
+  - type: input
+    id: workshop
+    attributes:
+      label: Workshop / session (optional)
+      placeholder: "e.g. Workshop 2 – 2026-10-14"
+  - type: input
+    id: organisation
+    attributes:
+      label: Organisation
+      description: The organisation selected in the dashboard filter (name or ROR ID).
+    validations:
+      required: true
+  - type: dropdown
+    id: primary_source
+    attributes:
+      label: Primary source (filter)
+      options: [CRIS, OpenAlex, OpenAIRE, Crossref, ROR]
+    validations:
+      required: true
+  - type: dropdown
+    id: compared_source
+    attributes:
+      label: Compared source
+      options: [CRIS, OpenAlex, OpenAIRE, Crossref, ROR]
+    validations:
+      required: true
+  - type: dropdown
+    id: segment
+    attributes:
+      label: Bar segment
+      description: Which part of the comparison chart is the action about?
+      options:
+        - Only in primary source (not in compared source)
+        - In both sources
+        - Only in compared source (not in primary source)
+    validations:
+      required: true
+  - type: dropdown
+    id: entity
+    attributes:
+      label: CERIF entity
+      options: [Publications, Persons, Organisations, Projects, Datasets]
+    validations:
+      required: true
+  - type: dropdown
+    id: matching
+    attributes:
+      label: Matching method
+      options: [DOI, ROR]
+    validations:
+      required: true
+  - type: dropdown
+    id: pubtype
+    attributes:
+      label: Publication type
+      options: [All, Journal Article, Conference Paper, Book Chapter, Preprint, Thesis, Report]
+  - type: textarea
+    id: observation
+    attributes:
+      label: What did you observe?
+      description: The numbers or pattern in the chart, and why it is a gap for you.
+    validations:
+      required: true
+  - type: textarea
+    id: action
+    attributes:
+      label: Proposed intervention
+      description: What concretely could the university (library, CRIS team, researchers) do?
+    validations:
+      required: true
+  - type: dropdown
+    id: actor
+    attributes:
+      label: Who would carry it out?
+      multiple: true
+      options: [Library / research support, CRIS / IT team, Researchers, Faculty / department, External source owner, SURF / national level]
+  - type: dropdown
+    id: effort
+    attributes:
+      label: Estimated effort
+      options: [Low, Medium, High]
+    validations:
+      required: true
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Expected impact
+      options: [Low, Medium, High]
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies, risks or existing initiatives (optional)
+  - type: checkboxes
+    id: dashboard
+    attributes:
+      label: Should this appear in the dashboard?
+      options:
+        - label: Add this as a recommended intervention on the Coverage screen

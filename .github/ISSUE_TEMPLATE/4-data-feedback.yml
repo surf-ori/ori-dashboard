@@ -1,0 +1,53 @@
+name: Data feedback
+description: The numbers or records shown look wrong, unexpected or unclear.
+title: "[Data] <screen>: <short summary>"
+labels: ["data", "workshop-feedback"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The dashboard is a proof of concept and currently shows **illustrative data**. Tell us where the data
+        does not match what you know about your organisation, or where a definition is unclear.
+        Please do not paste personal or confidential data.
+  - type: input
+    id: workshop
+    attributes:
+      label: Workshop / session (optional)
+  - type: dropdown
+    id: screen
+    attributes:
+      label: Screen
+      options: [Start / overview, Coverage, Completeness, Enrichment, Accuracy, Other]
+    validations:
+      required: true
+  - type: input
+    id: filters
+    attributes:
+      label: Filters used
+      description: Organisation, source, CERIF entity, publication type, matching method.
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Type of data issue
+      options:
+        - Numbers look incorrect
+        - Records missing / unexpected records shown
+        - Definition or metric unclear
+        - Wrong or missing source / entity / organisation
+        - Matching (DOI / ROR) looks off
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What did you see, and what did you expect?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence (optional)
+      description: Example DOIs / IDs, or how you verified it (e.g. compared with your CRIS).

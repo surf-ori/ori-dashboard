@@ -1,0 +1,36 @@
+name: Feature request
+description: Suggest a new capability or improvement for the dashboard.
+title: "[Feature] <short summary>"
+labels: ["enhancement", "workshop-feedback"]
+body:
+  - type: input
+    id: workshop
+    attributes:
+      label: Workshop / session (optional)
+  - type: textarea
+    id: need
+    attributes:
+      label: What are you trying to achieve?
+      description: Describe the task or question, not the solution.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Suggested feature
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options: [Coverage, Completeness, Enrichment, Accuracy, New source or entity, Export / reporting, Filters / comparison between organisations, Other]
+  - type: dropdown
+    id: priority
+    attributes:
+      label: How important is this to you?
+      options: [Nice to have, Would use regularly, Blocking for my use of the dashboard]
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Current workaround (optional)

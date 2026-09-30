@@ -21,3 +21,12 @@ The dashboard is a **mockup for demonstration purposes** — figures and records
 ## Tech stack
 
 Built with React, Vite, TypeScript, Tailwind CSS and Recharts.
+
+## Feedback
+
+Feedback from workshops and users is collected as structured GitHub issues — [open a new issue](https://github.com/surf-ori/ori-dashboard/issues/new/choose) and pick a form:
+
+- **Intervention – Coverage / Completeness / Accuracy**: an action a university could take to improve a specific part of its ORI (source comparison, metadata element, conflicting field).
+- **Data feedback**, **Interface & clarity feedback**, **Feature request**, **Bug report**.
+
+Intervention issues carry the dashboard filter context (organisation, sources, entity, matching method) so they can be turned into recommended interventions in `src/data/mockData.ts`.
