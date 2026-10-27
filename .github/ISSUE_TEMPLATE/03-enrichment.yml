@@ -1,0 +1,155 @@
+name: "Enrichment page: feedback or intervention"
+description: Report an issue or suggest an improvement for the dashboard's Enrichment page, or share an intervention your organisation is implementing or considering.
+title: "[Enrichment] <short summary>"
+labels: ["page:enrichment", "intervention"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The **Enrichment** page answers: *"Which missing values can be recovered from
+        comparing sources to enrich your primary source?"* See the
+        [live Enrichment tab](https://ori-dashboard.lovable.app/) for context.
+
+        Use this form for a bug report, a suggestion for the page itself, **or** to share
+        an intervention — something your organisation is already doing, or considering, to
+        recover missing metadata from another source. The intervention fields below mirror
+        the example interventions already shown on this page (see `Intervention` entries
+        with `page: 'Enrichment'` in `src/data/mockData.ts`), which are currently
+        AI-generated placeholders — real submissions here are how that gets replaced with
+        practice from actual institutions.
+  - type: dropdown
+    id: submission_type
+    attributes:
+      label: What is this?
+      options:
+        - Bug report
+        - Improvement suggestion for this page
+        - Sharing an intervention
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: >-
+        For a bug or suggestion: what's wrong, or what would make this page more useful?
+        For an intervention: a one-line summary (use the fields below for details).
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        ---
+        ### Sharing an intervention?
+        Fill in as much of the following as applies. Leave blank for a plain bug report
+        or suggestion.
+  - type: dropdown
+    id: organisation
+    attributes:
+      label: Organisation
+      description: Pick your institution, so interventions can be attributed and compared across organisations.
+      options:
+        - "Vrije Universiteit Amsterdam"
+        - "University of Amsterdam"
+        - "Delft University of Technology"
+        - "Utrecht University"
+        - "University of Groningen"
+        - "Leiden University"
+        - "Royal Netherlands Academy of Arts and Sciences (KNAW)"
+        - "Dutch Research Council (NWO)"
+        - "ZonMw"
+        - "SURF"
+        - "Netherlands eScience Center"
+        - "KB, National Library of the Netherlands"
+        - "Universities of the Netherlands (UNL)"
+        - "Vereniging Hogescholen (VH)"
+        - "Taskforce for Applied Research SIA"
+        - "Digital Competence Center for Practice-Oriented Research (DCC-PO)"
+        - "Dutch Reproducibility Network (NLRN)"
+        - "Other / not listed here"
+    validations:
+      required: false
+  - type: dropdown
+    id: intervention_status
+    attributes:
+      label: Status
+      options:
+        - Already implemented
+        - Considering
+        - Planned
+    validations:
+      required: false
+  - type: input
+    id: intervention_title
+    attributes:
+      label: Intervention title
+      placeholder: e.g. "Recover missing DOIs from OpenAIRE"
+    validations:
+      required: false
+  - type: textarea
+    id: intervention_description
+    attributes:
+      label: Intervention description
+      placeholder: What does the intervention involve, and what result did (or would) it have?
+    validations:
+      required: false
+  - type: dropdown
+    id: enrichment_field
+    attributes:
+      label: Metadata field being recovered
+      options:
+        - DOI
+        - ORCID
+        - ROR
+        - Grant DOI
+    validations:
+      required: false
+  - type: dropdown
+    id: enrichment_recoverable_from
+    attributes:
+      label: Recoverable from
+      description: Which source is the missing value recovered from?
+      options:
+        - OpenAlex
+        - Crossref
+        - OpenAIRE
+        - CRIS
+        - ROR
+    validations:
+      required: false
+  - type: dropdown
+    id: effort
+    attributes:
+      label: Effort
+      options:
+        - Low
+        - Medium
+        - High
+    validations:
+      required: false
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Impact
+      options:
+        - Low
+        - Medium
+        - High
+    validations:
+      required: false
+  - type: input
+    id: action_url
+    attributes:
+      label: Link (optional)
+      description: A tool, docs page, or registry relevant to the intervention.
+      placeholder: "https://..."
+    validations:
+      required: false
+  - type: input
+    id: action_label
+    attributes:
+      label: Link label (optional)
+      placeholder: e.g. "OpenAIRE Graph"
+    validations:
+      required: false
