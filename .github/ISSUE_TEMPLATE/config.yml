@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Live dashboard
+    url: https://ori-dashboard.lovable.app/
+    about: Check the current mockup before reporting an issue or sharing an intervention.
+  - name: PID to Portal — Deliverable A2 (background report)
+    url: https://doi.org/10.5281/zenodo.23682961
+    about: The metrics report this dashboard and its example interventions are based on.

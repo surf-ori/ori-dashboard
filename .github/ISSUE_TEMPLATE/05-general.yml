@@ -1,0 +1,55 @@
+name: "General feedback (About page, navigation, or other)"
+description: Report an issue or suggest an improvement that isn't specific to the Coverage, Completeness, Enrichment or Accuracy pages — e.g. the About/key-metrics overview, filters, navigation, or data export.
+title: "[General] <short summary>"
+labels: ["page:general"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this for feedback on the **About** tab (key metrics, filters, organisation list),
+        navigation, CSV export, or anything else that spans or falls outside the four
+        quality-aspect pages. For an intervention or page-specific issue, use the
+        Coverage, Completeness, Enrichment or Accuracy template instead. See the
+        [live dashboard](https://ori-dashboard.lovable.app/) for context.
+  - type: dropdown
+    id: submission_type
+    attributes:
+      label: What is this?
+      options:
+        - Bug report
+        - Improvement suggestion
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What's wrong, or what would make the dashboard more useful?
+    validations:
+      required: true
+  - type: dropdown
+    id: organisation
+    attributes:
+      label: Organisation (optional)
+      options:
+        - "Vrije Universiteit Amsterdam"
+        - "University of Amsterdam"
+        - "Delft University of Technology"
+        - "Utrecht University"
+        - "University of Groningen"
+        - "Leiden University"
+        - "Royal Netherlands Academy of Arts and Sciences (KNAW)"
+        - "Dutch Research Council (NWO)"
+        - "ZonMw"
+        - "SURF"
+        - "Netherlands eScience Center"
+        - "KB, National Library of the Netherlands"
+        - "Universities of the Netherlands (UNL)"
+        - "Vereniging Hogescholen (VH)"
+        - "Taskforce for Applied Research SIA"
+        - "Digital Competence Center for Practice-Oriented Research (DCC-PO)"
+        - "Dutch Reproducibility Network (NLRN)"
+        - "Other / not listed here"
+    validations:
+      required: false
